@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 var tempParents = Parents() //temp parent... referenced from ParentStructs
 var userEmoji = "🧑🏽"
@@ -14,3 +15,9 @@ var tempChild = Child()
 var tempChild2 = Child()
 var tempChild3 = Child()
 var numKids = 3
+
+struct King {
+    @State var directDepositOn = false
+}
+
+var user = King()

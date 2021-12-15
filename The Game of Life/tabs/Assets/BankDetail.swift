@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct BankDetail: View {
-    
+        
     var shape: RoundedRectangle { RoundedRectangle(cornerRadius: 60) }
     @State var directDepositOn = false
+    
+    @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
     
     //xmark.app.fill
@@ -38,7 +40,8 @@ struct BankDetail: View {
                             .fontWeight(.semibold)
                         
                         Button(action: {
-                            showBankDetail.toggle()
+                            showBankDetail = false
+                            showAssetsMain = true
                         }, label: {
                             Image(systemName: "xmark")
                                 .foregroundColor(Color.red)
@@ -143,8 +146,6 @@ struct BankDetail: View {
                 Spacer()
             }
             .aspectRatio(155/200, contentMode: .fit)
-            
-            
         }
     }
 }
@@ -152,12 +153,8 @@ struct BankDetail: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            BankDetail(showBankDetail: .constant(true))
+            BankDetail(showAssetsMain: .constant(false), showBankDetail: .constant(true))
                 .preferredColorScheme(.light)
-            BankDetail(showBankDetail: .constant(true))
-            BankDetail(showBankDetail: .constant(true))
-.previewInterfaceOrientation(.landscapeLeft)
-            BankDetail(showBankDetail: .constant(true))
         }
     }
 }

@@ -169,23 +169,3 @@ struct JobView_Previews: PreviewProvider {
         JobView()
     }
 }
-
-struct JobModeButton: View {
-    
-    let mode: String
-    
-    var body: some View {
-        Button(action: {
-            //jobListMode = mode
-            //JobView.jobListMode = mode
-        }, label: {
-            
-        })
-    }
-}
-
-/*struct JobButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> Self.Body {
-        configuration.
-    }
-}*/

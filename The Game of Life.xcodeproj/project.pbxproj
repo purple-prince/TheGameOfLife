@@ -27,6 +27,8 @@
 		D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67426C4B7C60054D033 /* HomeTab.swift */; };
 		D8A5C8A326DC248D004123A4 /* mainFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8A5C8A226DC248D004123A4 /* mainFont.ttf */; };
 		D8AC08DD27645D02000A432E /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC08DC27645D02000A432E /* ExperimentView.swift */; };
+		D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC08DE27653415000A432E /* RealEstateDetail.swift */; };
+		D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BEF23827685C7A004DC3EF /* AssetsMain.swift */; };
 		D8C202F22749EABB0057A92B /* BankDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C202F12749EABB0057A92B /* BankDetail.swift */; };
 		D8C43048272DC94900F18F89 /* RelationshipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43047272DC94900F18F89 /* RelationshipButton.swift */; };
 		D8C4304B272DD1E700F18F89 /* RelationshipDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4304A272DD1E700F18F89 /* RelationshipDetail.swift */; };
@@ -88,6 +90,8 @@
 		D8A5C8A226DC248D004123A4 /* mainFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mainFont.ttf; sourceTree = "<group>"; };
 		D8A5C8A526DC249F004123A4 /* mainFontBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainFontBold.ttf; path = "/Users/charliereeder/Desktop/xcode projs/The Game of Life/The Game of Life/custom fonts/mainFontBold.ttf"; sourceTree = "<absolute>"; };
 		D8AC08DC27645D02000A432E /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
+		D8AC08DE27653415000A432E /* RealEstateDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateDetail.swift; sourceTree = "<group>"; };
+		D8BEF23827685C7A004DC3EF /* AssetsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsMain.swift; sourceTree = "<group>"; };
 		D8C202F12749EABB0057A92B /* BankDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetail.swift; sourceTree = "<group>"; };
 		D8C43047272DC94900F18F89 /* RelationshipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipButton.swift; sourceTree = "<group>"; };
 		D8C4304A272DD1E700F18F89 /* RelationshipDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipDetail.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 			children = (
 				D881F66D26C4B6800054D033 /* AssetTab.swift */,
 				D8C202F12749EABB0057A92B /* BankDetail.swift */,
+				D8AC08DE27653415000A432E /* RealEstateDetail.swift */,
+				D8BEF23827685C7A004DC3EF /* AssetsMain.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */,
 				D8C202F22749EABB0057A92B /* BankDetail.swift in Sources */,
 				D8E34D01276198530056F054 /* ChildrenDetail.swift in Sources */,
 				D8E34CFF276190D10056F054 /* ChildrenStructs.swift in Sources */,
@@ -501,6 +508,7 @@
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
 				D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */,
 				D8C43052272DD5F600F18F89 /* ChildrenView.swift in Sources */,
+				D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */,
 				D87EC4DF26D4D5D700E21428 /* PosJobs.swift in Sources */,
 				D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */,
 				D8AC08DD27645D02000A432E /* ExperimentView.swift in Sources */,
