@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct RelationshipDetail: View {
+    
+    @AppStorage("app_color_index") var colorCount: Int = 0
+    
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
     let memberMode: String
     
     func memberList(_ tempMode: String) -> some View {
@@ -24,7 +31,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(appColor)
                     })
                     Button(action:{}, label: {
                         HStack {
@@ -34,7 +41,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(appColor)
                     })
                 }
             case "Romance":
@@ -47,7 +54,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(appColor)
                     })
                 }
             case "Children":
@@ -61,7 +68,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -71,7 +78,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -81,7 +88,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -91,7 +98,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                     }
                 }
@@ -106,7 +113,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -116,7 +123,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -126,7 +133,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -136,7 +143,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                     }
                 }
@@ -151,7 +158,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -161,7 +168,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -171,7 +178,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
                     }
                 }
@@ -185,34 +192,41 @@ struct RelationshipDetail: View {
     var body: some View {
                 
         VStack {
-            VStack /*current job*/ {
-                Spacer()
-                
-                Text(memberMode)
-                    .bold()
-                    .font(.largeTitle)
-                Spacer()
-                Text("-0.5/month")
-                    .font(.title3)
-                
-                Spacer()
-            }
-            .font(Font.custom("mainFont", size: 20))
-            .frame(maxWidth: .infinity, maxHeight: 150)
-            .background(Color("neonGreen"))
-            .foregroundColor(.black)
-            .cornerRadius(12)
-            .shadow(radius: 12)
-            .padding()
+            banner
             
             Divider()
             
             memberList(memberMode)
+            
             Spacer()
         }
         .offset(y: 72)
         .ignoresSafeArea()
         //.navigationBarHidden(true)
+    }
+}
+
+extension RelationshipDetail {
+    var banner: some View {
+        VStack /*current job*/ {
+            Spacer()
+            
+            Text(memberMode)
+                .bold()
+                .font(.largeTitle)
+            Spacer()
+            Text("-0.5/month")
+                .font(.title3)
+            
+            Spacer()
+        }
+        .font(Font.custom("mainFont", size: 20))
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(Color("neonGreen"))
+        .foregroundColor(.black)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
     }
 }
 

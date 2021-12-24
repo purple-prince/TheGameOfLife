@@ -29,12 +29,6 @@ struct CareerJob: Occupation {
     var id = UUID()
 }
 
-
-//let johns = users.filter( { return $0.firstName == "John" } )
-
-
-
-
 var jobsAndSalaries = ["aerospace engineer": 10,
                        "prostitute": 10,
                        "farmer": 10,
@@ -109,6 +103,7 @@ let careerJobs: [CareerJob] = [CareerJob(jobTitle: "🛩 Aerospace Engineer", sa
                                CareerJob(jobTitle: "💊 Pharmacist", salary: 5987),
                                CareerJob(jobTitle: "🧑‍🍳 Chef", salary: 5987)
 ]
+
 let otherJobs: [OtherJob] = [OtherJob(jobTitle: "🍑 Prostitute", salary: 484),
                              OtherJob(jobTitle: "⛺️ Beggar", salary: 454),
                              OtherJob(jobTitle: "🤡 Clown", salary: 292),

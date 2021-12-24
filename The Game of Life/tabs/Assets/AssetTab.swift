@@ -14,11 +14,6 @@ struct AssetTab: View {
     @State var showRealEstateDetail = false
 
     //BLEND MODE FOR BLUR OVERLAP
-    //BLEND MODE FOR BLUR OVERLAP
-    //BLEND MODE FOR BLUR OVERLAP
-    //BLEND MODE FOR BLUR OVERLAP
-    //BLEND MODE FOR BLUR OVERLAP
-    //BLEND MODE FOR BLUR OVERLAP
 
     var body: some View {
         if showAssetsMain {

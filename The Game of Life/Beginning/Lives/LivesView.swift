@@ -1,0 +1,151 @@
+//
+//  LivesView.swift
+//  The Game of Life
+//
+//  Created by Charlie Reeder on 12/22/21.
+//
+
+import SwiftUI
+
+struct LivesView: View {
+    
+    
+    @Binding var showMainView: Bool
+    @Binding var showLivesView: Bool
+    
+    @State static var index = 0
+    var life: Life {
+        cemetary[LivesView.index]
+    }
+    
+    var life1: Life {
+        cemetary[LivesView.index + 1]
+    }
+    
+    @State var offsetX: CGFloat = 0.0
+    @State var offsetY: CGFloat = 0.0
+    
+    @State var lastCard = false
+    @State var cardsLeft = cemetary.count
+    
+    func CheckCards(currentLife: Life) {
+        let life2 = cemetary[cemetary.count - 1]
+        if life1 == life2 {
+            lastCard.toggle()
+        }
+    }
+    
+    var body: some View {
+        
+        ZStack {
+            
+            Color("mainWhite")
+                .ignoresSafeArea()
+            
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 48)
+                    .foregroundColor(.white)
+                    .shadow(color: .gray, radius: 8)
+                    .padding(.horizontal, 32)
+                    .aspectRatio(0.8, contentMode: .fit)
+                
+                //LifeView(life: life1)
+                
+                ForEach(cemetary) { _life in
+                    LifeView(life: _life, showMainView: $showMainView, showLivesView: $showLivesView)
+                }
+                
+                //Text(String(cardsLeft))
+            }
+            .frame(width: 400, height: 500)
+        }
+    }
+}
+
+struct LifeView: View {
+    
+    @AppStorage("app_color_index") var colorCount: Int = 0
+
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
+    @State var life: Life
+    @State var offsetX: CGFloat = 0.0
+    @State var offsetY: CGFloat = 0.0
+    @Binding var showMainView: Bool
+    @Binding var showLivesView: Bool
+    
+    var body: some View {
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 48)
+                .foregroundColor(.white)
+                .shadow(color: .gray, radius: 8)
+                .padding(.horizontal, 32)
+                .aspectRatio(0.8, contentMode: .fit)
+            
+            VStack {
+                Text(life.name)
+                    .font(.largeTitle)
+                    .padding()
+                Text("Age: " + String(life.age))
+                    .padding()
+                Text("Net Worth: $" + String(life.netWorth))
+                    .padding()
+                Text("Cause of Death: " + life.causeOfDeath)
+                    .padding()
+                
+                Spacer()
+                
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(maxWidth: .infinity, maxHeight: 100)
+                    .padding(24)
+                    .padding(.horizontal, 32)
+                    .foregroundColor(appColor)
+                    .onTapGesture {
+                        showMainView = true
+                        showLivesView = false
+                    }
+                
+                //Spacer()
+            }
+            .foregroundColor(appColor)
+        }
+        .offset(x: offsetX, y: offsetY)
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    offsetX = value.translation.width
+                    offsetY = value.translation.height
+                }
+            
+                .onEnded { value in
+                    withAnimation(.spring()) {
+                        
+                        offsetY = 0
+                        
+                        if abs(offsetX) < 120 {
+                            offsetX = 0
+                        } else {
+                            if offsetX > 0 {
+                                offsetX = 400
+                            } else {
+                                offsetX = -400
+                            }
+                            LivesView.index += 1
+                            //index += 1
+                        }
+                    }
+                }
+        )
+        //.blendMode(.darken)
+    }
+}
+
+struct LivesView_Previews: PreviewProvider {
+    static var previews: some View {
+        LivesView(showMainView: .constant(false), showLivesView: .constant(true))
+    }
+}

@@ -10,38 +10,15 @@ import SwiftUI
 struct SHView: View {
     let tempSH = listOfSideHustles.randomElement()!
     
+    @AppStorage("app_color_index") var colorCount: Int = 0
+    
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
     var body: some View {
         VStack {
-            VStack /*current job*/ {
-                Text(tempSH.shTitle)
-                    .bold()
-                    .font(.largeTitle)
-                Text("Level \(tempSH.level)")
-                    .font(.title3)
-                Text("$\(tempSH.salaryMin) - $\(tempSH.salaryMax)/month")
-                    .font(.title3)
-
-                
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    Text("- 0.3⚡️")
-                        .padding(1)
-                    Spacer()
-                    Text("-0.5😀")
-                    Spacer()
-                }
-                
-                Spacer()
-            }
-            .font(Font.custom("mainFont", size: 20))
-            .frame(maxWidth: .infinity, maxHeight: 150)
-            .background(Color("neonGreen"))
-            .foregroundColor(.black)
-            .cornerRadius(12)
-            .shadow(radius: 12)
-            .padding()
+            banner
             
             Divider()
             
@@ -55,7 +32,7 @@ struct SHView: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(appColor)
                     })
                 }
             }
@@ -64,23 +41,43 @@ struct SHView: View {
     }
 }
 
+extension SHView {
+    var banner: some View {
+        VStack /*current job*/ {
+            Text(tempSH.shTitle)
+                .bold()
+                .font(.largeTitle)
+            Text("Level \(tempSH.level)")
+                .font(.title3)
+            Text("$\(tempSH.salaryMin) - $\(tempSH.salaryMax)/month")
+                .font(.title3)
+
+            
+            Spacer()
+            
+            HStack {
+                Spacer()
+                Text("- 0.3⚡️")
+                    .padding(1)
+                Spacer()
+                Text("-0.5😀")
+                Spacer()
+            }
+            
+            Spacer()
+        }
+        .font(Font.custom("mainFont", size: 20))
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(appColor)
+        .foregroundColor(appColor)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
+    }
+}
+
 struct SHView_Previews: PreviewProvider {
     static var previews: some View {
         SHView()
     }
 }
-
-/*
- ScrollView {
-     ForEach(hourlyJobs, id: \.self) { job in
-         Button(action:{}, label: {
-             HStack {
-                 Text(job.jobTitle)
-                 Spacer()
-                 Text(String("$\(job.salary)/month"))
-             }
-             .padding()
-         })
-     }
- }
- */

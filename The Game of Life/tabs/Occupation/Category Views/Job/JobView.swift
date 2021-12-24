@@ -9,11 +9,15 @@ import SwiftUI
 
 struct JobView: View{
     
+    @AppStorage("app_color_index") var colorCount: Int = 0
+    
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
     @State var tempJob = hourlyJobs.randomElement()!
-    //@State var jobTitle = ""
     
     @State var jobListMode = "Hourly"
-    //@State var jobObject: [HourlyJob] = []
         
     func jobList(_ jobListMode: String) -> some View {
         
@@ -34,7 +38,7 @@ struct JobView: View{
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(appColor)
                         })
 
                     }
@@ -51,7 +55,7 @@ struct JobView: View{
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)                        })
+                            .foregroundColor(appColor)                        })
                     }
                 }
             case "Other":
@@ -65,7 +69,7 @@ struct JobView: View{
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)                        })
+                            .foregroundColor(appColor)                        })
                     }
                 }
             default:
@@ -79,7 +83,7 @@ struct JobView: View{
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(.black)                        })
+                            .foregroundColor(appColor)                        })
                     }
                 }
             }
@@ -89,69 +93,10 @@ struct JobView: View{
     var body: some View {
         
         VStack {
-            VStack /*current job*/ {
-                Text(tempJob.jobTitle)
-                    .bold()
-                    .font(.largeTitle)
-                Text("$\(tempJob.salary)/month")
-                    .font(.title3)
-                
-                Spacer()
-                
-                VStack(alignment: .leading) {
-                    Text("- 0.3⚡️")
-                        .padding(1)
-                    Text("-0.5😀")
-                }
-                
-                Spacer()
-            }
-            .font(Font.custom("mainFont", size: 20))
-            .frame(maxWidth: .infinity, maxHeight: 150)
-            .background(Color("neonGreen"))
-            .foregroundColor(.black)
-            .cornerRadius(12)
-            .shadow(radius: 12)
-            .padding()
-        
             
-            HStack /*job categories*/{
-                Spacer()
-                Button(action: {
-                    jobListMode = "Hourly"
-                }, label: {
-                    Text("Hourly")
-                        .padding()
-                        .background(Color("neonGreen"))
-                        .cornerRadius(12)
-                })
-                
-                
-                
-                Spacer()
-                Button(action: {
-                    jobListMode = "Career"
-                }, label: {
-                    Text("Career")
-                        .padding()
-                        .background(Color("neonGreen"))
-                        .cornerRadius(12)
-                })
-                
-                
-                
-                Spacer()
-                Button(action: {
-                    jobListMode = "Other"
-                }, label: {
-                    Text("Other")
-                        .padding()
-                        .background(Color("neonGreen"))
-                        .cornerRadius(12)
-                })
-                Spacer()
-            }
-            .foregroundColor(Color.black)
+            banner
+        
+            modeButtons
             
             Divider()
             
@@ -161,6 +106,75 @@ struct JobView: View{
         .offset(y: 72)
         .ignoresSafeArea()
         //.navigationBarHidden(true)
+    }
+}
+
+extension JobView {
+    var banner: some View {
+        VStack /*current job*/ {
+            Text(tempJob.jobTitle)
+                .bold()
+                .font(.largeTitle)
+            Text("$\(tempJob.salary)/month")
+                .font(.title3)
+            
+            Spacer()
+            
+            VStack(alignment: .leading) {
+                Text("- 0.3⚡️")
+                    .padding(1)
+                Text("-0.5😀")
+            }
+            
+            Spacer()
+        }
+        .font(Font.custom("mainFont", size: 20))
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(Color("neonGreen"))
+        .foregroundColor(appColor)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
+    }
+    
+    var modeButtons: some View {
+        HStack /*job categories*/{
+            Spacer()
+            Button(action: {
+                jobListMode = "Hourly"
+            }, label: {
+                Text("Hourly")
+                    .padding()
+                    .background(appColor)
+                    .cornerRadius(12)
+            })
+            
+            
+            
+            Spacer()
+            Button(action: {
+                jobListMode = "Career"
+            }, label: {
+                Text("Career")
+                    .padding()
+                    .background(appColor)
+                    .cornerRadius(12)
+            })
+            
+            
+            
+            Spacer()
+            Button(action: {
+                jobListMode = "Other"
+            }, label: {
+                Text("Other")
+                    .padding()
+                    .background(appColor)
+                    .cornerRadius(12)
+            })
+            Spacer()
+        }
+        .foregroundColor(Color.black)
     }
 }
 

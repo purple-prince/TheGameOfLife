@@ -13,25 +13,7 @@ struct ParentsView: View {
                 
         NavigationView {
             VStack {
-                VStack /*current job*/ {
-                    Spacer()
-                    
-                    Text("Parents")
-                        .bold()
-                        .font(.largeTitle)
-                    Spacer()
-                    Text("-0.5/month")
-                        .font(.title3)
-                    
-                    Spacer()
-                }
-                .font(Font.custom("mainFont", size: 20))
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .background(Color("neonGreen"))
-                .foregroundColor(.black)
-                .cornerRadius(12)
-                .shadow(radius: 12)
-                .padding()
+                banner
                             
                 Divider()
                 
@@ -68,7 +50,7 @@ struct ParentsView: View {
                                     .foregroundColor(Color.gray)
                                     
                                 RoundedRectangle(cornerRadius: 12)
-                                    .frame(width: 90, height: 12)
+                                    .frame(width: ParentsDetail(mode: "Dad").momStatus, height: 12)
                                     .foregroundColor(Color.green)
                             }
                         }
@@ -82,7 +64,42 @@ struct ParentsView: View {
             .offset(y: 72)
         .ignoresSafeArea()
         }
-        //.navigationBarHidden(true)
+    }
+}
+
+struct ParentLink: View {
+    var body: some View {
+        HStack {
+            Text(tempParents.dad.emoji + " " + tempParents.dad.name)
+        }
+    }
+}
+
+extension ParentsView {
+    var banner: some View {
+        VStack /*current job*/ {
+            Spacer()
+            
+            Text("Parents")
+                .bold()
+                .font(.largeTitle)
+            Spacer()
+            Text("-0.5/month")
+                .font(.title3)
+            
+            Spacer()
+        }
+        .font(Font.custom("mainFont", size: 20))
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(Color("neonGreen"))
+        .foregroundColor(.black)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
+    }
+    
+    var parentLink: some View {
+        Text("")
     }
 }
 

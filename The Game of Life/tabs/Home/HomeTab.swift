@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct HomeTab: View {
+    
+    @AppStorage("app_color_index") var colorCount: Int = 0
+
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
@@ -22,6 +29,7 @@ struct HomeTab: View {
                     .padding()
                 Text(maleNames.randomElement()!)
                     .font(.title)
+                    .foregroundColor(appColor)
                 VStack(/*alignment: .leading*/) {
                     Text("Net Worth: $ 8,475")
                         .padding(.bottom)
@@ -31,7 +39,6 @@ struct HomeTab: View {
                         .padding(.bottom)
                     Button(action: {}, label: {
                         Text("Traits >")
-                            .foregroundColor(.black)
                     })
                         .padding(.bottom)
                     Text("Stats")
@@ -39,6 +46,7 @@ struct HomeTab: View {
                     Text("Goals")
                         .padding(.bottom)
                 }
+                .foregroundColor(appColor)
                 .padding(.top, 32)
                 Spacer()
             }

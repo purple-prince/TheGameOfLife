@@ -53,70 +53,71 @@ struct RealEstateDetail: View {
     
     var body: some View {
         
-        
-        //            RoundedRectangle(cornerRadius: 48)
-        //                .foregroundColor(.white)
-        //                .padding(8)
-        //                .shadow(color: .black, radius: 8)
-        
         VStack {
-            
             ZStack {
-                VStack /*current job*/ {
-                    Text("7 Properties")
-                        .bold()
-                        .font(.largeTitle)
-                    Text("$660/month")
-                        .font(.title3)
-                }
-                .font(Font.custom("mainFont", size: 20))
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .background(Color.white)
-                .foregroundColor(.black)
-                .cornerRadius(12)
-                .shadow(radius: 12)
-                .padding()
-                
-                Button(action: {
-                    showRealEstateDetail = false
-                    showAssetsMain = true
-                }, label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(Color.red)
-                        .font(Font.system(size: 40, weight: .medium))
-                        .padding(.leading, 300)
-                        .padding(.bottom, 90)
-                })
+                banner
+                closeButton
             }
             
-            Button(action: {
-                ownedMode.toggle()
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(Color("mainDarkGrey"))
-                    HStack {
-                        Image(systemName: "arrow.up.arrow.down")
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 24))
-                            .padding(.vertical)
-                        Text(ownedMode ? "Owned" : "Market")
-                            .padding()
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 32))
-                    }
-                }
-                .frame(width: .infinity, height: 80)
-                .padding(.horizontal)
-            })
-            
+            modeButton
             Divider()
-            
             jobList()
             
             
         }
-        .offset(y: 0)
+    }
+}
+
+extension RealEstateDetail {
+    var banner: some View {
+        VStack /*current job*/ {
+            Text("7 Properties")
+                .bold()
+                .font(.largeTitle)
+            Text("$660/month")
+                .font(.title3)
+        }
+        .font(Font.custom("mainFont", size: 20))
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(Color.white)
+        .foregroundColor(.black)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
+    }
+    var closeButton: some View {
+        Button(action: {
+            showRealEstateDetail = false
+            showAssetsMain = true
+        }, label: {
+            Image(systemName: "xmark")
+                .foregroundColor(Color.red)
+                .font(Font.system(size: 40, weight: .medium))
+                .padding(.leading, 300)
+                .padding(.bottom, 90)
+        })
+    }
+    var modeButton: some View {
+        Button(action: {
+            ownedMode.toggle()
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color("mainDarkGrey"))
+                HStack {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .foregroundColor(.white)
+                        .font(Font.system(size: 24))
+                        .padding(.vertical)
+                    Text(ownedMode ? "Owned" : "Market")
+                        .padding()
+                        .foregroundColor(.white)
+                        .font(Font.system(size: 32))
+                }
+            }
+            .frame(width: .infinity, height: 80)
+            .padding(.horizontal)
+        })
     }
 }
 
