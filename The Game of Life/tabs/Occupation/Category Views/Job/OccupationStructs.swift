@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct Job {
+struct Job: Occupation {
     var jobTitle: String
     var salary: Int
+    var id = UUID()
 }
 
 struct SideHustle: Hashable {

@@ -14,6 +14,12 @@ import SwiftUI
 
 struct CategoryButton: View {
     
+    @AppStorage("app_color_index") var colorCount: Int = 0
+    
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+    
     let category: String
     let position: String
     let salary: Int
@@ -50,18 +56,19 @@ struct CategoryButton: View {
                     Spacer()
                 }
                 .padding(.bottom)
-                .foregroundColor(Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 1))
             }
             .font(Font.custom("mainFont", size: 20))
             .frame(maxWidth: .infinity)
-            .foregroundColor(.white)
-            .background(color)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(appColor, lineWidth: 4)
+                )
+            .foregroundColor(appColor)
+            .background(Color("mainWhite"))
             .cornerRadius(12)
             .shadow(radius: 6)
-            .padding(.leading)
-            .padding(.trailing)
+            .padding(.horizontal)
             .padding(.top, 6)
-            //.navigationBarHidden(true)
         }
     }
 }

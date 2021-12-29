@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-
+//@AppStorage("life_net_worth") var life_net_worth: Int = 0
 
 struct OccupationTab: View {
+    
     
     let occupationCategories = ["Job", "Side Hustle", "Sports",
                                 "Real Estate", "Crime"]

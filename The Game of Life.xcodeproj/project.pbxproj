@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A357326CA0A12008CB95F /* LovedOnes.swift */; };
+		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
+		D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8AA277C18C8009D7992 /* OptionsView.swift */; };
 		D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82EE05F27365DD400C6498F /* ParentsDetail.swift */; };
 		D839529427714B1C002444D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D839529327714B1C002444D9 /* MainView.swift */; };
 		D83952982771B6B8002444D9 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83952972771B6B8002444D9 /* EntryView.swift */; };
@@ -70,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
+		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		D82EE05F27365DD400C6498F /* ParentsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsDetail.swift; sourceTree = "<group>"; };
 		D839529327714B1C002444D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D83952972771B6B8002444D9 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				D881F67426C4B7C60054D033 /* HomeTab.swift */,
+				D823B8A227784D71009D7992 /* SettingsView.swift */,
+				D823B8AA277C18C8009D7992 /* OptionsView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -543,6 +549,7 @@
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
+				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
 				D8BEF23D276AA55A004DC3EF /* RomanceStructs.swift in Sources */,
 				D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */,
 				D888B78F27756F5C00724ED1 /* LivesStruct.swift in Sources */,
@@ -559,6 +566,7 @@
 				D83952982771B6B8002444D9 /* EntryView.swift in Sources */,
 				D8C43056272DD61600F18F89 /* PetsView.swift in Sources */,
 				D8399AAB2754730200A5DFB3 /* LottoFile.swift in Sources */,
+				D823B8A327784D71009D7992 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

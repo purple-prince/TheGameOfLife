@@ -40,32 +40,30 @@ var allPartners: [Partner] = []
 var tempPartner = Partner(gender: "Female", age: 25)
 
 ///////////////////////////////////////
-struct UserPreferences {
-    @AppStorage("color_index") var colorCount: Int = 0
-    
-    var colorOptions: [Color] = [Color("mainRed"), Color("mainOrange"), Color("mainYellow"), Color("mainLightGreen"), Color("mainMutedBlue"), Color("mainDarkGray")]
-    
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+
+var colorOptions: [Color] = [Color("mainDarkGray"), Color("mainRed"), Color("mainOrange"), Color("mainLightGreen"), Color("mainMutedBlue")]
+
+func formatNum(_ _num: Int) -> String {
+        var num = _num
+        let strNum = String(num)
+        var digits: [String] = []
+        var i = 1
+
+        while num != 0 {
+          digits.append(String(num % 10))
+          num /= 10
+          if i % 3 == 0 {
+              digits.append(",")
+          }
+          i += 1
+        }
+        digits.reverse()
+        if strNum.count % 3 == 0 {
+          digits.removeFirst(1)
+        }
+
+        return digits.joined()
 }
 
-var colorOptions: [Color] = [Color("mainDarkGray"), Color("mainRed"), Color("mainOrange"), Color("mainYellow"), Color("mainLightGreen"), Color("mainMutedBlue")]
 
 
-//MARK: APP COLOR
-/*
- @AppStorage("app_color_index") var colorCount: Int = 0
-
- var appColor: Color {
-     colorOptions[colorCount]
- }
- */
-
-//struct userPreferences {
-    //var colorCount: Int = {}()
-    //var colorOptions: [Color] = {}()
-    //@AppStorage var appColor: Color = colorOptions[colorCount]
-//}
-
-//var user = userPreferences(colorCount: 0, colorOptions: [Color("mainDarkGray"), Color("mainRed"), Color("mainOrange"), Color("mainYellow"), Color("mainLightGreen"), Color("mainMutedBlue")])
