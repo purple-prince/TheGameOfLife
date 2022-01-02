@@ -66,6 +66,17 @@ struct LivesView: View {
 struct LifeView: View {
     
     @AppStorage("app_color_index") var colorCount: Int = 0
+    @AppStorage("entered") var entered: Bool = false
+    
+    @AppStorage("life_health_status") var life_health_status: Int = 0
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    
+    func initStatus() -> Void {
+        life_health_status = 100
+        life_happiness_status = 100
+        life_energy_status = 100
+    }
 
     var appColor: Color {
         colorOptions[colorCount]
@@ -107,6 +118,8 @@ struct LifeView: View {
                     .onTapGesture {
                         showMainView = true
                         showLivesView = false
+                        entered = true
+                        initStatus()
                     }
                 
                 //Spacer()
@@ -140,7 +153,6 @@ struct LifeView: View {
                     }
                 }
         )
-        //.blendMode(.darken)
     }
 }
 

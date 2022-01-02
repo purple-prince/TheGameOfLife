@@ -9,7 +9,12 @@ import SwiftUI
 
 struct HomeTab: View {
     
-    @AppStorage("life_net_worth") var life_net_worth: Int = 0
+    @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
+    @AppStorage("life_bank_balance") var life_bank_balance: Int = 0
+    @AppStorage("life_health_status") var life_health_status: Int = 0
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    
     
     @AppStorage("app_color_index") var colorCount: Int = 0
     var appColor: Color {
@@ -19,42 +24,101 @@ struct HomeTab: View {
     @State var showSettings: Bool = false
     @State var showOptions: Bool = false
     
+    func getNetWorth() -> Int {
+        return life_cash_balance + life_bank_balance
+    }
+    
     var body: some View {
         
         ZStack {
             ZStack {
-                RoundedRectangle(cornerRadius: 40)
-                    .aspectRatio(5/8, contentMode: .fit)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 40)
-                            .stroke(appColor, lineWidth: 1)
-                    )
-                    .padding(20)
-                    .foregroundColor(.white)
-                    .shadow(color: .gray, radius: 12, x: 0, y: 0)
+                background
                 
                 VStack {
                     Spacer()
+                        .frame(width: 0, height: 124)
                     
                     header
                     
-                    Text(maleNames.randomElement()!)
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .foregroundColor(Color("mainDarkGray"))
+                    HStack {
+                        Text(maleNames.randomElement()!)
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundColor(Color("mainWhite"))
+                        
+                        Text(" ·  36")
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundColor(Color("mainWhite"))
+                    }
                     
                     statusLabels
+                    
+                    infoLabels
                     
                     Spacer()
                 }
             }
             
             showSettings ? SettingsView(showSettings: $showSettings) : nil
+            
+            showOptions ? OptionsView(showOptions: $showOptions) : nil
         }        
     }
 }
 
 extension HomeTab {
+    
+    func statusBar(mode: String, color: Color) -> some View {
+        
+        var stat: CGFloat {
+            if mode == "Health" {
+                return CGFloat(life_health_status)
+            } else if mode == "Happiness" {
+                return CGFloat(life_happiness_status)
+            } else {
+                return CGFloat(life_energy_status)
+            }
+        }
+        
+        return VStack(spacing: 12) {
+            switch mode {
+            case "Health":
+                Text("♥️")
+                    .font(.largeTitle)
+            case "Happiness":
+                Text("😀")
+                    .font(.largeTitle)
+            default:
+                Text("⚡️")
+                    .font(.largeTitle)
+            }
+            
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(color, lineWidth: 1)
+                    .frame(width: 72, height: 12)
+                RoundedRectangle(cornerRadius: 24)
+                    .frame(width: stat, height: 12)
+                    .foregroundColor(color)
+            }
+        }
+        .padding(.horizontal, 8)
+    }
+    
+    var statusLabels: some View {
+        HStack {
+            statusBar(mode: "Health", color: Color.red)
+            
+            statusBar(mode: "Happiness", color: Color.orange)
+            
+            statusBar(mode: "Energy", color: Color.yellow)
+        }
+        .padding()
+        .background(Color(hue: 1.0, saturation: 0.027, brightness: 0.356))
+        .foregroundColor(.white)
+        .cornerRadius(12)
+    }
     var settingsButton: some View {
         VStack {
             Image(systemName: "gearshape")
@@ -67,30 +131,55 @@ extension HomeTab {
                 }
             
             Spacer()
-                .frame(width: 0, height: 112)
+                .frame(width: 0, height: 64)
         }
+    }
+    var background: some View {
+        RoundedRectangle(cornerRadius: 40)
+            .aspectRatio(5/8, contentMode: .fit)
+            .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(appColor, lineWidth: 1)
+            )
+            .padding(20)
+            .foregroundColor(Color("mainDarkGray"))
+            .shadow(color: .gray, radius: 12, x: 0, y: 0)
     }
     
-    var statusLabels: some View {
-        VStack(/*alignment: .leading*/) {
-            Text("Net Worth: $" + formatNum(life_net_worth))
-                .padding(.bottom)
-            Text("Monthly Income")
-                .padding(.bottom)
-            Text("Relationship Status: Single")
-                .padding(.bottom)
-            Button(action: {}, label: {
-                Text("Traits >")
-            })
-                .padding(.bottom)
+    //net worth, age, month income, traitss, stats, goals
+    var infoLabels: some View {
+        
+        VStack(spacing: 2) {
             Text("Stats")
-                .padding(.bottom)
-            Text("Goals")
-                .padding(.bottom)
+                .font(.title)
+            
+            Color.white
+                .clipShape(Capsule())
+                .frame(width: UIScreen.main.bounds.width / 3, height: 2)
+                .padding(.bottom, 6)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Net worth: ")
+                        .bold()
+                    Text(formatNum(getNetWorth()))
+                }
+                HStack {
+                    Text("Monthly Income: ")
+                        .bold()
+                }
+                HStack {
+                    Text("Years Lived: ")
+                        .bold()
+                    Text("104")
+                    
+                }
+            }
         }
-        .foregroundColor(Color("mainDarkGray"))
-        .padding(.top, 32)
+        .padding(.top, 6)
+        .foregroundColor(.white)
     }
+
     
     //stuff for the top half of the card
     var header: some View {
@@ -104,7 +193,7 @@ extension HomeTab {
             Spacer()
             
             Text(userEmoji)
-                .font(Font.system(size: 100))
+                .font(Font.system(size: 84))
             
             Spacer()
             
@@ -116,17 +205,17 @@ extension HomeTab {
     
     var menuButton: some View {
         VStack {
-            Image(systemName: "person")
+            Image(systemName: "square.grid.2x2")
                 .font(Font.system(size: 48))
                 .foregroundColor(appColor)
                 .onTapGesture {
                     withAnimation(.easeInOut) {
-                        showSettings = true
+                        showOptions = true
                     }
                 }
             
             Spacer()
-                .frame(width: 0, height: 112)
+                .frame(width: 0, height: 64)
         }
     }
 }
@@ -140,8 +229,6 @@ struct HomeTab_Previews: PreviewProvider {
 /* contextualmenu.and.cursorarrow
  person
  person.fill
- person.circle
- person.circle.fill
  slider.horizontal.3
  list.bullet
  square.grid.2x2

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//@AppStorage("life_net_worth") var life_net_worth: Int = 0
+//@AppStorage("life_cash_balance") var life_cash_balance: Int = 0
 
 struct OccupationTab: View {
     

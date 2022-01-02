@@ -71,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D805C588277E74F500536992 /* Swift-BigInt-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Swift-BigInt-master"; path = "../../../../../Downloads/Swift-BigInt-master"; sourceTree = "<group>"; };
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
 		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		D82EE05E273635FB00C6498F /* other */ = {
 			isa = PBXGroup;
 			children = (
+				D805C588277E74F500536992 /* Swift-BigInt-master */,
 				D8A5C8A126DC244A004123A4 /* custom fonts */,
 				D85C8554268EFE1E00FA7C9A /* ContentView.swift */,
 				D839529B2772B84B002444D9 /* ExperimentView.swift */,

@@ -21,7 +21,11 @@ struct JobView: View{
     
     @AppStorage("life_job_title") var life_job_title: String?
     @AppStorage("life_job_salary") var life_job_salary: Int?// = 0
-    @AppStorage("life_net_worth") var life_net_worth: Int = 0
+    @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
+    @AppStorage("life_health_status") var life_health_status: Int = 0
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    
         
     var body: some View {
         
@@ -153,7 +157,7 @@ extension JobView {
             
             Button(action: {
                 
-                life_net_worth += jobInfo().salary
+                life_cash_balance += jobInfo().salary
                 
             }, label: {
                 ZStack {

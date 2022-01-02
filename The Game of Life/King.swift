@@ -43,27 +43,50 @@ var tempPartner = Partner(gender: "Female", age: 25)
 
 var colorOptions: [Color] = [Color("mainDarkGray"), Color("mainRed"), Color("mainOrange"), Color("mainLightGreen"), Color("mainMutedBlue")]
 
-func formatNum(_ _num: Int) -> String {
-        var num = _num
-        let strNum = String(num)
-        var digits: [String] = []
-        var i = 1
+func formatNum(_ num: Int) -> String {
+    
+    let formatter = NumberFormatter()
+    formatter.maximumFractionDigits = 2
+    
+    if num < 1000 {
+        return "$" + String(num)
+    }
+    
+    //                 4-6  7-9  10-12 13-15
+    let prefixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sex", "Sep", "Oct", "Non", "Dec", "Und", "Duo", "Tre", "Quatt", "Quindec", "Sexdec", "Septen", "Octo", "Novem", "Vigin", "Cent"]
+    let strNum = String(num)//2000
+    var index: Int {((strNum.count - 1) / 3)}
+    //formatter(Float(num / 1000))
+    //formatter.string(from: NSNumber(value: ___))
+    if num < 1_000_000 { // million
+        return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000))! + prefixes[index]
+    } else if num < 1_000_000_000 { // billion
+        return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000000))! + prefixes[index]
+    } else if num < 1000000000000 { // trillion
+        return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000000000))! + prefixes[index]
+    } else if num < 1000000000000000 { //quadrillion
+        return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000000000000))! + prefixes[index]
+    } else if num < 1_000_000_000_000_000_000 { //quintillion
+        return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000000000000000))! + prefixes[index]
+    } else {
+        return "Wayyyy too much money. you're rich af"
+    }
 
-        while num != 0 {
-          digits.append(String(num % 10))
-          num /= 10
-          if i % 3 == 0 {
-              digits.append(",")
-          }
-          i += 1
-        }
-        digits.reverse()
-        if strNum.count % 3 == 0 {
-          digits.removeFirst(1)
-        }
-
-        return digits.joined()
+    //formatter.numberStyle = .currency
+    
+    
 }
 
+func restartLife() -> Void {
+    @AppStorage("life_cash_balance") var life_cash_balance = 0
+    life_cash_balance -= life_cash_balance
+}
 
-
+/*
+ net worth:
+ 
+ - cash
+ - bank
+ - real estate
+ - assets
+ */

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AssetsMain: View {
     
+    @AppStorage("life_bank_balance") var life_bank_balance = 0
+    
     @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
     @Binding var showRealEstateDetail: Bool
@@ -50,10 +52,10 @@ extension AssetsMain {
                         .padding()
                     
                     VStack(alignment: .trailing) {
-                        Text("Balance: $58,675")
+                        Text("Balance: " + formatNum(life_bank_balance))
                             .padding(.top)
                         
-                        Text("Debt: $24,200")
+                        Text("Debt: $0")
                             .padding(1)
                     }
                 }
