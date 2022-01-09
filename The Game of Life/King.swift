@@ -79,8 +79,39 @@ func formatNum(_ num: Int) -> String {
 
 func restartLife() -> Void {
     @AppStorage("life_cash_balance") var life_cash_balance = 0
+    @AppStorage("life_bank_balance") var life_bank_balance = 0
     life_cash_balance -= life_cash_balance
+    life_bank_balance -= life_bank_balance
 }
+
+func limitStatus() -> Void {
+    @AppStorage("life_health_status") var life_health_status: Int = 0
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    
+    if life_health_status < 0 {
+        life_health_status = 0
+    }
+    if life_health_status > 100 {
+        life_health_status = 100
+    }
+    
+    if life_happiness_status < 0 {
+        life_happiness_status = 0
+    }
+    if life_happiness_status > 100 {
+        life_happiness_status = 100
+    }
+    
+    if life_energy_status < 0 {
+        life_energy_status = 0
+    }
+    if life_energy_status > 100 {
+        life_energy_status = 100
+    }
+}
+
+
 
 /*
  net worth:

@@ -10,6 +10,9 @@ import Foundation
 struct Job: Occupation {
     var jobTitle: String
     var salary: Int
+    var healthMod: Int
+    var hapMod: Int
+    var energyMod: Int
     var id = UUID()
 }
 

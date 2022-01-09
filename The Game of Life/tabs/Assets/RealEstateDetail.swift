@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+//Color(hue: 1.0, saturation: 0.027, brightness: 0.356)
 
 struct RealEstateDetail: View {
     

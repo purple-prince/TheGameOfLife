@@ -7,9 +7,50 @@
 
 import SwiftUI
 
+protocol ActionView {
+    var frameWidth: CGFloat { get }
+    var frameHeight: CGFloat { get }
+}
+
+extension ActionView {
+    var frameWidth: CGFloat {
+        CGFloat.infinity
+    }
+    
+    var frameHeight: CGFloat {
+        240
+    }
+}
+
+
 struct ActionTab: View {
+    
+    @State var showCasinoView = false
+    @State var showMainView: Bool = true
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            
+            if showMainView {
+                ZStack {
+                    Color("mainWhite")
+                        .ignoresSafeArea()
+                    
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            CasinoIcon()
+                                .onTapGesture {
+                                    showCasinoView = true
+                                }
+                        }
+                    }
+                }
+            }
+            
+            if showCasinoView {
+                CasinoView(showCasinoView: $showCasinoView, showMainView: $showMainView)
+            }
+        }
     }
 }
 

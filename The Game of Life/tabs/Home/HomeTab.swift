@@ -11,9 +11,21 @@ struct HomeTab: View {
     
     @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
     @AppStorage("life_bank_balance") var life_bank_balance: Int = 0
-    @AppStorage("life_health_status") var life_health_status: Int = 0
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    @AppStorage("life_health_status") var life_health_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
     
     
     @AppStorage("app_color_index") var colorCount: Int = 0
@@ -69,6 +81,8 @@ struct HomeTab: View {
 
 extension HomeTab {
     
+
+    
     func statusBar(mode: String, color: Color) -> some View {
         
         var stat: CGFloat {
@@ -80,6 +94,7 @@ extension HomeTab {
                 return CGFloat(life_energy_status)
             }
         }
+        
         
         return VStack(spacing: 12) {
             switch mode {
@@ -94,12 +109,18 @@ extension HomeTab {
                     .font(.largeTitle)
             }
             
+            /*
+             x  =  100
+             -      -
+             100    72
+             */
+            
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 24)
                     .stroke(color, lineWidth: 1)
-                    .frame(width: 72, height: 12)
+                    .frame(width: 70, height: 12)
                 RoundedRectangle(cornerRadius: 24)
-                    .frame(width: stat, height: 12)
+                    .frame(width: (stat * 0.7), height: 12)
                     .foregroundColor(color)
             }
         }

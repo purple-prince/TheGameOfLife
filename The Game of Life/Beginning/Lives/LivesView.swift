@@ -68,9 +68,21 @@ struct LifeView: View {
     @AppStorage("app_color_index") var colorCount: Int = 0
     @AppStorage("entered") var entered: Bool = false
     
-    @AppStorage("life_health_status") var life_health_status: Int = 0
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    @AppStorage("life_health_status") var life_health_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
     
     func initStatus() -> Void {
         life_health_status = 100

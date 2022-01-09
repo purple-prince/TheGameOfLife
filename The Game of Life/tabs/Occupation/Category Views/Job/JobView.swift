@@ -18,35 +18,64 @@ struct JobView: View{
     
     @State var tempJob = hourlyJobs.randomElement()!
     @State var jobListMode = "Hourly"
+    @State var showApplyPopup = false
+    @State var showMainView = true
+    @State var jobTapped: Job? = nil
     
     @AppStorage("life_job_title") var life_job_title: String?
     @AppStorage("life_job_salary") var life_job_salary: Int?// = 0
     @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
-    @AppStorage("life_health_status") var life_health_status: Int = 0
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0
+    
+    @AppStorage("life_health_status") var life_health_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_energy_status") var life_energy_status: Int = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
     
         
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            banner
-        
-            modeButtons
+            if showMainView {
+                VStack {
+                    
+                    banner
+                        .padding(.top)
+                
+                    modeButtons
+                    
+                    Divider()
+                    
+                    jobList(jobListMode)
+                    
+                }
+                .offset(y: 72)
+                .background(Color("mainWhite"))
+                .ignoresSafeArea()
+            }
             
-            Divider()
-            
-            jobList(jobListMode)
-            
+            if showApplyPopup {
+                ApplyPopup(showApplyPopup: $showApplyPopup, showMainView: $showMainView, job: jobTapped!)
+            }
         }
-        .offset(y: 72)
-        .ignoresSafeArea()
         //.navigationBarHidden(true)
     }
 }
 
 extension JobView {
+    
+    //Color(hue: 1.0, saturation: 0.027, brightness: 0.356)
     
     func jobOption(job: Job) -> some View {
         Button(action: {
@@ -55,24 +84,42 @@ extension JobView {
         }, label: {
             HStack {
                 Text(job.jobTitle)
+                    .onTapGesture {
+                        showApplyPopup = true
+                        jobTapped = job
+                    }
                 Spacer()
-                Text(String("$\(job.salary)/month"))
+                if job.jobTitle == life_job_title {
+                    Text(formatNum(job.salary) + " / month")
+                } else {
+                    Text("Apply")
+                        .font(.callout)
+                        .foregroundColor(.white)
+                        .padding(12)
+                        .padding(.horizontal)
+                        .background(Color("mainDarkGray"))
+                        .cornerRadius(12)
+                }
             }
-            .padding()
+            .padding(.horizontal)
             .font(.system(size: 20))
-            .foregroundColor(appColor)
+            .foregroundColor(
+                life_job_title == job.jobTitle ? appColor : Color("mainDarkGray")
+            )
+            .frame(width: .infinity, height: 52)
         })
     }
     
     func jobList(_ jobListMode: String) -> some View {
-        
         Group {
             switch jobListMode {
             case "Hourly":
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 8) {
                         ForEach(hourlyJobs, id: \.self) { job in
                             jobOption(job: job)
+                            
+                        //Divider()
                         }
                         
                         Spacer()
@@ -145,11 +192,16 @@ extension JobView {
             Text(life_job_title ?? "Unemployed")
                 .font(.largeTitle)
                 .fontWeight(.medium)
+                .foregroundColor(Color("mainWhite"))
+                .padding(.top)
             
             if life_job_salary != nil {
-                Text("$\(life_job_salary!)/month")
-                    .font(.title3)
-                    .fontWeight(.light)
+                HStack {
+                    Text("$\(life_job_salary!)/month")
+                        .font(.title3)
+                        .fontWeight(.light)
+                        .foregroundColor(Color("mainWhite"))
+                }
             }
                         
             Spacer()
@@ -158,18 +210,22 @@ extension JobView {
             Button(action: {
                 
                 life_cash_balance += jobInfo().salary
+                life_health_status += jobInfo().healthMod
+                life_happiness_status += jobInfo().hapMod
+                life_energy_status += jobInfo().energyMod
                 
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(appColor, lineWidth: 1)
+                        )
                         .padding(.horizontal)
                         .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 12)
+                        .foregroundColor(Color(hue: 1.0, saturation: 0.002, brightness: 0.298))
+                        
                     
-                    /*VStack(alignment: .leading) {
-                        Text("- 0.3⚡️")
-                            .padding(1)
-                        Text("-0.5😀")
-                    }*/
                     Text("Work")
                         .font(.title)
                         .foregroundColor(.white)
@@ -178,12 +234,12 @@ extension JobView {
                 .padding(.bottom, 8)
         }
         .font(Font.custom("mainFont", size: 20))
-        .frame(maxWidth: .infinity, maxHeight: 160)
-        .background(Color.white)
-        .foregroundColor(appColor)
+        .frame(maxWidth: .infinity, maxHeight: 175)
+        .background(Color("mainDarkGray"))
         .cornerRadius(12)
         .shadow(radius: 12)
-        .padding()
+        .padding(.horizontal)
+        .padding(.bottom)
     }
     
     var modeButtons: some View {
@@ -194,7 +250,7 @@ extension JobView {
             }, label: {
                 Text("Hourly")
                     .padding()
-                    .background(appColor)
+                    .background(Color("mainDarkGray"))
                     .cornerRadius(12)
             })
             
@@ -206,7 +262,7 @@ extension JobView {
             }, label: {
                 Text("Career")
                     .padding()
-                    .background(appColor)
+                    .background(Color("mainDarkGray"))
                     .cornerRadius(12)
             })
             
@@ -218,39 +274,134 @@ extension JobView {
             }, label: {
                 Text("Other")
                     .padding()
-                    .background(appColor)
+                    .background(Color("mainDarkGray"))
                     .cornerRadius(12)
             })
             Spacer()
         }
         .foregroundColor(Color.white)
     }
+}
+
+struct ApplyPopup: View {
     
-    func formatNum(_ _num: Int) -> String {
-            var num = _num
-            let strNum = String(num)
-            var digits: [String] = []
-            var i = 1
-
-            while num != 0 {
-              digits.append(String(num % 10))
-              num /= 10
-              if i % 3 == 0 {
-                  digits.append(",")
-              }
-              i += 1
+    @Binding var showApplyPopup: Bool
+    @Binding var showMainView: Bool
+    
+    var job: Job
+    
+    var body: some View {
+        ZStack {
+            
+            background
+            
+            VStack(spacing: 0) {
+                
+                closeButton
+                
+                Text(job.jobTitle)
+                    .font(.largeTitle)
+                    .padding(.bottom, 2)
+                
+                Color.white
+                    .clipShape(Capsule())
+                    .frame(width: 128, height: 2)
+                
+                jobStats
+                
+                description
+                
+                Spacer()
             }
-            digits.reverse()
-            if strNum.count % 3 == 0 {
-              digits.removeFirst(1)
-            }
+            .foregroundColor(.white)
+            .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
+            .padding()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
 
-            return digits.joined()
+extension ApplyPopup {
+    var description: some View {
+        VStack {
+            Text("Description: \n")
+                .fontWeight(.light)
+                .underline()
+                .font(.title2)
+            
+            Text("This is a funny description that will make everyone laugh")
+                .fontWeight(.light)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.horizontal)
+    }
+    var jobStats: some View {
+        VStack(spacing: 12) {
+            HStack {
+                Text("Salary: ")
+                    .fontWeight(.light)
+                Spacer()
+                Text(formatNum(job.salary) + "/month")
+                    .fontWeight(.light)
+            }
+            HStack {
+                Text("Requirements: ")
+                    .fontWeight(.light)
+                Spacer()
+                Text("None")
+                    .fontWeight(.light)
+            }
+            HStack {
+                Text("Affects: ")
+                    .fontWeight(.light)
+                Spacer()
+                VStack {
+                    Text(String(job.hapMod) + " 😀")
+                        .fontWeight(.light)
+                    Text(String(job.energyMod) + " ⚡️")
+                        .fontWeight(.light)
+                }
+            }
+        }
+        .padding()
+        .font(.title2)
+        .frame(width: UIScreen.main.bounds.width * 4 / 5)
+    }
+    var background: some View {
+        ZStack {
+            Color(UIColor.systemGray3)
+                .opacity(0.9)
+                .edgesIgnoringSafeArea(.all)
+            
+            RoundedRectangle(cornerRadius: 24)
+                .foregroundColor(Color("mainDarkGray"))
+                //.background(Color("appMainWhite")).blur(radius: 10)
+                .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
+                .padding()
+        }
+    }
+    var closeButton: some View {
+        HStack {
+            Spacer()
+            Image(systemName: "xmark")
+                .foregroundColor(.red)
+                .padding(.horizontal)
+                .padding(.top)
+                .font(Font.system(size: 40))
+                .onTapGesture {
+                    withAnimation(.linear) {
+                        showApplyPopup = false
+                        showMainView = true
+                    }
+                }
+        }
+
     }
 }
 
 struct JobView_Previews: PreviewProvider {
     static var previews: some View {
         JobView()
+        //ApplyPopup(showApplyPopup: .constant(false), showMainView: .constant(false), job: hourlyJobs.randomElement()!)
     }
 }

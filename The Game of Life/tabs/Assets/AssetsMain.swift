@@ -40,9 +40,9 @@ extension AssetsMain {
             showAssetsMain = false
         }) {
             ZStack {
-                RoundedRectangle(cornerRadius: 40)
+                RoundedRectangle(cornerRadius: 24)
                     .aspectRatio(3/2, contentMode: .fit)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("mainDarkGray"))
                     .shadow(color: .gray, radius: 12, x: 0, y: 0)
                 
                 VStack {
@@ -51,7 +51,7 @@ extension AssetsMain {
                         .fontWeight(.semibold)
                         .padding()
                     
-                    VStack(alignment: .trailing) {
+                    VStack(alignment: .center) {
                         Text("Balance: " + formatNum(life_bank_balance))
                             .padding(.top)
                         
@@ -62,7 +62,7 @@ extension AssetsMain {
             }
             .padding()
         }
-        .foregroundColor(.black)
+        .foregroundColor(.white)
     }
     var realEstateButton: some View {
         Button(action: {
@@ -70,9 +70,9 @@ extension AssetsMain {
             showAssetsMain = false
         }) {
             ZStack {
-                RoundedRectangle(cornerRadius: 40)
+                RoundedRectangle(cornerRadius: 24)
                     .aspectRatio(3/2, contentMode: .fit)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("mainDarkGray"))
                     .shadow(color: .gray, radius: 12, x: 0, y: 0)
                     //.frame(width: 400, height: 100)
                 
@@ -97,7 +97,7 @@ extension AssetsMain {
             }
             .padding()
         }
-        .foregroundColor(.black)
+        .foregroundColor(.white)
     }
 }
 

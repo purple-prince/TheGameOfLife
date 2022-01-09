@@ -21,6 +21,22 @@ struct ParentsDetail: View {
     @State var momStatus = CGFloat(tempParents.mom.status)
     @State var dadStatus = CGFloat(tempParents.dad.status)
     
+    @AppStorage("life_health_status") var life_health_status = 0 {
+        didSet {
+            The_Game_of_Life.limitStatus()
+        }
+    }
+    @AppStorage("life_happiness_status") var life_happiness_status = 0 {
+        didSet {
+            The_Game_of_Life.limitStatus()
+        }
+    }
+    @AppStorage("life_energy_status") var life_energy_status = 0 {
+        didSet {
+            The_Game_of_Life.limitStatus()
+        }
+    }
+    
     func limitStatus(_ parent: CGFloat) -> Void {
         if parent == momStatus {
             if momStatus < 0 {
@@ -39,7 +55,7 @@ struct ParentsDetail: View {
         }
     }
     
-    func StatusBar() -> some View {
+    func StatusBar(mode: String) -> some View {
         ZStack(alignment: .leading){
             
             //background bar
@@ -49,7 +65,7 @@ struct ParentsDetail: View {
             
             //foreground bar
             RoundedRectangle(cornerRadius: 0)
-                .frame(width: CGFloat(momStatus), height: 16)
+                .frame(width: CGFloat(mode == "Mom" ? momStatus : dadStatus), height: 16)
                 .foregroundColor(Color.red)
         }
         .cornerRadius(8)
@@ -69,7 +85,7 @@ struct ParentsDetail: View {
                     Spacer()
                     Text(tempParents.mom.emoji)
                         .font(Font.system(size: 45))
-                    StatusBar()
+                    StatusBar(mode: "Mom")
                     Spacer()
                 }
                 .font(Font.custom("mainFont", size: 20))
@@ -86,10 +102,7 @@ struct ParentsDetail: View {
                     Text(tempParents.dad.name)
                         .font(.largeTitle)
                     Spacer()
-                    HStack {
-                        Text(tempParents.dad.emoji)
-                            .font(Font.system(size: 45))
-                    }
+                    StatusBar(mode: "Dad")
                     Spacer()
                 }
                 .font(Font.custom("mainFont", size: 20))
@@ -124,6 +137,10 @@ struct ParentsDetail: View {
                             dadStatus += 10
                             limitStatus(dadStatus)
                         }
+                        
+                        life_happiness_status += 10
+                        life_energy_status -= 2
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -153,6 +170,10 @@ struct ParentsDetail: View {
                             dadStatus += 20
                             limitStatus(dadStatus)
                         }
+                        
+                        life_happiness_status += 20
+                        life_energy_status -= 1
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -183,6 +204,8 @@ struct ParentsDetail: View {
                             dadStatus += 35
                             limitStatus(dadStatus)
                         }
+                        life_happiness_status += 5
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -206,6 +229,9 @@ struct ParentsDetail: View {
                             dadStatus += 75
                             limitStatus(dadStatus)
                         }
+                        life_happiness_status += 75
+                        life_energy_status += 40
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -233,6 +259,10 @@ struct ParentsDetail: View {
                             dadStatus -= 75
                             limitStatus(dadStatus)
                         }
+                        
+                        life_happiness_status -= 70
+                        life_energy_status -= 50
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -256,6 +286,9 @@ struct ParentsDetail: View {
                             dadStatus -= 10
                             limitStatus(dadStatus)
                         }
+                        
+                        life_happiness_status -= 2
+                        
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
