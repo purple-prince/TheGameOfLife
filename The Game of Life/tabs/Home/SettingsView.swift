@@ -61,11 +61,11 @@ struct SettingsView: View {
 
 struct ColorSetting: View {
     
-     @AppStorage("app_color_index") var colorCount: Int = 0
+    @EnvironmentObject var userPreferences: UserPreferences
 
-     var appColor: Color {
+     /*var appColor: Color {
          colorOptions[colorCount]
-     }
+     }*/
     
     @State var showColorChoices = false
     
@@ -89,7 +89,7 @@ extension ColorSetting {
             HStack {
                 Text("App Color")
                 Spacer()
-                appColor
+                userPreferences.appColor
                     .clipShape(Capsule())
                     .frame(width: geometry.size.width / 5)
                     .onTapGesture {
@@ -113,7 +113,8 @@ extension ColorSetting {
                         withAnimation(.spring()) {
                             showColorChoices.toggle()
                         }
-                        colorCount = colorOptions.firstIndex(of: color) ?? colorCount
+                        //colorCount = colorOptions.firstIndex(of: color) ?? colorCount
+                        userPreferences.colorCount = colorOptions.firstIndex(of: color) ?? userPreferences.colorCount
                     }
             }
         }
@@ -124,5 +125,6 @@ extension ColorSetting {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(showSettings: .constant(false))
+            .environmentObject(UserPreferences())
     }
 }

@@ -11,6 +11,7 @@ struct OptionsView: View {
     
     @State var showRestartLifePopup: Bool = false
     @Binding var showOptions: Bool
+    @EnvironmentObject var player: Player
     
     var body: some View {
         ZStack {
@@ -97,7 +98,8 @@ extension OptionsView {
                 .font(.title2)
         }
         .onTapGesture {
-            restartLife()
+            //Player.player.reset()
+            player.on_new_life = true
             showRestartLifePopup = false
         }
         .padding(.leading, 8)

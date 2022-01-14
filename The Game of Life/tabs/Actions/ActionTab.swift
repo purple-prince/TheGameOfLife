@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol ActionView {
+/*protocol ActionView {
     var frameWidth: CGFloat { get }
     var frameHeight: CGFloat { get }
 }
@@ -20,7 +20,7 @@ extension ActionView {
     var frameHeight: CGFloat {
         240
     }
-}
+}*/
 
 
 struct ActionTab: View {

@@ -7,22 +7,18 @@
 
 import SwiftUI
 
-struct CasinoView: View, ActionView {
+struct CasinoView: View {
     
     @Binding var showCasinoView: Bool
     @Binding var showMainView: Bool
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
-
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     @State var showLotteryPopup = false
     
     var body: some View {
         ZStack {
-            appColor.ignoresSafeArea()
+            userPreferences.appColor.ignoresSafeArea()
             
             VStack {
                 

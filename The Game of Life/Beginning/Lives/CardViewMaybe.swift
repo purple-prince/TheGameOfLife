@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct LivesView: View {
+struct CardViewMaybe: View {
     
     
-    @Binding var showMainView: Bool
+    /*@Binding var showMainView: Bool
     @Binding var showLivesView: Bool
     
     @State static var index = 0
     var life: Life {
-        cemetary[LivesView.index]
+        cemetary[CardViewMaybe.index]
     }
     
     var life1: Life {
-        cemetary[LivesView.index + 1]
+        cemetary[CardViewMaybe.index + 1]
     }
     
     @State var offsetX: CGFloat = 0.0
@@ -33,13 +33,13 @@ struct LivesView: View {
         if life1 == life2 {
             lastCard.toggle()
         }
-    }
+    }*/
     
     var body: some View {
         
         ZStack {
             
-            Color("mainWhite")
+            /*Color("mainWhite")
                 .ignoresSafeArea()
             
             
@@ -58,14 +58,14 @@ struct LivesView: View {
                 
                 //Text(String(cardsLeft))
             }
-            .frame(width: 400, height: 500)
+            .frame(width: 400, height: 500)*/
         }
     }
 }
 
-struct LifeView: View {
+/*struct LifeView: View {
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
+    @EnvironmentObject var userPreferences: UserPreferences
     @AppStorage("entered") var entered: Bool = false
     
     @AppStorage("life_health_status") var life_health_status: Int = 0 {
@@ -88,10 +88,6 @@ struct LifeView: View {
         life_health_status = 100
         life_happiness_status = 100
         life_energy_status = 100
-    }
-
-    var appColor: Color {
-        colorOptions[colorCount]
     }
     
     @State var life: Life
@@ -126,7 +122,7 @@ struct LifeView: View {
                     .frame(maxWidth: .infinity, maxHeight: 100)
                     .padding(24)
                     .padding(.horizontal, 32)
-                    .foregroundColor(appColor)
+                    .foregroundColor(userPreferences.appColor)
                     .onTapGesture {
                         showMainView = true
                         showLivesView = false
@@ -136,7 +132,7 @@ struct LifeView: View {
                 
                 //Spacer()
             }
-            .foregroundColor(appColor)
+            .foregroundColor(userPreferences.appColor)
         }
         .offset(x: offsetX, y: offsetY)
         .gesture(
@@ -159,17 +155,19 @@ struct LifeView: View {
                             } else {
                                 offsetX = -400
                             }
-                            LivesView.index += 1
+                            CardViewMaybe.index += 1
                             //index += 1
                         }
                     }
                 }
         )
     }
-}
+}*/
 
 struct LivesView_Previews: PreviewProvider {
     static var previews: some View {
-        LivesView(showMainView: .constant(false), showLivesView: .constant(true))
+        /*CardViewMaybe(showMainView: .constant(false), showLivesView: .constant(true))
+            .environmentObject(UserPreferences())*/
+        CardViewMaybe()
     }
 }

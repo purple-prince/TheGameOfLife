@@ -20,22 +20,7 @@ struct ParentsDetail: View {
     
     @State var momStatus = CGFloat(tempParents.mom.status)
     @State var dadStatus = CGFloat(tempParents.dad.status)
-    
-    @AppStorage("life_health_status") var life_health_status = 0 {
-        didSet {
-            The_Game_of_Life.limitStatus()
-        }
-    }
-    @AppStorage("life_happiness_status") var life_happiness_status = 0 {
-        didSet {
-            The_Game_of_Life.limitStatus()
-        }
-    }
-    @AppStorage("life_energy_status") var life_energy_status = 0 {
-        didSet {
-            The_Game_of_Life.limitStatus()
-        }
-    }
+    @EnvironmentObject var player: Player
     
     func limitStatus(_ parent: CGFloat) -> Void {
         if parent == momStatus {
@@ -138,8 +123,8 @@ struct ParentsDetail: View {
                             limitStatus(dadStatus)
                         }
                         
-                        life_happiness_status += 10
-                        life_energy_status -= 2
+                        player.life_happiness_status += 10
+                        player.life_energy_status -= 2
                         
                     }, label: {
                         ZStack {
@@ -171,8 +156,8 @@ struct ParentsDetail: View {
                             limitStatus(dadStatus)
                         }
                         
-                        life_happiness_status += 20
-                        life_energy_status -= 1
+                        player.life_happiness_status += 20
+                        player.life_energy_status -= 1
                         
                     }, label: {
                         ZStack {
@@ -204,7 +189,7 @@ struct ParentsDetail: View {
                             dadStatus += 35
                             limitStatus(dadStatus)
                         }
-                        life_happiness_status += 5
+                        player.life_happiness_status += 5
                         
                     }, label: {
                         ZStack {
@@ -229,8 +214,8 @@ struct ParentsDetail: View {
                             dadStatus += 75
                             limitStatus(dadStatus)
                         }
-                        life_happiness_status += 75
-                        life_energy_status += 40
+                        player.life_happiness_status += 75
+                        player.life_energy_status += 40
                         
                     }, label: {
                         ZStack {
@@ -260,8 +245,8 @@ struct ParentsDetail: View {
                             limitStatus(dadStatus)
                         }
                         
-                        life_happiness_status -= 70
-                        life_energy_status -= 50
+                        player.life_happiness_status -= 70
+                        player.life_energy_status -= 50
                         
                     }, label: {
                         ZStack {
@@ -287,7 +272,7 @@ struct ParentsDetail: View {
                             limitStatus(dadStatus)
                         }
                         
-                        life_happiness_status -= 2
+                        player.life_happiness_status -= 2
                         
                     }, label: {
                         ZStack {

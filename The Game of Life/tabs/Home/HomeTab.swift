@@ -9,35 +9,14 @@ import SwiftUI
 
 struct HomeTab: View {
     
-    @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
-    @AppStorage("life_bank_balance") var life_bank_balance: Int = 0
-    @AppStorage("life_health_status") var life_health_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    
-    
-    @AppStorage("app_color_index") var colorCount: Int = 0
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     @State var showSettings: Bool = false
     @State var showOptions: Bool = false
+    @EnvironmentObject var player: Player
     
     func getNetWorth() -> Int {
-        return life_cash_balance + life_bank_balance
+        return player.life_cash_balance + player.life_bank_balance
     }
     
     var body: some View {
@@ -87,11 +66,11 @@ extension HomeTab {
         
         var stat: CGFloat {
             if mode == "Health" {
-                return CGFloat(life_health_status)
+                return CGFloat(player.life_health_status)
             } else if mode == "Happiness" {
-                return CGFloat(life_happiness_status)
+                return CGFloat(player.life_happiness_status)
             } else {
-                return CGFloat(life_energy_status)
+                return CGFloat(player.life_energy_status)
             }
         }
         
@@ -160,7 +139,7 @@ extension HomeTab {
             .aspectRatio(5/8, contentMode: .fit)
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
-                    .stroke(appColor, lineWidth: 1)
+                    .stroke(userPreferences.appColor, lineWidth: 1)
             )
             .padding(20)
             .foregroundColor(Color("mainDarkGray"))
@@ -228,7 +207,7 @@ extension HomeTab {
         VStack {
             Image(systemName: "square.grid.2x2")
                 .font(Font.system(size: 48))
-                .foregroundColor(appColor)
+                .foregroundColor(userPreferences.appColor)
                 .onTapGesture {
                     withAnimation(.easeInOut) {
                         showOptions = true
@@ -244,6 +223,7 @@ extension HomeTab {
 struct HomeTab_Previews: PreviewProvider {
     static var previews: some View {
         HomeTab()
+            .environmentObject(UserPreferences())
     }
 }
 

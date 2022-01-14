@@ -38,11 +38,12 @@ struct RelationshipTab: View {
         NavigationView {
             
             ZStack {
-                //Color(red: 235/255, green: 35/255, blue: 195/255, opacity: 0.5).ignoresSafeArea()
+                Color("mainWhite").ignoresSafeArea()
                 ScrollView {
                     VStack {
                         ForEach(0..<relationshipCategories.count) { occupation in
-                            RelationshipButton(memberType: relationshipCategories[occupation], status: 0, color: Color(red: 255/255, green: 35/255, blue: 115/255, opacity: 0.5))
+                            RelationshipButton(memberType: relationshipCategories[occupation], status: 0)
+                                .padding(.vertical, 4)
                         }
                     }
                 }
@@ -54,5 +55,6 @@ struct RelationshipTab: View {
 struct RelationshipTab_Previews: PreviewProvider {
     static var previews: some View {
         RelationshipTab()
+            .environmentObject(UserPreferences())
     }
 }

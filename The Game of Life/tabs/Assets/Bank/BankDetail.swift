@@ -20,8 +20,8 @@ struct BankDetail: View {
     @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
     
-    @AppStorage("life_bank_balance") var life_bank_balance = 0
-    @AppStorage("life_cash_balance") var life_cash_balance = 0
+    @EnvironmentObject var player: Player
+    
     
     //xmark.app.fill
     //xmark.circle
@@ -139,7 +139,7 @@ extension BankDetail {
             }
             .padding(.bottom, 4)
             
-            Text(formatNum(life_bank_balance))
+            Text(formatNum(player.life_bank_balance))
                 .font(Font.system(size: 24))
                 .padding(.bottom, 32)
         }
@@ -171,6 +171,7 @@ struct SwiftUIView_Previews: PreviewProvider {
         Group {
             BankDetail(showAssetsMain: .constant(false), showBankDetail: .constant(true))
                 .preferredColorScheme(.light)
+                .environmentObject(Player())
         }
     }
 }

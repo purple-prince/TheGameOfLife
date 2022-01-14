@@ -13,6 +13,7 @@ struct Job: Occupation {
     var healthMod: Int
     var hapMod: Int
     var energyMod: Int
+    var description: String
     var id = UUID()
 }
 

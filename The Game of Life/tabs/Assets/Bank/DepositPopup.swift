@@ -8,24 +8,18 @@
 import SwiftUI
 
 struct DepositPopup: View {
-    @AppStorage("app_color_index") var colorCount: Int = 0
-
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
     
-    
-    @AppStorage("life_cash_balance") var life_cash_balance = 0
-    @AppStorage("life_bank_balance") var life_bank_balance = 0
+    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var player: Player
     @Binding var showDepositPopup: Bool
     @State var depositAmount: Double = 0.0
     
     var maxSliderAmount: Double {
         
-        if life_cash_balance <= 0 {
+        if player.life_cash_balance <= 0 {
             return 0.0
         } else {
-            return Double(life_cash_balance)
+            return Double(player.life_cash_balance)
         }
     }
         
@@ -49,7 +43,7 @@ struct DepositPopup: View {
                     Slider(value: $depositAmount,
                            in: -1...maxSliderAmount,
                            step: 1.0)
-                        .accentColor(appColor)
+                        .accentColor(userPreferences.appColor)
                         .padding(.horizontal)
                     
                     submitDepositButton
@@ -75,7 +69,7 @@ extension DepositPopup {
             .frame(width: .infinity, height: 220)
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
-                    .stroke(appColor, lineWidth: 2)
+                    .stroke(userPreferences.appColor, lineWidth: 2)
             )
             .shadow(color: .gray, radius: 12)
     }
@@ -107,8 +101,8 @@ extension DepositPopup {
             .foregroundColor(.white)
             .cornerRadius(12)
             .onTapGesture {
-                life_cash_balance -= Int(depositAmount)
-                life_bank_balance += Int(depositAmount)
+                player.life_cash_balance -= Int(depositAmount)
+                player.life_bank_balance += Int(depositAmount)
                 showDepositPopup = false
             }
             
@@ -118,5 +112,6 @@ extension DepositPopup {
 struct DepositPopup_Previews: PreviewProvider {
     static var previews: some View {
         DepositPopup(showDepositPopup: .constant(true))
+            .environmentObject(Player())
     }
 }

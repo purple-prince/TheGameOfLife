@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct AssetsMain: View {
-    
-    @AppStorage("life_bank_balance") var life_bank_balance = 0
-    
+        
     @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
     @Binding var showRealEstateDetail: Bool
+    @EnvironmentObject var player: Player
     
     var body: some View {
         ScrollView {
@@ -52,7 +51,7 @@ extension AssetsMain {
                         .padding()
                     
                     VStack(alignment: .center) {
-                        Text("Balance: " + formatNum(life_bank_balance))
+                        Text("Balance: " + formatNum(player.life_bank_balance))
                             .padding(.top)
                         
                         Text("Debt: $0")

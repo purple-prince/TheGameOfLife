@@ -9,11 +9,7 @@ import SwiftUI
 
 struct RelationshipDetail: View {
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
-    
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     let memberMode: String
     
@@ -31,7 +27,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(appColor)
+                        .foregroundColor(userPreferences.appColor)
                     })
                     Button(action:{}, label: {
                         HStack {
@@ -41,7 +37,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(appColor)
+                        .foregroundColor(userPreferences.appColor)
                     })
                 }
             case "Romance":
@@ -54,7 +50,7 @@ struct RelationshipDetail: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(appColor)
+                        .foregroundColor(userPreferences.appColor)
                     })
                 }
             case "Children":
@@ -68,7 +64,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -78,7 +74,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -88,7 +84,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -98,7 +94,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                     }
                 }
@@ -113,7 +109,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -123,7 +119,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -133,7 +129,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -143,7 +139,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                     }
                 }
@@ -158,7 +154,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -168,7 +164,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                         Button(action:{}, label: {
                             HStack {
@@ -178,7 +174,7 @@ struct RelationshipDetail: View {
                             }
                             .padding()
                             .font(.system(size: 20))
-                            .foregroundColor(appColor)
+                            .foregroundColor(userPreferences.appColor)
                         })
                     }
                 }

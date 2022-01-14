@@ -6,19 +6,27 @@
 //
 
 import SwiftUI
-import RealModule
+
+class LotteryModel: ObservableObject {
+    //singleton
+    static let instance = LotteryModel()
+    
+    
+    @Published var num1: String?
+    @Published var num2: String?
+    @Published var num3: String?
+    @Published var num4: String?
+    @Published var num5: String?
+    @Published var num6: String?
+}
 
 struct LotteryPopup: View {
     
+    @EnvironmentObject var player: Player
     @State var resetUpcomingNums: Bool = false
     @AppStorage("lottery_jackpot") var lottery_jackpot: Int = Int.random(in: 750_000_000...1_500_000_000)
-    
-    @AppStorage("life_cash_balance") var life_cash_balance = 0
-    @AppStorage("app_color_index") var colorCount: Int = 0
-
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+        
+    @EnvironmentObject var userPreferences: UserPreferences
     
     @Binding var showLotteryPopup: Bool
     @State var amountWon: Int = 0
@@ -90,31 +98,31 @@ extension LotteryPopup {
                         if Int(num5!) == winning_5 {
                             if Int(num6!) == winning_6 {
                                 numsRight = 6
-                                life_cash_balance += lottery_jackpot
+                                player.life_cash_balance += lottery_jackpot
                             } else {
                                 numsRight = 5
                                 amountWon += Int(pow(Double(lottery_jackpot), Double(1/2.0)) * Double(amount))
-                                life_cash_balance += amountWon
+                                player.life_cash_balance += amountWon
                             }
                         } else {
                             numsRight = 4
                             amountWon = Int(pow(Double(lottery_jackpot), Double(1/3.0)) * Double(amount))
-                            life_cash_balance += amountWon
+                            player.life_cash_balance += amountWon
                         }
                     } else {
                         numsRight = 3
                         amountWon = Int(pow(Double(lottery_jackpot), Double(1/4.0)) * Double(amount))
-                        life_cash_balance += amountWon
+                        player.life_cash_balance += amountWon
                     }
                 } else {
                     numsRight = 2
                     amountWon = Int(pow(Double(lottery_jackpot), Double(1/5.0)) * Double(amount))
-                    life_cash_balance += amountWon
+                    player.life_cash_balance += amountWon
                 }
             } else {
                 numsRight = 1
                 amountWon += Int(pow(Double(lottery_jackpot), Double(1/6.0)) * Double(amount))
-                life_cash_balance += amountWon
+                player.life_cash_balance += amountWon
             }
             resetUpcomingNums = true
         }
@@ -125,7 +133,7 @@ extension LotteryPopup {
             .foregroundColor(Color("mainWhite"))
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
-                    .stroke(appColor, lineWidth: 2)
+                    .stroke(userPreferences.appColor, lineWidth: 2)
             )
             .shadow(color: .gray, radius: 12)
     }
@@ -178,7 +186,7 @@ extension LotteryPopup {
             .background(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(appColor, lineWidth: 2)
+                    .stroke(userPreferences.appColor, lineWidth: 2)
             )
             .cornerRadius(6)
     }
@@ -285,14 +293,15 @@ extension LotteryPopup {
     func buyTicketButton(amount: Int) -> some View {
         Button(action: {
             
-            if resetUpcomingNums {
-                resetWinningNums()
-                resetUpcomingNums = false
-            }
-            
-            if life_cash_balance >= 10 * amount {
+            if player.life_cash_balance >= 10 * amount {
+                
+                if resetUpcomingNums {
+                    resetWinningNums()
+                    resetUpcomingNums = false
+                }
+                
                 numsRight = 0
-                life_cash_balance -= 10 * amount
+                player.life_cash_balance -= 10 * amount
                 
                 num1 = String(Int.random(in: 1...9))
                 num2 = String(Int.random(in: 1...9))
@@ -305,13 +314,15 @@ extension LotteryPopup {
                 checkNums(amount: amount)
             }
             
+            HapticManager.instance.playHaptic(type: .light)
+            
         }, label: {
             Text("Buy \(amount) - $\(10 * amount)")
                 .foregroundColor(.white)
                 .padding()
                 .padding(.horizontal, 12)
                 .background(Color("mainDarkGray"))
-                .overlay(life_cash_balance >= (amount * 10) ? nil : Color.gray.opacity(0.4))
+                .overlay(player.life_cash_balance >= (amount * 10) ? nil : Color.gray.opacity(0.4))
                 .cornerRadius(12)
                 
         })
@@ -321,5 +332,7 @@ extension LotteryPopup {
 struct LotteryPopup_Previews: PreviewProvider {
     static var previews: some View {
         LotteryPopup(showLotteryPopup: .constant(true))
+            .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }

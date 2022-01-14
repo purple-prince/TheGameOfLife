@@ -9,14 +9,9 @@ import SwiftUI
 
 struct JobView: View{
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
-    
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     
-    @State var tempJob = hourlyJobs.randomElement()!
     @State var jobListMode = "Hourly"
     @State var showApplyPopup = false
     @State var showMainView = true
@@ -24,24 +19,7 @@ struct JobView: View{
     
     @AppStorage("life_job_title") var life_job_title: String?
     @AppStorage("life_job_salary") var life_job_salary: Int?// = 0
-    @AppStorage("life_cash_balance") var life_cash_balance: Int = 0
-    
-    @AppStorage("life_health_status") var life_health_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0 {
-        didSet {
-            limitStatus()
-        }
-    }
-    
+    @EnvironmentObject var player: Player
         
     var body: some View {
         
@@ -87,6 +65,7 @@ extension JobView {
                     .onTapGesture {
                         showApplyPopup = true
                         jobTapped = job
+                        HapticManager.instance.playHaptic(type: .soft)
                     }
                 Spacer()
                 if job.jobTitle == life_job_title {
@@ -104,7 +83,7 @@ extension JobView {
             .padding(.horizontal)
             .font(.system(size: 20))
             .foregroundColor(
-                life_job_title == job.jobTitle ? appColor : Color("mainDarkGray")
+                life_job_title == job.jobTitle ? userPreferences.appColor : Color("mainDarkGray")
             )
             .frame(width: .infinity, height: 52)
         })
@@ -163,19 +142,7 @@ extension JobView {
             }
         }
     }
-    
-    /*var hourlyJobInfo: [HourlyJob] {
-        return hourlyJobs.filter({ return $0.jobTitle == life_job_title })
-    }
-    
-    var careerJobInfo: [CareerJob] {
-        return careerJobs.filter({ return $0.jobTitle == life_job_title })
-    }
-    
-    var otherJobInfo: [OtherJob] {
-        return otherJobs.filter({ return $0.jobTitle == life_job_title })
-    }*/
-    
+        
     //passas either HourlyJob, CareerJob, or OtherJob into currentJobInfo func
     func jobInfo/*<T: Occupation>*/() -> Job {
         if hourlyJobs.filter({ return $0.jobTitle == life_job_title }).count > 0 {
@@ -209,17 +176,17 @@ extension JobView {
             
             Button(action: {
                 
-                life_cash_balance += jobInfo().salary
-                life_health_status += jobInfo().healthMod
-                life_happiness_status += jobInfo().hapMod
-                life_energy_status += jobInfo().energyMod
-                
+                player.life_cash_balance += jobInfo().salary
+                player.life_health_status += jobInfo().healthMod
+                player.life_happiness_status += jobInfo().hapMod
+                player.life_energy_status += jobInfo().energyMod
+                HapticManager.instance.playHaptic(type: .rigid)
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(appColor, lineWidth: 1)
+                                .stroke(userPreferences.appColor, lineWidth: 1)
                         )
                         .padding(.horizontal)
                         .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 12)
@@ -247,6 +214,7 @@ extension JobView {
             Spacer()
             Button(action: {
                 jobListMode = "Hourly"
+                HapticManager.instance.playHaptic(type: .soft)
             }, label: {
                 Text("Hourly")
                     .padding()
@@ -259,6 +227,7 @@ extension JobView {
             Spacer()
             Button(action: {
                 jobListMode = "Career"
+                HapticManager.instance.playHaptic(type: .soft)
             }, label: {
                 Text("Career")
                     .padding()
@@ -271,6 +240,7 @@ extension JobView {
             Spacer()
             Button(action: {
                 jobListMode = "Other"
+                HapticManager.instance.playHaptic(type: .soft)
             }, label: {
                 Text("Other")
                     .padding()
@@ -324,12 +294,12 @@ struct ApplyPopup: View {
 extension ApplyPopup {
     var description: some View {
         VStack {
-            Text("Description: \n")
+            Text("Job Description: \n")
                 .fontWeight(.light)
                 .underline()
                 .font(.title2)
             
-            Text("This is a funny description that will make everyone laugh")
+            Text(job.description)
                 .fontWeight(.light)
                 .multilineTextAlignment(.center)
         }
@@ -402,6 +372,7 @@ extension ApplyPopup {
 struct JobView_Previews: PreviewProvider {
     static var previews: some View {
         JobView()
+            .environmentObject(UserPreferences())
         //ApplyPopup(showApplyPopup: .constant(false), showMainView: .constant(false), job: hourlyJobs.randomElement()!)
     }
 }

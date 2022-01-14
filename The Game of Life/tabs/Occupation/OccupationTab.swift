@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//@AppStorage("life_cash_balance") var life_cash_balance: Int = 0
 
 struct OccupationTab: View {
     
@@ -26,22 +25,13 @@ struct OccupationTab: View {
         NavigationView {
             
             ZStack {
-                Color(red: 235/255, green: 235/255, blue: 235/255).ignoresSafeArea()
+                
+                Color("mainWhite").ignoresSafeArea()
+                
                 ScrollView {
-                    
-                    ZStack {
-                        ZStack {
-                            
-                            Color(red: 235/255, green: 235/255, blue: 235/255)//.ignoresSafeArea()
-                            
-                            VStack {
-                                
-                                VStack {
-                                    ForEach(0..<occupationCategories.count) { occupation in
-                                        CategoryButton(category: occupationCategories[occupation], position: "None", salary: 0, color: backgroundColors[occupation])
-                                    }
-                                }
-                            }
+                    VStack {
+                        ForEach(0..<occupationCategories.count) { occupation in
+                            CategoryButton(category: occupationCategories[occupation], position: "None", salary: 0, color: backgroundColors[occupation])//TODO: IMPLEMENT THIS!! diff colors for each... makes more interesting
                         }
                     }
                 }
@@ -54,5 +44,6 @@ struct OccupationTab: View {
 struct OccupationTab_Previews: PreviewProvider {
     static var previews: some View {
         OccupationTab()
+            .environmentObject(UserPreferences())
     }
 }

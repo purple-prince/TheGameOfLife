@@ -10,11 +10,7 @@ import SwiftUI
 struct SHView: View {
     let tempSH = listOfSideHustles.randomElement()!
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
-    
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     var body: some View {
         VStack {
@@ -32,7 +28,7 @@ struct SHView: View {
                         }
                         .padding()
                         .font(.system(size: 20))
-                        .foregroundColor(appColor)
+                        .foregroundColor(userPreferences.appColor)
                     })
                 }
             }
@@ -68,8 +64,8 @@ extension SHView {
         }
         .font(Font.custom("mainFont", size: 20))
         .frame(maxWidth: .infinity, maxHeight: 150)
-        .background(appColor)
-        .foregroundColor(appColor)
+        .background(userPreferences.appColor)
+        .foregroundColor(userPreferences.appColor)
         .cornerRadius(12)
         .shadow(radius: 12)
         .padding()

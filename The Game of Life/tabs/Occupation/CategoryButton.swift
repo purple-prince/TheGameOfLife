@@ -14,11 +14,7 @@ import SwiftUI
 
 struct CategoryButton: View {
     
-    @AppStorage("app_color_index") var colorCount: Int = 0
-    
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
+    @EnvironmentObject var userPreferences: UserPreferences
     
     let category: String
     let position: String
@@ -59,12 +55,15 @@ struct CategoryButton: View {
             }
             .font(Font.custom("mainFont", size: 20))
             .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color("mainDarkGray"))
+            )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(appColor, lineWidth: 4)
+                    .stroke(userPreferences.appColor, lineWidth: 4)
                 )
-            .foregroundColor(appColor)
-            .background(Color("mainWhite"))
+            .foregroundColor(userPreferences.appColor)
             .cornerRadius(12)
             .shadow(radius: 6)
             .padding(.horizontal)
@@ -76,6 +75,7 @@ struct CategoryButton: View {
 struct OccupationButton_Previews: PreviewProvider {
     static var previews: some View {
         CategoryButton(category: "Job", position: "Junior Developer", salary: 69, color: Color.red)
+            .environmentObject(UserPreferences())
     }
 }
 

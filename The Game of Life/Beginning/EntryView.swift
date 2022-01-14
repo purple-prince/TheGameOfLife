@@ -10,13 +10,10 @@ import SwiftUI
 struct EntryView: View {
     
     @AppStorage("entered") var entered: Bool = false
-    @AppStorage("app_color_index") var colorCount: Int = 0
     
     @State var showEntryView  = true
     @State var showLivesView = false
-    @State var showMainView = false
-    
-    
+    //@State var showMainView = false
     
     
     var body: some View {
@@ -25,9 +22,8 @@ struct EntryView: View {
             if showEntryView {
                 ColorView(showColorView: $showEntryView, showLivesView: $showLivesView)
             } else if showLivesView {
-                LivesView(showMainView: $showMainView, showLivesView: $showLivesView)
-            } else if showMainView {
-                MainView()
+                //LivesView(showMainView: $showMainView, showLivesView: $showLivesView)
+                NewLifeView(/*showMainView: $showMainView, showLivesView:  $showLivesView*/)
             } else {
                 Text("Error: EntryView")
             }
@@ -39,15 +35,13 @@ struct EntryView: View {
 
 struct ColorView: View {
     
+    @EnvironmentObject var userPreferences: UserPreferences
+    
     @AppStorage("entered") var entered: Bool = false
-    @AppStorage("app_color_index") var colorCount: Int = 0
     
     @Binding var showColorView: Bool
     @Binding var showLivesView: Bool
 
-    var appColor: Color {
-        colorOptions[colorCount]
-    }
     
     var body: some View {
         ZStack {
@@ -58,11 +52,11 @@ struct ColorView: View {
                     .font(.largeTitle)
                     .fontWeight(.medium)
                     .padding(40)
-                    .foregroundColor(appColor)
+                    .foregroundColor(userPreferences.appColor)
                 
                 
                 Text("Select an app color to get started. You can always change this later!")
-                    .foregroundColor(appColor)
+                    .foregroundColor(userPreferences.appColor)
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                 
@@ -91,13 +85,13 @@ struct ColorView: View {
                         updateColorCount(.backwards)
                     }
                 }
-                .foregroundColor(appColor)
+                .foregroundColor(userPreferences.appColor)
             
             RoundedRectangle(cornerRadius: 16)
                 .aspectRatio(1, contentMode: .fit)
                 .frame(width: 80, height: 80)
                 .padding(.horizontal)
-                .foregroundColor(appColor)
+                .foregroundColor(userPreferences.appColor)
                 .shadow(color: .black, radius: 2)
             
             Text("❯")
@@ -107,20 +101,20 @@ struct ColorView: View {
                         updateColorCount(.forwards)
                     }
                 }
-                .foregroundColor(appColor)
+                .foregroundColor(userPreferences.appColor)
         }
     }
     
     func updateColorCount(_ mode: ColorCountStepper) {
         if mode == .backwards {
-            if colorCount < 1 {
-                colorCount = colorOptions.count
+            if userPreferences.colorCount < 1 {
+                userPreferences.colorCount = colorOptions.count
             }
-            colorCount -= 1
+            userPreferences.colorCount -= 1
         } else {
-            colorCount += 1
-            if colorCount >= colorOptions.count {
-                colorCount = 0
+            userPreferences.colorCount += 1
+            if userPreferences.colorCount >= colorOptions.count {
+                userPreferences.colorCount = 0
             }
         }
     }
@@ -131,14 +125,12 @@ struct ColorView: View {
                 .frame(maxWidth: .infinity, maxHeight: 100)
                 .padding()
                 .padding(.horizontal)
-                .foregroundColor(appColor)
+                .foregroundColor(userPreferences.appColor)
             Text("Done")
                 .foregroundColor(.white)
                 .font(.title)
         }
         .onTapGesture {
-            entered.toggle()
-            
             withAnimation(.spring()) {
                 showColorView = false
                 showLivesView = true
@@ -150,6 +142,7 @@ struct ColorView: View {
 struct EntryView_Previews: PreviewProvider {
     static var previews: some View {
         EntryView()
+            .environmentObject(UserPreferences())
     }
 }
 

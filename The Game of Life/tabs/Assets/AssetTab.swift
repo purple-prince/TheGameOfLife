@@ -33,6 +33,7 @@ struct AssetTab: View {
 struct AssetTab_Previews: PreviewProvider {
     static var previews: some View {
         AssetTab()
+            .environmentObject(Player())
     }
 }
 

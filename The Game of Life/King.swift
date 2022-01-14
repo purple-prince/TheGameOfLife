@@ -27,14 +27,6 @@ var tempChild2 = Child()
 var tempChild3 = Child()
 var numKids = 3
 
-struct King {
-    @State var directDepositOn = false
-}
-
-protocol Person {
-    var name: String { get }
-}
-
 var allPartners: [Partner] = []
 
 var tempPartner = Partner(gender: "Female", age: 25)
@@ -56,8 +48,7 @@ func formatNum(_ num: Int) -> String {
     let prefixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sex", "Sep", "Oct", "Non", "Dec", "Und", "Duo", "Tre", "Quatt", "Quindec", "Sexdec", "Septen", "Octo", "Novem", "Vigin", "Cent"]
     let strNum = String(num)//2000
     var index: Int {((strNum.count - 1) / 3)}
-    //formatter(Float(num / 1000))
-    //formatter.string(from: NSNumber(value: ___))
+    
     if num < 1_000_000 { // million
         return "$" + formatter.string(from: NSNumber(value: Float(num) / 1000))! + prefixes[index]
     } else if num < 1_000_000_000 { // billion
@@ -77,47 +68,173 @@ func formatNum(_ num: Int) -> String {
     
 }
 
-func restartLife() -> Void {
+//Haptic manager singleton
+class HapticManager {
+    
+    enum HapticTypes {
+        case light, medium, heavy, rigid, soft, success, warning, error
+    }
+    
+    //let type: HapticTypes
+    static let instance = HapticManager()
+    
+    func playHaptic(type: HapticTypes) {
+        switch type {
+            case .light:
+                let generator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
+                generator.impactOccurred()
+            case .medium:
+                let generator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.medium)
+                generator.impactOccurred()
+            case .heavy:
+                let generator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.heavy)
+                generator.impactOccurred()
+            case .rigid:
+                let generator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.rigid)
+                generator.impactOccurred()
+            case .soft:
+                let generator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.soft)
+                generator.impactOccurred()
+            case .success:
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
+            case .warning:
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.warning)
+            case .error:
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+        }
+    }
+    
+}
+
+class UserPreferences: ObservableObject {
+        
+    @AppStorage("app_color_index") var colorCount: Int = 0
+
+    var appColor: Color {
+        colorOptions[colorCount]
+    }
+}
+
+class Player: ObservableObject {
+        
+    @AppStorage("on_new_life") var on_new_life: Bool = false
     @AppStorage("life_cash_balance") var life_cash_balance = 0
     @AppStorage("life_bank_balance") var life_bank_balance = 0
-    life_cash_balance -= life_cash_balance
-    life_bank_balance -= life_bank_balance
-}
+    @AppStorage("life_health_status") var life_health_status = 100 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_happiness_status") var life_happiness_status = 100 {
+        didSet {
+            limitStatus()
+        }
+    }
+    @AppStorage("life_energy_status") var life_energy_status = 100 {
+        didSet {
+            limitStatus()
+        }
+    }
+    
+    
+    enum Genders: CaseIterable {
+        case male, female
+    }
+    
+    func reset() {
+        resetFinances()
+        resetEmotions()
+    }
+    
+    func limitStatus() {
+        if life_health_status < 0 {
+            on_new_life = true
+        }
+        if life_health_status > 100 {
+            life_health_status = 100
+        }
+        
+        if life_happiness_status < 0 {
+            on_new_life = true
+        }
+        if life_happiness_status > 100 {
+            life_happiness_status = 100
+        }
+        
+        if life_energy_status < 0 {
+            on_new_life = true
+        }
+        if life_energy_status > 100 {
+            life_energy_status = 100
+        }
 
-func limitStatus() -> Void {
-    @AppStorage("life_health_status") var life_health_status: Int = 0
-    @AppStorage("life_happiness_status") var life_happiness_status: Int = 0
-    @AppStorage("life_energy_status") var life_energy_status: Int = 0
-    
-    if life_health_status < 0 {
-        life_health_status = 0
     }
-    if life_health_status > 100 {
+    
+    func resetEmotions() {
         life_health_status = 100
-    }
-    
-    if life_happiness_status < 0 {
-        life_happiness_status = 0
-    }
-    if life_happiness_status > 100 {
+        life_energy_status = 100
         life_happiness_status = 100
     }
+    func resetFinances() {
+        life_cash_balance = 0
+        life_bank_balance = 0
+    }
     
-    if life_energy_status < 0 {
-        life_energy_status = 0
-    }
-    if life_energy_status > 100 {
-        life_energy_status = 100
-    }
 }
 
-
-
 /*
- net worth:
+ @Published var gender: Genders = .male
+ @Published var name: String
+ @Published var monthsOld: Int = 0
+ @Published var age: Int = 0
  
- - cash
- - bank
- - real estate
- - assets
+ init() {
+     gender = Genders.allCases.randomElement()!
+     switch gender {
+         case .male:
+             name = maleNames.randomElement()!
+         case .female:
+             name = femaleNames.randomElement()!
+         }
+     life_cash_balance = 0
+     life_bank_balance = 0
+     monthsOld = 0
+ }
+
+ func reset() {
+     resetGender()
+     resetName()
+     resetFinances()
+     resetAge()
+ }
+ 
+ func resetAge() {
+     
+ }
+
+ func resetFinances() {
+     life_cash_balance -= life_cash_balance
+     life_bank_balance -= life_bank_balance
+ }
+ 
+ func resetGender() {
+     gender = Genders.allCases.randomElement()!
+ }
+ 
+ func resetName() {
+     switch gender {
+         case .male:
+             name = maleNames.randomElement()!
+         case .female:
+             name = femaleNames.randomElement()!
+         }
+ }
+ 
+ func changeName() {
+     
+ }
+ 
  */
