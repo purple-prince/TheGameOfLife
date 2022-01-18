@@ -10,6 +10,8 @@ import SwiftUI
 struct EntryView: View {
     
     @AppStorage("entered") var entered: Bool = false
+    @StateObject var userPreferences = UserPreferences()
+    @StateObject var player = Player()
     
     @State var showEntryView  = true
     @State var showLivesView = false
@@ -21,14 +23,19 @@ struct EntryView: View {
         if !entered {
             if showEntryView {
                 ColorView(showColorView: $showEntryView, showLivesView: $showLivesView)
+                    .environmentObject(userPreferences)
             } else if showLivesView {
                 //LivesView(showMainView: $showMainView, showLivesView: $showLivesView)
                 NewLifeView(/*showMainView: $showMainView, showLivesView:  $showLivesView*/)
+                    .environmentObject(userPreferences)
+                    .environmentObject(player)
             } else {
                 Text("Error: EntryView")
             }
         } else {
             MainView()
+                .environmentObject(userPreferences)
+                .environmentObject(player)
         }
     }
 }
@@ -143,6 +150,7 @@ struct EntryView_Previews: PreviewProvider {
     static var previews: some View {
         EntryView()
             .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }
 

@@ -8,50 +8,55 @@
 import SwiftUI
 
 struct ParentsView: View {
+    
+    @Binding var showMainView: Bool
+    @Binding var showParentsView: Bool
+    @EnvironmentObject var player: Player
+    @EnvironmentObject var userPreferences: UserPreferences
         
     var body: some View {
                 
         NavigationView {
             VStack {
                 banner
-                            
+
                 Divider()
-                
+
                 VStack {
-                    
+
                     NavigationLink(destination: {
-                        ParentsDetail(mode: "Mom")
+                        ParentsDetail(mode: .mom)
                     }, label:{
                         HStack {
-                            Text(tempParents.mom.emoji + " " + tempParents.mom.name)
+                            Text(player.mom_emoji + " " + player.mom_name)
                             Spacer()
                             ZStack(alignment: .leading) {
                                 RoundedRectangle(cornerRadius: 12)
                                     .frame(width: 120, height: 12)
                                     .foregroundColor(Color.gray)
-                                    
+
                                 RoundedRectangle(cornerRadius: 12)
-                                    .frame(width: ParentsDetail(mode: "Mom").momStatus, height: 12)
-                                    .foregroundColor(Color.green)
+                                    .frame(width: CGFloat(player.mom_status), height: 12)
+                                    .foregroundColor(userPreferences.appColor)
                             }
                         }
                         .padding()
                         .font(.system(size: 20))
                         .foregroundColor(.black)
                     })
-                    
-                    NavigationLink(destination: {ParentsDetail(mode: "Dad")}, label: {
+
+                    NavigationLink(destination: {ParentsDetail(mode: .dad)}, label: {
                         HStack {
-                            Text(tempParents.dad.emoji + " " + tempParents.dad.name)
+                            Text(player.dad_emoji + " " + player.dad_name)
                             Spacer()
                             ZStack(alignment: .leading) {
                                 RoundedRectangle(cornerRadius: 12)
                                     .frame(width: 120, height: 12)
                                     .foregroundColor(Color.gray)
-                                    
+
                                 RoundedRectangle(cornerRadius: 12)
-                                    .frame(width: ParentsDetail(mode: "Dad").momStatus, height: 12)
-                                    .foregroundColor(Color.green)
+                                    .frame(width: CGFloat(player.dad_status), height: 12)
+                                    .foregroundColor(userPreferences.appColor)
                             }
                         }
                         .padding()
@@ -62,15 +67,7 @@ struct ParentsView: View {
                 Spacer()
             }
             .offset(y: 72)
-        .ignoresSafeArea()
-        }
-    }
-}
-
-struct ParentLink: View {
-    var body: some View {
-        HStack {
-            Text(tempParents.dad.emoji + " " + tempParents.dad.name)
+            .ignoresSafeArea()
         }
     }
 }
@@ -89,22 +86,19 @@ extension ParentsView {
             
             Spacer()
         }
-        .font(Font.custom("mainFont", size: 20))
         .frame(maxWidth: .infinity, maxHeight: 150)
-        .background(Color("neonGreen"))
-        .foregroundColor(.black)
+        .background(Color("mainDarkGray"))
+        .foregroundColor(.white)
         .cornerRadius(12)
         .shadow(radius: 12)
         .padding()
-    }
-    
-    var parentLink: some View {
-        Text("")
     }
 }
 
 struct ParentsView_Previews: PreviewProvider {
     static var previews: some View {
-        ParentsView()
+        ParentsView(showMainView: .constant(true), showParentsView: .constant(true))
+            .environmentObject(Player())
+            .environmentObject(UserPreferences())
     }
 }

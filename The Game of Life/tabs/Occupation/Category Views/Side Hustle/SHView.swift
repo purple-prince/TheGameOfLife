@@ -75,5 +75,6 @@ extension SHView {
 struct SHView_Previews: PreviewProvider {
     static var previews: some View {
         SHView()
+            .environmentObject(UserPreferences())
     }
 }

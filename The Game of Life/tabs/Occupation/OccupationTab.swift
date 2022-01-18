@@ -45,5 +45,6 @@ struct OccupationTab_Previews: PreviewProvider {
     static var previews: some View {
         OccupationTab()
             .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }

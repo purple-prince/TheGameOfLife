@@ -115,5 +115,6 @@ struct WithdrawPopup_Previews: PreviewProvider {
     static var previews: some View {
         WithdrawPopup(showWithdrawPopup: .constant(true))
             .environmentObject(Player())
+            .environmentObject(UserPreferences())
     }
 }

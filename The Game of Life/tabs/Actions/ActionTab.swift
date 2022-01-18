@@ -57,5 +57,7 @@ struct ActionTab: View {
 struct ActionTab_Previews: PreviewProvider {
     static var previews: some View {
         ActionTab()
+            .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }

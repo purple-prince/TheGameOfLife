@@ -7,47 +7,52 @@
 
 import SwiftUI
 
-protocol FamMember: Hashable, Identifiable {    
-    var age: Int {get}
-    var id: UUID {get}
-    var status: Int {get}
-    var emoji: String {get}
-}
-
-extension FamMember {
-    var id: UUID {
-        return UUID()
-    }
-    var emoji: String {
-        return "NO EMOJI"
-    }
-}
-
 struct RelationshipTab: View {
-    let relationshipCategories = ["Parents", "Romance", "Children",
-                                "Friends", "Pets"]
         
-    /*let backgroundColors = [Color.white,
-                            Color.white,
-                            Color.white,
-                            Color.white,
-                            Color.white]*/
+    @State var showMainView: Bool = true
+    @State var showParentsView: Bool = false
+    @State var showRomanceView: Bool = false
+    @State var showChildrenView: Bool = false
+    @State var showFriendsView: Bool = false
+    @State var showPetsView: Bool = false
+    @EnvironmentObject var player: Player
+    @EnvironmentObject var userPreferences: UserPreferences
 
     var body: some View {
         
-        NavigationView {
             
-            ZStack {
-                Color("mainWhite").ignoresSafeArea()
+        ZStack {
+            Color("mainWhite").ignoresSafeArea()
+            
+            if showMainView {
                 ScrollView {
-                    VStack {
-                        ForEach(0..<relationshipCategories.count) { occupation in
-                            RelationshipButton(memberType: relationshipCategories[occupation], status: 0)
+                    VStack(spacing: 0) {
+                        ForEach(0..<RelationshipTypes.allCases.count) { occupation in
+                            RelationshipButton(memberType: RelationshipTypes.allCases[occupation],
+                                               showMainView: $showMainView,
+                                               showParentsView: $showParentsView,
+                                               showRomanceView: $showRomanceView,
+                                               showChildrenView: $showChildrenView,
+                                               showFriendsView: $showFriendsView,
+                                               showPetsView: $showPetsView)
                                 .padding(.vertical, 4)
                         }
                     }
                 }
             }
+            if showParentsView {
+                ParentsView(showMainView: $showMainView, showParentsView: $showParentsView)
+            }/* else if showRomanceView {
+                
+            } else if showChildrenView {
+                
+            } else if showFriendsView {
+                FriendsView()
+            } else if showPetsView {
+                PetsView()
+            } else {
+                Text("Error: RelationshipTab / RelationshipButton")
+            }*/
         }
     }
 }
@@ -56,5 +61,6 @@ struct RelationshipTab_Previews: PreviewProvider {
     static var previews: some View {
         RelationshipTab()
             .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }

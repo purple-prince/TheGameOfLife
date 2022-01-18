@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-class LotteryModel: ObservableObject {
-    //singleton
-    static let instance = LotteryModel()
-    
-    
-    @Published var num1: String?
-    @Published var num2: String?
-    @Published var num3: String?
-    @Published var num4: String?
-    @Published var num5: String?
-    @Published var num6: String?
-}
-
 struct LotteryPopup: View {
     
     @EnvironmentObject var player: Player
@@ -55,7 +42,9 @@ struct LotteryPopup: View {
                 
                 background
                 
-                VStack {
+                VStack(spacing: 0) {
+                    
+                    
                     
                     header
                     
@@ -67,9 +56,7 @@ struct LotteryPopup: View {
             .frame(width: .infinity, height: (UIScreen.main.bounds.height * 2 / 3))
             .padding(24)
             
-            Spacer()
             
-            Spacer()
             
             Spacer()
         }
@@ -130,7 +117,7 @@ extension LotteryPopup {
     
     var background: some View {
         RoundedRectangle(cornerRadius: 24)
-            .foregroundColor(Color("mainWhite"))
+            .foregroundColor(Color("mainDarkGray"))
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
                     .stroke(userPreferences.appColor, lineWidth: 2)
@@ -178,6 +165,7 @@ extension LotteryPopup {
             .font(.largeTitle)
             .padding(.horizontal)
         }
+        .foregroundColor(.white)
         .padding(.top)
     }
     func ticketNumBox(_ num: String?) -> some View {
@@ -204,6 +192,7 @@ extension LotteryPopup {
                                        endRadius: geometry.size.height)
                     )
             }
+            .frame(width: .infinity, height: 260)
             
             VStack {
                 
@@ -275,10 +264,11 @@ extension LotteryPopup {
         
     }
     var main: some View {
-        VStack {
+        VStack() {
             
             Text("Jackpot: " + formatNum(lottery_jackpot))
                 .font(.largeTitle)
+                .foregroundColor(.white)
                         
             winningNums
             
@@ -288,6 +278,7 @@ extension LotteryPopup {
                 buyTicketButton(amount: 1)
                 buyTicketButton(amount: 10)
             }
+            .padding(.vertical)
         }
     }
     func buyTicketButton(amount: Int) -> some View {
@@ -312,17 +303,20 @@ extension LotteryPopup {
                 
                 amountWon = 0
                 checkNums(amount: amount)
+                
+                HapticManager.instance.playHaptic(type: .light)
             }
             
-            HapticManager.instance.playHaptic(type: .light)
+            
             
         }, label: {
             Text("Buy \(amount) - $\(10 * amount)")
                 .foregroundColor(.white)
                 .padding()
                 .padding(.horizontal, 12)
-                .background(Color("mainDarkGray"))
-                .overlay(player.life_cash_balance >= (amount * 10) ? nil : Color.gray.opacity(0.4))
+                //.background(player.life_cash_balance >= (amount * 10) ? Color.green : Color.gray.opacity(0.2))
+                .background(Color.green)
+                .overlay(player.life_cash_balance >= (amount * 10) ? nil : Color("mainDarkGray").opacity(0.5))
                 .cornerRadius(12)
                 
         })

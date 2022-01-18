@@ -373,6 +373,7 @@ struct JobView_Previews: PreviewProvider {
     static var previews: some View {
         JobView()
             .environmentObject(UserPreferences())
+            .environmentObject(Player())
         //ApplyPopup(showApplyPopup: .constant(false), showMainView: .constant(false), job: hourlyJobs.randomElement()!)
     }
 }

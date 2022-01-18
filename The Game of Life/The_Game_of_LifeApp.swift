@@ -12,6 +12,7 @@ struct The_Game_of_LifeApp: App {
     var body: some Scene {
         WindowGroup {
             EntryView()
+            //NewLifeView()
         }
     }
 }

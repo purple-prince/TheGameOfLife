@@ -153,6 +153,7 @@ extension OptionsView {
 struct OptionsView_Previews: PreviewProvider {
     static var previews: some View {
         OptionsView(showOptions: .constant(false))
+            .environmentObject(Player())
     }
 }
 

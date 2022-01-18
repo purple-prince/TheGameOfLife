@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var userPreferences = UserPreferences()
-    @StateObject var player = Player()
+    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var player: Player
     
     
     @State var showActionsView: Bool = false
@@ -75,6 +75,7 @@ struct MainView: View {
         if(player.on_new_life) {
             NewLifeView()
                 .environmentObject(player)
+                .environmentObject(userPreferences)
         } else {
             ZStack {
                 if showActionsView { ActionTab() }

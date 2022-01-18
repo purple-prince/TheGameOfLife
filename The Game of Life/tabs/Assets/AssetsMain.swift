@@ -103,5 +103,6 @@ extension AssetsMain {
 struct AssetsMain_Previews: PreviewProvider {
     static var previews: some View {
         AssetsMain(showAssetsMain: .constant(false), showBankDetail: .constant(false), showRealEstateDetail: .constant(false))
+            .environmentObject(Player())
     }
 }

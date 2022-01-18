@@ -19,21 +19,11 @@
 import Foundation
 import SwiftUI
 
-var tempParents = Parents() //temp parent... referenced from ParentStructs
-var userEmoji = "🧑🏽"
-var hasChildren = true
-var tempChild = Child()
-var tempChild2 = Child()
-var tempChild3 = Child()
-var numKids = 3
+enum RelationshipTypes: CaseIterable {
+    case parents, romance, children, friends, pets
+}
 
-var allPartners: [Partner] = []
-
-var tempPartner = Partner(gender: "Female", age: 25)
-
-///////////////////////////////////////
-
-var colorOptions: [Color] = [Color("mainDarkGray"), Color("mainRed"), Color("mainOrange"), Color("mainLightGreen"), Color("mainMutedBlue")]
+var colorOptions: [Color] = [Color("mainRed"), Color("mainOrange"), Color("mainLightGreen"), Color("mainMutedBlue")]
 
 func formatNum(_ num: Int) -> String {
     
@@ -119,10 +109,50 @@ class UserPreferences: ObservableObject {
 }
 
 class Player: ObservableObject {
+    
+    init() {
+        //self.mom = Parent(parent: .mom)
+        //self.dad = Parent(parent: .dad)
         
-    @AppStorage("on_new_life") var on_new_life: Bool = false
+        self.mom_name = femaleNames.randomElement()!
+        self.mom_age = Int.random(in: 25...45)
+        self.mom_emoji = momEmojis.randomElement()!
+        self.mom_status = 100
+        
+        self.dad_name = maleNames.randomElement()!
+        self.dad_age = Int.random(in: 25...45)
+        self.dad_emoji = dadEmojis.randomElement()!
+        self.dad_status = 100
+        
+    }
+    
+    
+    //MARK: PARENT STUFF
+    // // // // // // // // // // // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // // // // // // // // // // // //
+    //var mom: Parent
+    //var dad: Parent
+    
+    @AppStorage("mom_name") var mom_name = ""
+    @AppStorage("mom_age") var mom_age = 0
+    @AppStorage("mom_emoji") var mom_emoji = ""
+    @AppStorage("mom_status") var mom_status = 100
+    
+    @AppStorage("dad_name") var dad_name = ""
+    @AppStorage("dad_age") var dad_age = 0
+    @AppStorage("dad_emoji") var dad_emoji = ""
+    @AppStorage("dad_status") var dad_status = 100
+    
+    
+    
+    //MARK: PLAYER STUFF
+    // // // // // // // // // // // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // // // // // // // // // // // // 
+    @AppStorage("emoji") var emoji: String = ""
+    @AppStorage("on_new_life") var on_new_life: Bool = true
     @AppStorage("life_cash_balance") var life_cash_balance = 0
     @AppStorage("life_bank_balance") var life_bank_balance = 0
+    
     @AppStorage("life_health_status") var life_health_status = 100 {
         didSet {
             limitStatus()
@@ -138,7 +168,6 @@ class Player: ObservableObject {
             limitStatus()
         }
     }
-    
     
     enum Genders: CaseIterable {
         case male, female
@@ -170,6 +199,21 @@ class Player: ObservableObject {
         if life_energy_status > 100 {
             life_energy_status = 100
         }
+        
+        if mom_status > 100 {
+            mom_status = 100
+        }
+        if dad_status > 100 {
+            dad_status = 100
+        }
+        
+        if mom_status < 0 {
+            mom_status = 0
+        }
+        
+        if dad_status < 0 {
+            dad_status = 0
+        }
 
     }
     
@@ -185,56 +229,34 @@ class Player: ObservableObject {
     
 }
 
-/*
- @Published var gender: Genders = .male
- @Published var name: String
- @Published var monthsOld: Int = 0
- @Published var age: Int = 0
- 
- init() {
-     gender = Genders.allCases.randomElement()!
-     switch gender {
-         case .male:
-             name = maleNames.randomElement()!
-         case .female:
-             name = femaleNames.randomElement()!
-         }
-     life_cash_balance = 0
-     life_bank_balance = 0
-     monthsOld = 0
- }
-
- func reset() {
-     resetGender()
-     resetName()
-     resetFinances()
-     resetAge()
- }
- 
- func resetAge() {
-     
- }
-
- func resetFinances() {
-     life_cash_balance -= life_cash_balance
-     life_bank_balance -= life_bank_balance
- }
- 
- func resetGender() {
-     gender = Genders.allCases.randomElement()!
- }
- 
- func resetName() {
-     switch gender {
-         case .male:
-             name = maleNames.randomElement()!
-         case .female:
-             name = femaleNames.randomElement()!
-         }
- }
- 
- func changeName() {
-     
- }
- 
- */
+/*class Parent: ObservableObject {
+    
+    fileprivate var emoji: String
+    fileprivate var parent: Parents
+    fileprivate var name: String
+    fileprivate var gender: Genders
+    fileprivate var status: Int = 100 {
+        didSet {
+            if status > 100 {
+                status = 100
+            }
+            if status < 0 {
+                status = 0
+            }
+        }
+    }
+        
+    init(parent: Parents) {
+        self.parent = parent
+        self.name = self.parent == .mom ? femaleNames.randomElement()! : maleNames.randomElement()!
+        self.gender = self.parent == .mom ? .female : .male
+        self.emoji = self.parent == .mom ? momEmojis.randomElement()! : dadEmojis.randomElement()!
+    }
+    
+    fileprivate enum Parents {
+        case mom, dad
+    }
+    fileprivate enum Genders {
+        case female, male
+    }
+}*/

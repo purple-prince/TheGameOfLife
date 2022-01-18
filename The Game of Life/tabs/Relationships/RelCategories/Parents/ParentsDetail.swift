@@ -15,283 +15,92 @@ import SwiftUI
 //CHANGING THE ASPECT RATIOS TO A DOUBLE RESULTS IN A MEMORY LEAK IDK WHY
 
 struct ParentsDetail: View {
-
-    let mode: String
     
-    @State var momStatus = CGFloat(tempParents.mom.status)
-    @State var dadStatus = CGFloat(tempParents.dad.status)
-    @EnvironmentObject var player: Player
-    
-    func limitStatus(_ parent: CGFloat) -> Void {
-        if parent == momStatus {
-            if momStatus < 0 {
-                momStatus = 0
-            }
-            if momStatus > 100 {
-                momStatus = 100
-            }
-        } else {
-            if dadStatus < 0 {
-                dadStatus = 0
-            }
-            if dadStatus > 100 {
-                dadStatus = 100
-            }
-        }
+    enum Modes {
+        case mom, dad
     }
+
+    let mode: Modes
     
-    func StatusBar(mode: String) -> some View {
+    @EnvironmentObject var player: Player
+    @EnvironmentObject var userPreferences: UserPreferences
+    
+    func StatusBar() -> some View {
         ZStack(alignment: .leading){
             
             //background bar
-            RoundedRectangle(cornerRadius: 0)
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(userPreferences.appColor, lineWidth: 1)
                 .frame(width: 100, height: 16)
-                .foregroundColor(Color.gray)
+                
             
             //foreground bar
-            RoundedRectangle(cornerRadius: 0)
-                .frame(width: CGFloat(mode == "Mom" ? momStatus : dadStatus), height: 16)
-                .foregroundColor(Color.red)
+            RoundedRectangle(cornerRadius: 8)
+                .frame(width: CGFloat(mode == .mom ? player.mom_status : player.dad_status), height: 16)
+                .foregroundColor(userPreferences.appColor)
         }
-        .cornerRadius(8)
         .offset(y: -16)
     }
     
     func parentBanner() -> some View {
-                
-        Group {
-            switch mode {
-            case "Mom":
-                VStack(alignment: .center){
-                    Spacer()
-                    
-                    Text(tempParents.mom.name)
-                        .font(.largeTitle)
-                    Spacer()
-                    Text(tempParents.mom.emoji)
-                        .font(Font.system(size: 45))
-                    StatusBar(mode: "Mom")
-                    Spacer()
-                }
-                .font(Font.custom("mainFont", size: 20))
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .background(Color.yellow)
-                .foregroundColor(.black)
-                .cornerRadius(12)
-                .shadow(radius: 12)
-                .padding()
-            case "Dad":
-                VStack{
-                    Spacer()
-                    
-                    Text(tempParents.dad.name)
-                        .font(.largeTitle)
-                    Spacer()
-                    StatusBar(mode: "Dad")
-                    Spacer()
-                }
-                .font(Font.custom("mainFont", size: 20))
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .background(Color.yellow)
-                .foregroundColor(.black)
-                .cornerRadius(12)
-                .shadow(radius: 12)
-                .padding()
-            default:
-                Text("")
-            }
+        
+        VStack(alignment: .center) {
+            Spacer()
+            Text(mode == .mom ? player.mom_name : player.dad_name)
+            Spacer()
+            Text(mode == .mom ? player.mom_emoji : player.dad_emoji)
+                .font(Font.system(size: 40))
+            StatusBar()
+            Spacer()
         }
+        //.font(Font.system(size: 20))
+        .font(.largeTitle)
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(Color("mainDarkGray"))
+        .foregroundColor(.white)
+        .cornerRadius(12)
+        .shadow(radius: 12)
+        .padding()
     }
-    
+            
     var body: some View {
-        let shadowRadius: CGFloat = 4
         
         VStack {
+            
+            //Text(String(mode == .mom ? player.mom_status : player.dad_status))
+            //guard let decodedRatings = try? JSONDecoder().decode([String:Double].self, from: ratings) else { return }
             
             parentBanner()
             
             Divider()
             
-            VStack {
-                HStack {
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus += 10
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus += 10
-                            limitStatus(dadStatus)
-                        }
-                        
-                        player.life_happiness_status += 10
-                        player.life_energy_status -= 2
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            VStack {
-                                
-                                Text("Visit Park")
-                                    .foregroundColor(Color.black)
-                                
+            VStack(spacing: 12) {
+                HStack(spacing: 12) {
+                    
+                    ActionButton(parentStatusAffect: 10, healthMod: 0, hapMod: 10, energyMod: -2, cost: 0, description: "Visit park")
+                    
+                    ActionButton(parentStatusAffect: 20, healthMod: 0, hapMod: 20, energyMod: 0, cost: 50, description: "Get dinner")
+                    
+                }
+                
+                HStack(spacing: 12) {
+                    
+                    ActionButton(parentStatusAffect: 35, healthMod: 0, hapMod: 5, energyMod: 0, cost: 150, description: "Give gift")
+                    
+                    ActionButton(parentStatusAffect: 75, healthMod: 0, hapMod: 75, energyMod: 40, cost: 2000, description: "Take vacation")
 
-                                
-                            }
-                        }
-                    })
-                        .padding(.leading, 12)
-                        .padding(.bottom, 6)
-                        .padding(.top, 8)
-                        .padding(.trailing, 4)
-                    
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus += 20
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus += 20
-                            limitStatus(dadStatus)
-                        }
-                        
-                        player.life_happiness_status += 20
-                        player.life_energy_status -= 1
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            VStack {
-                                Text("Get Dinner")
-                                    .foregroundColor(Color.black)
-                            }
-                        }
-                    })
-                        .padding(.leading, 4)
-                        .padding(.bottom, 4)
-                        .padding(.top, 6)
-                        .padding(.trailing, 12)
-                    
                 }
-                .foregroundColor(Color.white)
                 
-                HStack {
+                HStack(spacing: 12) {
                     
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus += 35
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus += 35
-                            limitStatus(dadStatus)
-                        }
-                        player.life_happiness_status += 5
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            Text("Give Gift")
-                                .foregroundColor(Color.black)
-                        }
-                    })
-                        .padding(.leading, 12)
-                        .padding(.bottom, 8)
-                        .padding(.top, 4)
-                        .padding(.trailing, 4)
+                    ActionButton(parentStatusAffect: -80, healthMod: 0, hapMod: -70, energyMod: -50, cost: 0, description: "Kill")
                     
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus += 75
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus += 75
-                            limitStatus(dadStatus)
-                        }
-                        player.life_happiness_status += 75
-                        player.life_energy_status += 40
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            Text("Take vacation")
-                                .foregroundColor(Color.black)
-                        }
-                    })
-                        .padding(.leading, 4)
-                        .padding(.bottom, 8)
-                        .padding(.top, 4)
-                        .padding(.trailing, 12)
+                    ActionButton(parentStatusAffect: -10, healthMod: 0, hapMod: -2, energyMod: 0, cost: 0, description: "Ask for money")
+
                 }
-                .foregroundColor(Color.white)
-                
-                HStack {
-                    
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus -= 75
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus -= 75
-                            limitStatus(dadStatus)
-                        }
-                        
-                        player.life_happiness_status -= 70
-                        player.life_energy_status -= 50
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            Text("Kill")
-                                .foregroundColor(Color.black)
-                        }
-                    })
-                        .padding(.leading, 12)
-                        .padding(.bottom, 8)
-                        .padding(.top, 4)
-                        .padding(.trailing, 4)
-                    
-                    Button(action:{
-                        if mode == "Mom" {
-                            momStatus -= 10
-                            limitStatus(momStatus)
-                        } else {
-                            dadStatus -= 10
-                            limitStatus(dadStatus)
-                        }
-                        
-                        player.life_happiness_status -= 2
-                        
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .aspectRatio(5/4, contentMode: .fit)
-                                .shadow(color: Color.gray, radius: shadowRadius)
-                            
-                            Text("Ask for money")
-                                .foregroundColor(Color.black)
-                        }
-                    })
-                        .padding(.leading, 4)
-                        .padding(.bottom, 8)
-                        .padding(.top, 4)
-                        .padding(.trailing, 12)
-                }
-                .foregroundColor(Color.white)
                 
             }
+            .padding(12)
             
             Spacer()
         }
@@ -300,8 +109,211 @@ struct ParentsDetail: View {
     }
 }
 
+extension ParentsDetail {
+    
+    func ActionButton(parentStatusAffect: Int, healthMod: Int, hapMod: Int, energyMod: Int, cost: Int, description: String) -> some View {
+        
+        enum ModTypes {
+            case health, happiness, energy, cost
+        }
+        
+        var numAffected: Int = 0
+        
+        if healthMod != 0 {
+            numAffected += 1
+        }
+        if hapMod != 0 {
+            numAffected += 1
+        }
+        if energyMod != 0 {
+            numAffected += 1
+        }
+        if cost != 0 {
+            numAffected += 1
+        }
+        
+        func ModLabel(mod: ModTypes) -> some View {
+            
+            var parameter: Int
+            switch mod {
+                case .health:
+                    parameter = healthMod
+                case .happiness:
+                    parameter = hapMod
+                case .energy:
+                    parameter = energyMod
+                case .cost:
+                    parameter = cost
+            }
+            
+            return HStack {
+                
+                if mod == .health || mod == .happiness || mod == .energy {
+                    HStack(spacing: 4) {
+                        Text(parameter > 0 ? "+ \(parameter)" : "- \(abs(parameter))")
+                            .foregroundColor(parameter > 0 ? .green : .red)
+                        if mod == .health {Text("❤️")} else if mod == .happiness {Text("😀")} else if mod == .energy {Text("⚡️")}
+                    }
+                } else {
+                    Text("- \(formatNum(cost))").foregroundColor(.red)
+                }
+                
+            }
+        }
+        
+        var returnView: some View {
+            Button(action: {
+                if mode == .mom {
+                    player.mom_status += parentStatusAffect
+                } else {
+                    player.dad_status += parentStatusAffect
+                }
+                player.life_health_status += healthMod
+                player.life_happiness_status += hapMod
+                player.life_energy_status += energyMod
+                player.life_cash_balance -= cost
+                
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(Color("mainDarkGray"))
+                        .aspectRatio(5/4, contentMode: .fit)
+                        .shadow(color: Color.black, radius: 4)
+                        .frame(maxHeight: 142)
+                    
+                    VStack(spacing: 0) {
+                        Text(description)
+                            .fontWeight(.light)
+                            .font(Font.system(size: 26))
+                            .padding(.top)
+                        
+                        Spacer()
+                        //health        happ
+                        //energy      money
+                        
+                        /*if healthMod != 0 {
+                            HStack(spacing: 4) {
+                                Text(healthMod > 0 ? "+ \(healthMod)" : "- \(abs(healthMod))")
+                                    .foregroundColor(healthMod > 0 ? .green : .red)
+                                Text("❤️")
+                            }
+                        } else if hapMod != 0 {
+                            HStack(spacing: 4) {
+                                Text(hapMod > 0 ? "+ \(hapMod)" : "- \(abs(hapMod))")
+                                    .foregroundColor(hapMod > 0 ? .green : .red)
+                                Text("😀")
+                            }
+                        } else if energyMod != 0 {
+                            HStack(spacing: 4) {
+                                Text(energyMod > 0 ? "+ \(energyMod)" : "- \(abs(energyMod))")
+                                    .foregroundColor(energyMod > 0 ? .green : .red)
+                                Text("⚡️")
+                            }
+                        } else if  cost != 0 {
+                            Text("- \(formatNum(cost))")
+                                .foregroundColor(.red)
+                        }*/
+                        
+                        VStack {
+                            
+                            switch numAffected {
+                                case 1:
+                                    if energyMod != 0 {
+                                        ModLabel(mod: .energy)
+                                    } else if healthMod != 0 {
+                                        ModLabel(mod: .health)
+                                    } else if hapMod != 0 {
+                                        ModLabel(mod: .happiness)
+                                    } else {
+                                        Text("- \(formatNum(cost))")
+                                            .foregroundColor(.red)
+                                    }
+                                case 2:
+                                    HStack {
+                                        if healthMod != 0 {
+                                            ModLabel(mod: .health)
+                                            if hapMod != 0 {
+                                                ModLabel(mod: .happiness)
+                                            } else if energyMod != 0 {
+                                                ModLabel(mod: .energy)
+                                            } else {
+                                                ModLabel(mod: .cost)
+                                            }
+                                        } else if hapMod != 0 {
+                                        
+                                            ModLabel(mod: .happiness)
+                                            
+                                            if energyMod != 0 {
+                                                ModLabel(mod: .energy)
+                                            } else {
+                                                ModLabel(mod: .cost)
+                                            }
+                                            
+                                        } else {
+                                            ModLabel(mod: .energy)
+                                            
+                                            ModLabel(mod: .cost)
+                                        }
+                                    }
+                                case 3:
+                                    if healthMod != 0 {
+                                        HStack {
+                                            ModLabel(mod: .health)
+                                            
+                                            if hapMod != 0 {
+                                                ModLabel(mod: .happiness)
+                                            } else {
+                                                ModLabel(mod: .energy)
+                                            }
+                                        }
+                                        
+                                        if energyMod != 0 {
+                                            ModLabel(mod: .energy)
+                                        } else {
+                                            ModLabel(mod: .cost)
+                                        }
+                                    } else {
+                                        HStack {
+                                            ModLabel(mod: .happiness)
+                                            
+                                            ModLabel(mod: .energy)
+                                        }
+                                        
+                                        ModLabel(mod: .cost)
+                                    }
+                                case 4:
+                                    HStack {
+                                        ModLabel(mod: .health)
+                                        
+                                        ModLabel(mod: .happiness)
+                                    }
+                                    HStack {
+                                        ModLabel(mod: .energy)
+                                        
+                                        ModLabel(mod: .cost)
+                                    }
+                                default:
+                                    Text("")
+                            }
+                        }
+                        .font(.title2)
+                        
+                        Spacer()
+                    }
+                    .foregroundColor(.white)
+                }
+            }).frame(maxHeight: 142)
+        }
+        
+        return returnView
+        
+    }
+}
+
 struct ParentsDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ParentsDetail(mode: "Mom")
+        ParentsDetail(mode: .mom )
+            .environmentObject(Player())
+            .environmentObject(UserPreferences())
     }
 }

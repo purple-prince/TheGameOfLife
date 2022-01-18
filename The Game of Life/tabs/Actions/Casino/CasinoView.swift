@@ -59,5 +59,6 @@ extension CasinoView {
 struct CasinoView_Previews: PreviewProvider {
     static var previews: some View {
         CasinoView(showCasinoView: .constant(false), showMainView: .constant(false))
+            .environmentObject(UserPreferences())
     }
 }

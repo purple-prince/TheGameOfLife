@@ -192,7 +192,7 @@ extension HomeTab {
             
             Spacer()
             
-            Text(userEmoji)
+            Text(player.emoji)
                 .font(Font.system(size: 84))
             
             Spacer()
@@ -224,6 +224,7 @@ struct HomeTab_Previews: PreviewProvider {
     static var previews: some View {
         HomeTab()
             .environmentObject(UserPreferences())
+            .environmentObject(Player())
     }
 }
 

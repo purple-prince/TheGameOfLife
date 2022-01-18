@@ -113,5 +113,6 @@ struct DepositPopup_Previews: PreviewProvider {
     static var previews: some View {
         DepositPopup(showDepositPopup: .constant(true))
             .environmentObject(Player())
+            .environmentObject(UserPreferences())
     }
 }

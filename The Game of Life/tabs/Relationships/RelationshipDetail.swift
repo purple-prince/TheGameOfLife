@@ -229,5 +229,6 @@ extension RelationshipDetail {
 struct RelationshipDetail_Previews: PreviewProvider {
     static var previews: some View {
         RelationshipDetail(memberMode: "Parents")
+            .environmentObject(UserPreferences())
     }
 }

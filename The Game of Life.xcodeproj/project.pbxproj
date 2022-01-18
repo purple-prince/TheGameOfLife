@@ -24,7 +24,6 @@
 		D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FA27855C68008606B2 /* DepositPopup.swift */; };
 		D860E0FD27856085008606B2 /* WithdrawPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FC27856085008606B2 /* WithdrawPopup.swift */; };
 		D860E0FF27858258008606B2 /* CasinoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FE27858258008606B2 /* CasinoView.swift */; };
-		D867743D2774028E001EB64E /* CardViewMaybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D867743C2774028E001EB64E /* CardViewMaybe.swift */; };
 		D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8702311278E454D00C4E4FD /* NewLifeView.swift */; };
 		D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B824278CFFD400E3DC70 /* LearnTab.swift */; };
 		D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B826278E371F00E3DC70 /* LearnMain.swift */; };
@@ -38,26 +37,18 @@
 		D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67026C4B7410054D033 /* OccupationTab.swift */; };
 		D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67226C4B7AE0054D033 /* ActionTab.swift */; };
 		D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67426C4B7C60054D033 /* HomeTab.swift */; };
-		D888B78F27756F5C00724ED1 /* LivesStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888B78E27756F5C00724ED1 /* LivesStruct.swift */; };
 		D89CD643278AD8A80004FBB7 /* BallsGamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */; };
 		D8A5C8A326DC248D004123A4 /* mainFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8A5C8A226DC248D004123A4 /* mainFont.ttf */; };
 		D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC08DE27653415000A432E /* RealEstateDetail.swift */; };
 		D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BEF23827685C7A004DC3EF /* AssetsMain.swift */; };
-		D8BEF23B276AA54C004DC3EF /* RomanceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BEF23A276AA54C004DC3EF /* RomanceDetail.swift */; };
-		D8BEF23D276AA55A004DC3EF /* RomanceStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BEF23C276AA55A004DC3EF /* RomanceStructs.swift */; };
 		D8BF707D2786489800B4444B /* CasinoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF707C2786489800B4444B /* CasinoIcon.swift */; };
 		D8BF707F278648E700B4444B /* LotteryPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF707E278648E700B4444B /* LotteryPopup.swift */; };
 		D8C202F22749EABB0057A92B /* BankDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C202F12749EABB0057A92B /* BankDetail.swift */; };
 		D8C43048272DC94900F18F89 /* RelationshipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43047272DC94900F18F89 /* RelationshipButton.swift */; };
 		D8C4304B272DD1E700F18F89 /* RelationshipDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4304A272DD1E700F18F89 /* RelationshipDetail.swift */; };
-		D8C43050272DD5E200F18F89 /* RomanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4304F272DD5E200F18F89 /* RomanceView.swift */; };
-		D8C43052272DD5F600F18F89 /* ChildrenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43051272DD5F600F18F89 /* ChildrenView.swift */; };
 		D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43053272DD60700F18F89 /* FriendsView.swift */; };
 		D8C43056272DD61600F18F89 /* PetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43055272DD61600F18F89 /* PetsView.swift */; };
-		D8C43059272E35A500F18F89 /* ParentStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43058272E35A500F18F89 /* ParentStructs.swift */; };
 		D8C4305B272E4D8800F18F89 /* King.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4305A272E4D8800F18F89 /* King.swift */; };
-		D8E34CFF276190D10056F054 /* ChildrenStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E34CFE276190D10056F054 /* ChildrenStructs.swift */; };
-		D8E34D01276198530056F054 /* ChildrenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E34D00276198530056F054 /* ChildrenDetail.swift */; };
 		D8E384DF27894568008E0DE8 /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = D8E384DE27894568008E0DE8 /* RealModule */; };
 		D8F18C3627375A2200A527B6 /* ParentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F18C3527375A2200A527B6 /* ParentsView.swift */; };
 		D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC918626E58B690065D3CF /* SHView.swift */; };
@@ -106,7 +97,6 @@
 		D860E0FA27855C68008606B2 /* DepositPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositPopup.swift; sourceTree = "<group>"; };
 		D860E0FC27856085008606B2 /* WithdrawPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPopup.swift; sourceTree = "<group>"; };
 		D860E0FE27858258008606B2 /* CasinoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasinoView.swift; sourceTree = "<group>"; };
-		D867743C2774028E001EB64E /* CardViewMaybe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewMaybe.swift; sourceTree = "<group>"; };
 		D8702311278E454D00C4E4FD /* NewLifeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLifeView.swift; sourceTree = "<group>"; };
 		D878B824278CFFD400E3DC70 /* LearnTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTab.swift; sourceTree = "<group>"; };
 		D878B826278E371F00E3DC70 /* LearnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMain.swift; sourceTree = "<group>"; };
@@ -120,27 +110,19 @@
 		D881F67026C4B7410054D033 /* OccupationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationTab.swift; sourceTree = "<group>"; };
 		D881F67226C4B7AE0054D033 /* ActionTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTab.swift; sourceTree = "<group>"; };
 		D881F67426C4B7C60054D033 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
-		D888B78E27756F5C00724ED1 /* LivesStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivesStruct.swift; sourceTree = "<group>"; };
 		D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsGamePopup.swift; sourceTree = "<group>"; };
 		D8A5C8A226DC248D004123A4 /* mainFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mainFont.ttf; sourceTree = "<group>"; };
 		D8A5C8A526DC249F004123A4 /* mainFontBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainFontBold.ttf; path = "/Users/charliereeder/Desktop/xcode projs/The Game of Life/The Game of Life/custom fonts/mainFontBold.ttf"; sourceTree = "<absolute>"; };
 		D8AC08DE27653415000A432E /* RealEstateDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateDetail.swift; sourceTree = "<group>"; };
 		D8BEF23827685C7A004DC3EF /* AssetsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsMain.swift; sourceTree = "<group>"; };
-		D8BEF23A276AA54C004DC3EF /* RomanceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanceDetail.swift; sourceTree = "<group>"; };
-		D8BEF23C276AA55A004DC3EF /* RomanceStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanceStructs.swift; sourceTree = "<group>"; };
 		D8BF707C2786489800B4444B /* CasinoIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasinoIcon.swift; sourceTree = "<group>"; };
 		D8BF707E278648E700B4444B /* LotteryPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryPopup.swift; sourceTree = "<group>"; };
 		D8C202F12749EABB0057A92B /* BankDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetail.swift; sourceTree = "<group>"; };
 		D8C43047272DC94900F18F89 /* RelationshipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipButton.swift; sourceTree = "<group>"; };
 		D8C4304A272DD1E700F18F89 /* RelationshipDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipDetail.swift; sourceTree = "<group>"; };
-		D8C4304F272DD5E200F18F89 /* RomanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanceView.swift; sourceTree = "<group>"; };
-		D8C43051272DD5F600F18F89 /* ChildrenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenView.swift; sourceTree = "<group>"; };
 		D8C43053272DD60700F18F89 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		D8C43055272DD61600F18F89 /* PetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsView.swift; sourceTree = "<group>"; };
-		D8C43058272E35A500F18F89 /* ParentStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentStructs.swift; sourceTree = "<group>"; };
 		D8C4305A272E4D8800F18F89 /* King.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = King.swift; sourceTree = "<group>"; };
-		D8E34CFE276190D10056F054 /* ChildrenStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenStructs.swift; sourceTree = "<group>"; };
-		D8E34D00276198530056F054 /* ChildrenDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenDetail.swift; sourceTree = "<group>"; };
 		D8F18C3527375A2200A527B6 /* ParentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsView.swift; sourceTree = "<group>"; };
 		D8FC918626E58B690065D3CF /* SHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHView.swift; sourceTree = "<group>"; };
 		D8FC918826E58BFE0065D3CF /* SHBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHBackend.swift; sourceTree = "<group>"; };
@@ -325,8 +307,6 @@
 		D888B78D27756F4200724ED1 /* Lives */ = {
 			isa = PBXGroup;
 			children = (
-				D867743C2774028E001EB64E /* CardViewMaybe.swift */,
-				D888B78E27756F5C00724ED1 /* LivesStruct.swift */,
 			);
 			path = Lives;
 			sourceTree = "<group>";
@@ -404,7 +384,6 @@
 		D8C43057272E358A00F18F89 /* Parents */ = {
 			isa = PBXGroup;
 			children = (
-				D8C43058272E35A500F18F89 /* ParentStructs.swift */,
 				D82EE05F27365DD400C6498F /* ParentsDetail.swift */,
 				D8F18C3527375A2200A527B6 /* ParentsView.swift */,
 			);
@@ -414,9 +393,6 @@
 		D8E34CFA27618CA10056F054 /* Romance */ = {
 			isa = PBXGroup;
 			children = (
-				D8C4304F272DD5E200F18F89 /* RomanceView.swift */,
-				D8BEF23A276AA54C004DC3EF /* RomanceDetail.swift */,
-				D8BEF23C276AA55A004DC3EF /* RomanceStructs.swift */,
 			);
 			path = Romance;
 			sourceTree = "<group>";
@@ -424,9 +400,6 @@
 		D8E34CFB27618CA70056F054 /* Children */ = {
 			isa = PBXGroup;
 			children = (
-				D8C43051272DD5F600F18F89 /* ChildrenView.swift */,
-				D8E34CFE276190D10056F054 /* ChildrenStructs.swift */,
-				D8E34D00276198530056F054 /* ChildrenDetail.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -594,34 +567,25 @@
 			files = (
 				D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */,
 				D8C202F22749EABB0057A92B /* BankDetail.swift in Sources */,
-				D8E34D01276198530056F054 /* ChildrenDetail.swift in Sources */,
-				D8E34CFF276190D10056F054 /* ChildrenStructs.swift in Sources */,
 				D8C43048272DC94900F18F89 /* RelationshipButton.swift in Sources */,
 				D87EC4D526D4291E00E21428 /* CategoryButton.swift in Sources */,
-				D8BEF23B276AA54C004DC3EF /* RomanceDetail.swift in Sources */,
 				D87EC4DD26D4613900E21428 /* OccupationStructs.swift in Sources */,
 				D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */,
 				D8BF707F278648E700B4444B /* LotteryPopup.swift in Sources */,
-				D867743D2774028E001EB64E /* CardViewMaybe.swift in Sources */,
 				D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */,
 				D881F66E26C4B6800054D033 /* AssetTab.swift in Sources */,
 				D85C8555268EFE1E00FA7C9A /* ContentView.swift in Sources */,
 				D839529427714B1C002444D9 /* MainView.swift in Sources */,
 				D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */,
-				D8C43059272E35A500F18F89 /* ParentStructs.swift in Sources */,
 				D8C4305B272E4D8800F18F89 /* King.swift in Sources */,
 				D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */,
 				D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */,
-				D8C43050272DD5E200F18F89 /* RomanceView.swift in Sources */,
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
 				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
 				D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */,
-				D8BEF23D276AA55A004DC3EF /* RomanceStructs.swift in Sources */,
 				D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */,
-				D888B78F27756F5C00724ED1 /* LivesStruct.swift in Sources */,
-				D8C43052272DD5F600F18F89 /* ChildrenView.swift in Sources */,
 				D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */,
 				D87EC4DF26D4D5D700E21428 /* PosJobs.swift in Sources */,
 				D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */,
