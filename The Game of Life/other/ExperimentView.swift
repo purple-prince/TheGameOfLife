@@ -7,44 +7,51 @@
 
 import SwiftUI
 
-/*class HapticsManager {
-    
-    static let instance = HapticsManager()
-    
-    func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(type)
-    }
-    
-    func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
-        let generator = UIImpactFeedbackGenerator(style: style)
-        generator.impactOccurred()
-    }
-    
-}*/
-
 struct ExperimentView: View {
     
     var body: some View {
+        
         VStack {
+            Spacer()
+            elShape()
+                .stroke(lineWidth: 4)
+            Spacer()
         }
-
     }
     
     
 }
 
 
-
-/*
- 1)
- 2)
- 3)
- 4)
- 5)
- 6)
- 7)
- */
+struct elShape: Shape {
+    
+    
+    
+//    var animatableData: CGFloat {
+//        get {
+//            
+//        }
+//        set {
+//            
+//        }
+//    }
+    
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: rect.midX, y: rect.midY))
+            path.addArc(center: CGPoint(x: rect.midX + 10, y: rect.midY),
+                        radius: 10.0,
+                        startAngle: Angle(degrees:180),
+                        endAngle: Angle(degrees:0),
+                        clockwise: false)
+            path.move(to: CGPoint(x: rect.midX + 20, y: rect.midY - 3))
+            path.addQuadCurve(to: CGPoint(x: rect.midX + 50, y: rect.midY + 8),
+                              control: CGPoint(x: rect.midX + 20, y: rect.midY + 10))
+            //path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
+            
+        }
+    }
+}
 
 
 struct ExperimentView_Previews: PreviewProvider {

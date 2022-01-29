@@ -11,6 +11,12 @@
 		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
 		D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8AA277C18C8009D7992 /* OptionsView.swift */; };
 		D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82EE05F27365DD400C6498F /* ParentsDetail.swift */; };
+		D83913A9279CF9E000B8B468 /* RomanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913A8279CF9E000B8B468 /* RomanceView.swift */; };
+		D83913AB279CF9F000B8B468 /* RomanceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913AA279CF9F000B8B468 /* RomanceDetail.swift */; };
+		D83913AD279CFA0200B8B468 /* ChildrenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913AC279CFA0200B8B468 /* ChildrenView.swift */; };
+		D83913AF279CFA0D00B8B468 /* ChildrenDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913AE279CFA0D00B8B468 /* ChildrenDetail.swift */; };
+		D83913B1279CFA1F00B8B468 /* FriendsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913B0279CFA1F00B8B468 /* FriendsDetail.swift */; };
+		D83913B3279CFA3100B8B468 /* PetsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83913B2279CFA3100B8B468 /* PetsDetail.swift */; };
 		D839529427714B1C002444D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D839529327714B1C002444D9 /* MainView.swift */; };
 		D83952982771B6B8002444D9 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83952972771B6B8002444D9 /* EntryView.swift */; };
 		D839529C2772B84B002444D9 /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D839529B2772B84B002444D9 /* ExperimentView.swift */; };
@@ -78,6 +84,12 @@
 		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		D82EE05F27365DD400C6498F /* ParentsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsDetail.swift; sourceTree = "<group>"; };
+		D83913A8279CF9E000B8B468 /* RomanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanceView.swift; sourceTree = "<group>"; };
+		D83913AA279CF9F000B8B468 /* RomanceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanceDetail.swift; sourceTree = "<group>"; };
+		D83913AC279CFA0200B8B468 /* ChildrenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenView.swift; sourceTree = "<group>"; };
+		D83913AE279CFA0D00B8B468 /* ChildrenDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenDetail.swift; sourceTree = "<group>"; };
+		D83913B0279CFA1F00B8B468 /* FriendsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDetail.swift; sourceTree = "<group>"; };
+		D83913B2279CFA3100B8B468 /* PetsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsDetail.swift; sourceTree = "<group>"; };
 		D839529327714B1C002444D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D83952972771B6B8002444D9 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		D839529B2772B84B002444D9 /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
@@ -176,6 +188,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		D83913A7279CAE6400B8B468 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		D839529227714A9B002444D9 /* Beginning */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,8 +232,9 @@
 				D8C4305A272E4D8800F18F89 /* King.swift */,
 				D8399AAA2754730200A5DFB3 /* LottoFile.swift */,
 				D839529227714A9B002444D9 /* Beginning */,
-				D82EE05E273635FB00C6498F /* other */,
 				D881F66F26C4B6AA0054D033 /* tabs */,
+				D83913A7279CAE6400B8B468 /* Shop */,
+				D82EE05E273635FB00C6498F /* other */,
 				D85C8558268EFE2100FA7C9A /* Preview Content */,
 				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
 				D85C855B268EFE2100FA7C9A /* Info.plist */,
@@ -393,6 +413,8 @@
 		D8E34CFA27618CA10056F054 /* Romance */ = {
 			isa = PBXGroup;
 			children = (
+				D83913A8279CF9E000B8B468 /* RomanceView.swift */,
+				D83913AA279CF9F000B8B468 /* RomanceDetail.swift */,
 			);
 			path = Romance;
 			sourceTree = "<group>";
@@ -400,6 +422,8 @@
 		D8E34CFB27618CA70056F054 /* Children */ = {
 			isa = PBXGroup;
 			children = (
+				D83913AC279CFA0200B8B468 /* ChildrenView.swift */,
+				D83913AE279CFA0D00B8B468 /* ChildrenDetail.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -408,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C43053272DD60700F18F89 /* FriendsView.swift */,
+				D83913B0279CFA1F00B8B468 /* FriendsDetail.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -416,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C43055272DD61600F18F89 /* PetsView.swift */,
+				D83913B2279CFA3100B8B468 /* PetsDetail.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -565,18 +591,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83913AB279CF9F000B8B468 /* RomanceDetail.swift in Sources */,
 				D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */,
 				D8C202F22749EABB0057A92B /* BankDetail.swift in Sources */,
+				D83913B1279CFA1F00B8B468 /* FriendsDetail.swift in Sources */,
 				D8C43048272DC94900F18F89 /* RelationshipButton.swift in Sources */,
 				D87EC4D526D4291E00E21428 /* CategoryButton.swift in Sources */,
 				D87EC4DD26D4613900E21428 /* OccupationStructs.swift in Sources */,
 				D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */,
+				D83913AF279CFA0D00B8B468 /* ChildrenDetail.swift in Sources */,
 				D8BF707F278648E700B4444B /* LotteryPopup.swift in Sources */,
 				D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */,
 				D881F66E26C4B6800054D033 /* AssetTab.swift in Sources */,
 				D85C8555268EFE1E00FA7C9A /* ContentView.swift in Sources */,
 				D839529427714B1C002444D9 /* MainView.swift in Sources */,
 				D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */,
+				D83913AD279CFA0200B8B468 /* ChildrenView.swift in Sources */,
 				D8C4305B272E4D8800F18F89 /* King.swift in Sources */,
 				D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */,
 				D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */,
@@ -595,7 +625,9 @@
 				D860E0FD27856085008606B2 /* WithdrawPopup.swift in Sources */,
 				D8C4304B272DD1E700F18F89 /* RelationshipDetail.swift in Sources */,
 				D8F18C3627375A2200A527B6 /* ParentsView.swift in Sources */,
+				D83913A9279CF9E000B8B468 /* RomanceView.swift in Sources */,
 				D878B829278E373200E3DC70 /* Education.swift in Sources */,
+				D83913B3279CFA3100B8B468 /* PetsDetail.swift in Sources */,
 				D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */,
 				D8FC918926E58BFE0065D3CF /* SHBackend.swift in Sources */,
 				D881F66C26C4B43A0054D033 /* RelationshipTab.swift in Sources */,

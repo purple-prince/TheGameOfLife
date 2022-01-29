@@ -22,17 +22,15 @@ struct OccupationTab: View {
     
     var body: some View {
         
-        NavigationView {
             
-            ZStack {
-                
-                Color("mainWhite").ignoresSafeArea()
-                
-                ScrollView {
-                    VStack {
-                        ForEach(0..<occupationCategories.count) { occupation in
-                            CategoryButton(category: occupationCategories[occupation], position: "None", salary: 0, color: backgroundColors[occupation])//TODO: IMPLEMENT THIS!! diff colors for each... makes more interesting
-                        }
+        ZStack {
+            
+            Color("mainWhite").ignoresSafeArea()
+            
+            ScrollView {
+                VStack {
+                    ForEach(0..<occupationCategories.count) { occupation in
+                        CategoryButton(category: occupationCategories[occupation], position: "None", salary: 0, color: backgroundColors[occupation])//TODO: IMPLEMENT THIS!! diff colors for each... makes more interesting
                     }
                 }
             }

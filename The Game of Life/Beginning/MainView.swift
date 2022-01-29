@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct AgeButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 72)
+            .foregroundColor(.red)
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+    }
+}
+
 struct MainView: View {
     
     @EnvironmentObject var userPreferences: UserPreferences
@@ -21,78 +31,112 @@ struct MainView: View {
     @State var showAssetsView: Bool = false
     
     var body: some View {
-        /*VStack {
-            TabView {
-                
-                ActionTab()
-                    .tabItem {
-                        Image(systemName: "book.fill")
-                            .frame(width: 4, height: 4)
-                    }
-                
-                RelationshipTab()
-                    .tabItem {
-                        Image(systemName: "heart.fill")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                    }
-                
-                HomeTab()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                    }
-                
-                LearnTab()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                    }
-                
-                OccupationTab()
-                    .tabItem {
-                        Image(systemName: "briefcase.fill")
-                    }
-                
-                AssetTab()
-                    .tabItem {
-                        
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                            
-                    }
-                
-                
-            }
-            .accentColor(.red)
-            .edgesIgnoringSafeArea(.all)
-            
-        }*/
         
         if(player.on_new_life) {
             NewLifeView()
-                .environmentObject(player)
-                .environmentObject(userPreferences)
+                //.environmentObject(player)
+                //.environmentObject(userPreferences)
         } else {
             ZStack {
-                if showActionsView { ActionTab() }
-                if showRelationshipsView { RelationshipTab() }
-                if showIdentityView { HomeTab() }
-                if showLearnView { LearnTab() }
-                if showWorkView { OccupationTab() }
-                if showAssetsView { AssetTab() }
+
+                Color("mainWhite").ignoresSafeArea()
                 
                 VStack {
+                    topInfo
+                    Spacer()
+                    if showActionsView { ActionTab() }
+                    if showRelationshipsView { RelationshipTab() }
+                    if showIdentityView { HomeTab() }
+                    if showLearnView { LearnTab() }
+                    if showWorkView { OccupationTab() }
+                    if showAssetsView { AssetTab() }
                     Spacer()
                     tabBar
                 }
+                
+                AgeButton
+                
             }
-            .environmentObject(userPreferences)
-            .environmentObject(player)
+            //.environmentObject(userPreferences)
+            //.environmentObject(player)
         }
+    }
+    
+    var AgeButton: some View {
+        VStack {
+            
+            Spacer()
+            
+            Button(action: {
+                HapticManager.instance.playHaptic(type: .rigid)
+            }, label: {
+                Image(systemName: "plus.diamond.fill")
+                    .resizable()
+
+            })
+                .buttonStyle(AgeButtonStyle())
+            
+        }
+    }
+    
+    enum StatusModes {
+        case health, happiness, energy
+    }
+    
+    func topInfoStatusBar(mode: StatusModes) -> some View {
+        
+        var color: Color = mode == .health ? Color.red : mode == .happiness ? Color.yellow : Color.green
+        
+        var returnView: some View {
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .stroke(color, lineWidth: 1)
+                    .frame(width: 35, height: 10)
+                
+                Capsule()
+                    .frame(width: CGFloat(Double((mode == .health ? player.life_health_status : mode == .happiness ? player.life_happiness_status : player.life_energy_status)) * 0.35), height: 10)
+            }
+            .foregroundColor(color)
+        }
+        
+        return returnView
+    }
+    
+    var topInfo: some View {
+        HStack {
+            HStack {
+                Spacer()
+                Text(formatNum(player.life_cash_balance))
+                Spacer()
+                Text("|")
+                Spacer()
+                Text("45 y/o")
+                Spacer()
+            }
+            
+            
+            Spacer()
+            HStack {
+                topInfoStatusBar(mode: .health)
+                topInfoStatusBar(mode: .happiness)
+                topInfoStatusBar(mode: .energy)
+            }
+            
+            Spacer()
+            
+            
+            
+            Image(systemName: "cart.fill")
+                .foregroundColor(userPreferences.appColor)
+            
+            Spacer()
+        
+        }
+        .font(.title3)
+        .padding(.horizontal)
+        .padding(.bottom, 8)
+        .foregroundColor(.white)
+        .background(Color("mainDarkGray").ignoresSafeArea())
     }
     
     func resetViewBools(except: Tabs) -> Void {
@@ -120,9 +164,11 @@ struct MainView: View {
     }
         
     var tabBar: some View {
+        
+        
+        
         HStack(spacing: 0) {
             
-            Spacer()
             
             HStack {
                 Spacer()
@@ -144,7 +190,7 @@ struct MainView: View {
                     }
                 
                 Spacer()
-                    .frame(width: 11)
+                Spacer()
                     
             }
             
@@ -152,7 +198,7 @@ struct MainView: View {
             
             HStack {
                 Spacer()
-                    .frame(width: 11)
+                Spacer()
                 tabImage("books.vertical", color: .brown)
                     .onTapGesture {
                         resetViewBools(except: .learn)
@@ -170,7 +216,6 @@ struct MainView: View {
                 Spacer()
             }
             
-            Spacer()
         }
         .frame(maxWidth: UIScreen.main.bounds.width)
         .background(Color("mainDarkGray"))
@@ -198,3 +243,11 @@ struct MainView_Previews: PreviewProvider {
             .environmentObject(Player())
     }
 }
+
+
+
+
+
+
+
+

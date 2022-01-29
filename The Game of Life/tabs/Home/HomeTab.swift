@@ -32,12 +32,12 @@ struct HomeTab: View {
                     header
                     
                     HStack {
-                        Text(maleNames.randomElement()!)
+                        Text(player.name)
                             .font(.title)
                             .fontWeight(.medium)
                             .foregroundColor(Color("mainWhite"))
                         
-                        Text(" ·  36")
+                        Text(" ·  \(player.yearsOld)")
                             .font(.title)
                             .fontWeight(.medium)
                             .foregroundColor(Color("mainWhite"))
@@ -110,9 +110,9 @@ extension HomeTab {
         HStack {
             statusBar(mode: "Health", color: Color.red)
             
-            statusBar(mode: "Happiness", color: Color.orange)
+            statusBar(mode: "Happiness", color: Color.yellow)
             
-            statusBar(mode: "Energy", color: Color.yellow)
+            statusBar(mode: "Energy", color: Color.green)
         }
         .padding()
         .background(Color(hue: 1.0, saturation: 0.027, brightness: 0.356))

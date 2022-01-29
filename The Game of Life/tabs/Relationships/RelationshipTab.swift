@@ -42,9 +42,9 @@ struct RelationshipTab: View {
             }
             if showParentsView {
                 ParentsView(showMainView: $showMainView, showParentsView: $showParentsView)
-            }/* else if showRomanceView {
-                
-            } else if showChildrenView {
+            }else if showRomanceView {
+                RomanceView(showMainView: $showMainView, showRomanceView: $showRomanceView)
+            }/*  else if showChildrenView {
                 
             } else if showFriendsView {
                 FriendsView()
@@ -54,6 +54,7 @@ struct RelationshipTab: View {
                 Text("Error: RelationshipTab / RelationshipButton")
             }*/
         }
+        
     }
 }
 

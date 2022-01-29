@@ -20,23 +20,30 @@ struct EntryView: View {
     
     var body: some View {
         
-        if !entered {
-            if showEntryView {
-                ColorView(showColorView: $showEntryView, showLivesView: $showLivesView)
-                    .environmentObject(userPreferences)
-            } else if showLivesView {
-                //LivesView(showMainView: $showMainView, showLivesView: $showLivesView)
-                NewLifeView(/*showMainView: $showMainView, showLivesView:  $showLivesView*/)
+        ZStack {
+            
+            
+            
+            if !entered {
+                if showEntryView {
+                    ColorView(showColorView: $showEntryView, showLivesView: $showLivesView)
+                        .environmentObject(userPreferences)
+                } else if showLivesView {
+                    //LivesView(showMainView: $showMainView, showLivesView: $showLivesView)
+                    NewLifeView(/*showMainView: $showMainView, showLivesView:  $showLivesView*/)
+                        .environmentObject(userPreferences)
+                        .environmentObject(player)
+                } else {
+                    Text("Error: EntryView")
+                }
+            } else {
+                MainView()
                     .environmentObject(userPreferences)
                     .environmentObject(player)
-            } else {
-                Text("Error: EntryView")
             }
-        } else {
-            MainView()
-                .environmentObject(userPreferences)
-                .environmentObject(player)
         }
+        
+        
     }
 }
 

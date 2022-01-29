@@ -12,6 +12,7 @@
 //cd /Users/charliereeder/Desktop/xcode\ projs/The\ Game\ of\ Life
 //find . -path ./Pods -prune -o -name '*.swift' -print0 ! -name '/Pods' | xargs -0 wc -l
 //3106 total
+//jan 18: 4730 total (ALMOST AT 5k!!! 5 fucking k lets fucking go bro)
 
 
 
@@ -111,8 +112,11 @@ class UserPreferences: ObservableObject {
 class Player: ObservableObject {
     
     init() {
-        //self.mom = Parent(parent: .mom)
-        //self.dad = Parent(parent: .dad)
+        
+        self.gender = Genders.allCases.randomElement()! == .male ? "male" : "female"
+        self.emoji = babyEmojis.randomElement()!
+        self.name = gender == "male" ? maleNames.randomElement()! : femaleNames.randomElement()!
+        //self.yearsOld = months_old / 12
         
         self.mom_name = femaleNames.randomElement()!
         self.mom_age = Int.random(in: 25...45)
@@ -128,27 +132,77 @@ class Player: ObservableObject {
     
     
     //MARK: PARENT STUFF
-    // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // //
-    //var mom: Parent
-    //var dad: Parent
     
     @AppStorage("mom_name") var mom_name = ""
     @AppStorage("mom_age") var mom_age = 0
     @AppStorage("mom_emoji") var mom_emoji = ""
-    @AppStorage("mom_status") var mom_status = 100
+    @AppStorage("mom_status") var mom_status = 100 {
+        didSet {
+            limitStatus()
+        }
+    }
     
     @AppStorage("dad_name") var dad_name = ""
     @AppStorage("dad_age") var dad_age = 0
     @AppStorage("dad_emoji") var dad_emoji = ""
-    @AppStorage("dad_status") var dad_status = 100
+    @AppStorage("dad_status") var dad_status = 100  {
+        didSet {
+            limitStatus()
+        }
+    }
+    
+    
+    
+    //MARK: ROMANCE STUFF
+    @AppStorage("partner1_name") var partner1_name = ""
+    @AppStorage("partner1_emoji") var partner1_emoji = ""
+    @AppStorage("partner1_age") var partner1_age = 0
+    @AppStorage("partner1_status") var partner1_status = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    
+    @AppStorage("partner2_name") var partner2_name = ""
+    @AppStorage("partner2_age") var partner2_age = 0
+    @AppStorage("partner2_emoji") var partner2_emoji = ""
+    @AppStorage("partner2_status") var partner2_status = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    
+    @AppStorage("partner3_name") var partner3_name = ""
+    @AppStorage("partner3_age") var partner3_age = 0
+    @AppStorage("partner3_emoji") var partner3_emoji = ""
+    @AppStorage("partner3_status") var partner3_status = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
+    
+    @AppStorage("partner4_name") var partner4_name = ""
+    @AppStorage("partner4_age") var partner4_age = 0
+    @AppStorage("partner4_emoji") var partner4_emoji = ""
+    @AppStorage("partner4_status") var partner4_status = 0 {
+        didSet {
+            limitStatus()
+        }
+    }
     
     
     
     //MARK: PLAYER STUFF
-    // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // // 
+
+    @AppStorage("name") var name: String = ""
     @AppStorage("emoji") var emoji: String = ""
+    @AppStorage("gender") var gender: String = ""
+    @AppStorage("months_old") var months_old: Int = 0
+    lazy var yearsOld: Int = months_old / 12
+    
+    @AppStorage("age_stage") var age_stage: AgeStages = .baby
+    
+    
     @AppStorage("on_new_life") var on_new_life: Bool = true
     @AppStorage("life_cash_balance") var life_cash_balance = 0
     @AppStorage("life_bank_balance") var life_bank_balance = 0
@@ -173,12 +227,94 @@ class Player: ObservableObject {
         case male, female
     }
     
+    enum Partners {
+        case all, partner1, partner2, partner3, partner4
+    }
+    
+    
+    enum AgeStages: String {
+        case baby = "baby"
+        case kid = "kid"
+        case adult = "adult"
+        case elder = "elder"
+    }
+    
     func reset() {
         resetFinances()
         resetEmotions()
+        resetParents()
+        resetSelf()
+        resetRomance(.all)
+    }
+    
+    func resetRomance(_ mode: Partners) {
+        switch mode {
+            case .all:
+                resetRomance(.partner1)
+                resetRomance(.partner2)
+                resetRomance(.partner3)
+                resetRomance(.partner4)
+            case .partner1:
+                partner1_age = 0
+                partner1_status = 0
+                partner1_name = ""
+                partner1_emoji = ""
+            case .partner2:
+                partner2_age = 0
+                partner2_status = 0
+                partner2_name = ""
+                partner2_emoji = ""
+            case .partner3:
+                partner3_age = 0
+                partner3_status = 0
+                partner3_name = ""
+                partner3_emoji = ""
+            case .partner4:
+                partner4_age = 0
+                partner4_status = 0
+                partner4_name = ""
+                partner4_emoji = ""
+        }
+    }
+    func resetSelf() {
+        gender = Genders.allCases.randomElement()! == .male ? "male" : "female"
+        emoji = babyEmojis.randomElement()!
+    }
+    
+    enum Resettable {
+        case health
     }
     
     func limitStatus() {
+        
+        if partner4_status < 0 {
+            partner4_status = 0
+        }
+        if partner4_status > 100 {
+            partner4_status = 100
+        }
+        
+        if partner3_status < 0 {
+            partner3_status = 0
+        }
+        if partner3_status > 100 {
+            partner3_status = 100
+        }
+        
+        if partner2_status < 0 {
+            partner2_status = 0
+        }
+        if partner2_status > 100 {
+            partner2_status = 100
+        }
+        
+        if partner1_status < 0 {
+            partner1_status = 0
+        }
+        if partner1_status > 100 {
+            partner1_status = 100
+        }
+        
         if life_health_status < 0 {
             on_new_life = true
         }
@@ -216,7 +352,17 @@ class Player: ObservableObject {
         }
 
     }
-    
+    func resetParents() {
+        mom_name = femaleNames.randomElement()!
+        mom_age = Int.random(in: 25...45)
+        mom_emoji = momEmojis.randomElement()!
+        mom_status = 100
+        
+        dad_name = maleNames.randomElement()!
+        dad_age = Int.random(in: 25...45)
+        dad_emoji = dadEmojis.randomElement()!
+        dad_status = 100
+    }
     func resetEmotions() {
         life_health_status = 100
         life_energy_status = 100
@@ -226,8 +372,24 @@ class Player: ObservableObject {
         life_cash_balance = 0
         life_bank_balance = 0
     }
+    func checkAgeStage() {
+        if yearsOld < 5 {
+            age_stage = .baby
+        } else if yearsOld < 18 {
+            age_stage = .kid
+            emoji = gender == "male" ? boyEmojis.randomElement()! : girlEmojis.randomElement()!
+        } else if yearsOld < 50 {
+            age_stage = .adult
+            emoji = gender == "male" ? dadEmojis.randomElement()! : momEmojis.randomElement()!
+        } else {
+            age_stage = .elder
+            emoji = gender == "male" ? grandpaEmojis.randomElement()! : grandmaEmojis.randomElement()!
+        }
+    }
     
 }
+
+
 
 /*class Parent: ObservableObject {
     

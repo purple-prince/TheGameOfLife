@@ -7,10 +7,14 @@
 
 import SwiftUI
 
-//flirt, ask them out, propose, marry, have kids, divorce,
-//spend time, trip, gift, sex, date, vacation, hurt
-//breakup, cheat
 
+struct ParentsDetialButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .brightness(configuration.isPressed ? 0.05 : 0)
+    }
+}
 
 //CHANGING THE ASPECT RATIOS TO A DOUBLE RESULTS IN A MEMORY LEAK IDK WHY
 
@@ -21,6 +25,10 @@ struct ParentsDetail: View {
     }
 
     let mode: Modes
+    
+    @Binding var showMomDetail: Bool
+    @Binding var showDadDetail: Bool
+    @Binding var showParentsView2: Bool
     
     @EnvironmentObject var player: Player
     @EnvironmentObject var userPreferences: UserPreferences
@@ -60,7 +68,7 @@ struct ParentsDetail: View {
         .foregroundColor(.white)
         .cornerRadius(12)
         .shadow(radius: 12)
-        .padding()
+        .padding(.horizontal)
     }
             
     var body: some View {
@@ -69,6 +77,8 @@ struct ParentsDetail: View {
             
             //Text(String(mode == .mom ? player.mom_status : player.dad_status))
             //guard let decodedRatings = try? JSONDecoder().decode([String:Double].self, from: ratings) else { return }
+            
+            BackButton
             
             parentBanner()
             
@@ -104,12 +114,25 @@ struct ParentsDetail: View {
             
             Spacer()
         }
-        .offset(y: 72)
-        .ignoresSafeArea()
     }
 }
 
 extension ParentsDetail {
+    
+    var BackButton: some View {
+        HStack {
+            Image(systemName: "chevron.left")
+                .font(Font.system(size: 32))
+                .foregroundColor(.red)
+                .padding(.horizontal)
+                .onTapGesture {
+                    showMomDetail = false
+                    showDadDetail = false
+                    showParentsView2 = true
+                }
+            Spacer()
+        }
+    }
     
     func ActionButton(parentStatusAffect: Int, healthMod: Int, hapMod: Int, energyMod: Int, cost: Int, description: String) -> some View {
         
@@ -161,17 +184,22 @@ extension ParentsDetail {
             }
         }
         
+        @State var clickable: Bool = player.life_cash_balance >= cost
+        
         var returnView: some View {
             Button(action: {
-                if mode == .mom {
-                    player.mom_status += parentStatusAffect
-                } else {
-                    player.dad_status += parentStatusAffect
+                
+                if clickable {
+                    if mode == .mom {
+                        player.mom_status += parentStatusAffect
+                    } else {
+                        player.dad_status += parentStatusAffect
+                    }
+                    player.life_health_status += healthMod
+                    player.life_happiness_status += hapMod
+                    player.life_energy_status += energyMod
+                    player.life_cash_balance -= cost
                 }
-                player.life_health_status += healthMod
-                player.life_happiness_status += hapMod
-                player.life_energy_status += energyMod
-                player.life_cash_balance -= cost
                 
             }, label: {
                 ZStack {
@@ -190,30 +218,7 @@ extension ParentsDetail {
                         Spacer()
                         //health        happ
                         //energy      money
-                        
-                        /*if healthMod != 0 {
-                            HStack(spacing: 4) {
-                                Text(healthMod > 0 ? "+ \(healthMod)" : "- \(abs(healthMod))")
-                                    .foregroundColor(healthMod > 0 ? .green : .red)
-                                Text("❤️")
-                            }
-                        } else if hapMod != 0 {
-                            HStack(spacing: 4) {
-                                Text(hapMod > 0 ? "+ \(hapMod)" : "- \(abs(hapMod))")
-                                    .foregroundColor(hapMod > 0 ? .green : .red)
-                                Text("😀")
-                            }
-                        } else if energyMod != 0 {
-                            HStack(spacing: 4) {
-                                Text(energyMod > 0 ? "+ \(energyMod)" : "- \(abs(energyMod))")
-                                    .foregroundColor(energyMod > 0 ? .green : .red)
-                                Text("⚡️")
-                            }
-                        } else if  cost != 0 {
-                            Text("- \(formatNum(cost))")
-                                .foregroundColor(.red)
-                        }*/
-                        
+                                                
                         VStack {
                             
                             switch numAffected {
@@ -302,7 +307,13 @@ extension ParentsDetail {
                     }
                     .foregroundColor(.white)
                 }
-            }).frame(maxHeight: 142)
+                .overlay(
+                    clickable ? nil : RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(Color.gray.opacity(0.5))
+                )
+            })
+                .frame(maxHeight: 142)
+                .buttonStyle(ParentsDetialButtonStyle())
         }
         
         return returnView
@@ -312,7 +323,7 @@ extension ParentsDetail {
 
 struct ParentsDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ParentsDetail(mode: .mom )
+        ParentsDetail(mode: .mom, showMomDetail: .constant(true), showDadDetail: .constant(false), showParentsView2: .constant(false))
             .environmentObject(Player())
             .environmentObject(UserPreferences())
     }
