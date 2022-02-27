@@ -11,14 +11,15 @@ struct JobView: View{
     
     @EnvironmentObject var userPreferences: UserPreferences
     
+    @Binding var showOccupationMain: Bool
+    @Binding var showJobView: Bool
     
     @State var jobListMode = "Hourly"
     @State var showApplyPopup = false
     @State var showMainView = true
     @State var jobTapped: Job? = nil
     
-    @AppStorage("life_job_title") var life_job_title: String?
-    @AppStorage("life_job_salary") var life_job_salary: Int?// = 0
+    // = 0
     @EnvironmentObject var player: Player
         
     var body: some View {
@@ -26,21 +27,40 @@ struct JobView: View{
         ZStack {
             
             if showMainView {
-                VStack {
+                ZStack {
+                    VStack {
+                        
+                        banner
+                            .padding(.top)
                     
-                    banner
-                        .padding(.top)
-                
-                    modeButtons
+                        modeButtons
+                        
+                        Divider()
+                        
+                        jobList(jobListMode)
+                        
+                    }
+                    .offset(y: 72)
+                    .background(Color("mainWhite"))
+                    .ignoresSafeArea()
                     
-                    Divider()
-                    
-                    jobList(jobListMode)
-                    
+                    VStack {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.red)
+                                .font(Font.system(size: 32))
+                                .padding(.horizontal)
+                                .onTapGesture {
+                                    showOccupationMain = true
+                                    showJobView = false
+                                }
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                    }
                 }
-                .offset(y: 72)
-                .background(Color("mainWhite"))
-                .ignoresSafeArea()
             }
             
             if showApplyPopup {
@@ -57,8 +77,8 @@ extension JobView {
     
     func jobOption(job: Job) -> some View {
         Button(action: {
-            life_job_title = job.jobTitle
-            life_job_salary = job.salary
+            player.life_job_title = job.jobTitle
+            player.life_job_salary = job.salary
         }, label: {
             HStack {
                 Text(job.jobTitle)
@@ -68,7 +88,7 @@ extension JobView {
                         HapticManager.instance.playHaptic(type: .soft)
                     }
                 Spacer()
-                if job.jobTitle == life_job_title {
+                if job.jobTitle == player.life_job_title {
                     Text(formatNum(job.salary) + " / month")
                 } else {
                     Text("Apply")
@@ -83,7 +103,7 @@ extension JobView {
             .padding(.horizontal)
             .font(.system(size: 20))
             .foregroundColor(
-                life_job_title == job.jobTitle ? userPreferences.appColor : Color("mainDarkGray")
+                player.life_job_title == job.jobTitle ? userPreferences.appColor : Color("mainDarkGray")
             )
             .frame(width: .infinity, height: 52)
         })
@@ -145,26 +165,26 @@ extension JobView {
         
     //passas either HourlyJob, CareerJob, or OtherJob into currentJobInfo func
     func jobInfo/*<T: Occupation>*/() -> Job {
-        if hourlyJobs.filter({ return $0.jobTitle == life_job_title }).count > 0 {
-            return hourlyJobs.filter({ return $0.jobTitle == life_job_title })[0]
-        } else if careerJobs.filter({ return $0.jobTitle == life_job_title }).count > 0 {
-            return careerJobs.filter({ return $0.jobTitle == life_job_title })[0]
+        if hourlyJobs.filter({ return $0.jobTitle == player.life_job_title }).count > 0 {
+            return hourlyJobs.filter({ return $0.jobTitle == player.life_job_title })[0]
+        } else if careerJobs.filter({ return $0.jobTitle == player.life_job_title }).count > 0 {
+            return careerJobs.filter({ return $0.jobTitle == player.life_job_title })[0]
         } else {
-            return otherJobs.filter({ return $0.jobTitle == life_job_title })[0]
+            return otherJobs.filter({ return $0.jobTitle == player.life_job_title })[0]
         }
     }
     
     var banner: some View {
         VStack /*current job*/ {
-            Text(life_job_title ?? "Unemployed")
+            Text(player.life_job_title ?? "Unemployed")
                 .font(.largeTitle)
                 .fontWeight(.medium)
                 .foregroundColor(Color("mainWhite"))
                 .padding(.top)
             
-            if life_job_salary != nil {
+            if player.life_job_salary != nil {
                 HStack {
-                    Text("$\(life_job_salary!)/month")
+                    Text("$\(player.life_job_salary!)/month")
                         .font(.title3)
                         .fontWeight(.light)
                         .foregroundColor(Color("mainWhite"))
@@ -176,11 +196,16 @@ extension JobView {
             
             Button(action: {
                 
-                player.life_cash_balance += jobInfo().salary
-                player.life_health_status += jobInfo().healthMod
-                player.life_happiness_status += jobInfo().hapMod
-                player.life_energy_status += jobInfo().energyMod
-                HapticManager.instance.playHaptic(type: .rigid)
+                if !(player.life_job_title == nil) {
+                    player.life_cash_balance += jobInfo().salary
+                    player.life_health_status += jobInfo().healthMod
+                    player.life_happiness_status += jobInfo().hapMod
+                    player.life_energy_status += jobInfo().energyMod
+                    
+                    HapticManager.instance.playHaptic(type: .rigid)
+                    
+                    player.months_old += 1
+                }
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
@@ -371,7 +396,7 @@ extension ApplyPopup {
 
 struct JobView_Previews: PreviewProvider {
     static var previews: some View {
-        JobView()
+        JobView(showOccupationMain: .constant(false), showJobView: .constant(true))
             .environmentObject(UserPreferences())
             .environmentObject(Player())
         //ApplyPopup(showApplyPopup: .constant(false), showMainView: .constant(false), job: hourlyJobs.randomElement()!)

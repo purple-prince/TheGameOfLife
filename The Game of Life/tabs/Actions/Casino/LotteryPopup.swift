@@ -34,35 +34,40 @@ struct LotteryPopup: View {
 
         
     var body: some View {
-        VStack {
+        ZStack {
             
-            Spacer()
+            Color("mainWhite").ignoresSafeArea()
             
-            ZStack {
+            VStack {
                 
-                background
+                Spacer()
                 
-                VStack(spacing: 0) {
+                ZStack {
                     
+                    background
                     
-                    
-                    header
-                    
-                    main
-                    
-                    Spacer()
+                    VStack(spacing: 0) {
+                        
+                        
+                        
+                        header
+                        
+                        main
+                        //TODO: uncomment
+                            //.environmentObject(player)
+                        
+                        Spacer()
+                    }
                 }
+                .frame(width: .infinity, height: (UIScreen.main.bounds.height * 2 / 3))
+                .padding(24)
+                
+                
+                
+                Spacer()
             }
-            .frame(width: .infinity, height: (UIScreen.main.bounds.height * 2 / 3))
-            .padding(24)
-            
-            
-            
-            Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("mainWhite").blur(radius: 64))
-        
     }
 }
 
@@ -86,30 +91,36 @@ extension LotteryPopup {
                             if Int(num6!) == winning_6 {
                                 numsRight = 6
                                 player.life_cash_balance += lottery_jackpot
+                                player.total_lottery_winnings += lottery_jackpot
                             } else {
                                 numsRight = 5
                                 amountWon += Int(pow(Double(lottery_jackpot), Double(1/2.0)) * Double(amount))
                                 player.life_cash_balance += amountWon
+                                player.total_lottery_winnings += amountWon
                             }
                         } else {
                             numsRight = 4
                             amountWon = Int(pow(Double(lottery_jackpot), Double(1/3.0)) * Double(amount))
                             player.life_cash_balance += amountWon
+                            player.total_lottery_winnings += amountWon
                         }
                     } else {
                         numsRight = 3
                         amountWon = Int(pow(Double(lottery_jackpot), Double(1/4.0)) * Double(amount))
                         player.life_cash_balance += amountWon
+                        player.total_lottery_winnings += amountWon
                     }
                 } else {
                     numsRight = 2
                     amountWon = Int(pow(Double(lottery_jackpot), Double(1/5.0)) * Double(amount))
                     player.life_cash_balance += amountWon
+                    player.total_lottery_winnings += amountWon
                 }
             } else {
                 numsRight = 1
                 amountWon += Int(pow(Double(lottery_jackpot), Double(1/6.0)) * Double(amount))
                 player.life_cash_balance += amountWon
+                player.total_lottery_winnings += amountWon
             }
             resetUpcomingNums = true
         }
@@ -120,7 +131,7 @@ extension LotteryPopup {
             .foregroundColor(Color("mainDarkGray"))
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
-                    .stroke(userPreferences.appColor, lineWidth: 2)
+                    .stroke(Color.orange/*userPreferences.appColor*/, lineWidth: 2)
             )
             .shadow(color: .gray, radius: 12)
     }
@@ -174,7 +185,7 @@ extension LotteryPopup {
             .background(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(userPreferences.appColor, lineWidth: 2)
+                    .stroke(Color.orange/*userPreferences.appColor*/, lineWidth: 2)
             )
             .cornerRadius(6)
     }
@@ -291,6 +302,8 @@ extension LotteryPopup {
                     resetUpcomingNums = false
                 }
                 
+                player.total_lottery_winnings -= 10 * amount
+                
                 numsRight = 0
                 player.life_cash_balance -= 10 * amount
                 
@@ -314,9 +327,24 @@ extension LotteryPopup {
                 .foregroundColor(.white)
                 .padding()
                 .padding(.horizontal, 12)
-                //.background(player.life_cash_balance >= (amount * 10) ? Color.green : Color.gray.opacity(0.2))
-                .background(Color.green)
-                .overlay(player.life_cash_balance >= (amount * 10) ? nil : Color("mainDarkGray").opacity(0.5))
+                .background(
+                    
+                    
+                     Group {
+                         if player.life_cash_balance >= (amount * 10) {
+                             RoundedRectangle(cornerRadius: 12)
+                                 .stroke(Color.green, lineWidth: 4)
+                         } else {
+                             Color.gray.opacity(0.2)
+                         }
+                     }
+                     
+                    
+                    //player.life_cash_balance >= (amount * 10) ? Color("mainDarkGray") : Color.gray.opacity(0.2)
+                )
+                //.background(Color.green)
+            //TODO: UNCOMMENT THIS
+                //.overlay(player.life_cash_balance >= (amount * 10) ? nil : Color("mainDarkGray").opacity(0.5))
                 .cornerRadius(12)
                 
         })

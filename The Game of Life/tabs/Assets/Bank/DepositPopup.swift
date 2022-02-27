@@ -15,7 +15,7 @@ struct DepositPopup: View {
     @State var depositAmount: Double = 0.0
     
     var maxSliderAmount: Double {
-        
+                
         if player.life_cash_balance <= 0 {
             return 0.0
         } else {

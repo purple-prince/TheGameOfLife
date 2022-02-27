@@ -16,32 +16,42 @@ struct CategoryButton: View {
     
     @EnvironmentObject var userPreferences: UserPreferences
     
+    @Binding var showOccupationMain: Bool
+    @Binding var showJobView: Bool
+    @Binding var showSHView: Bool
+    @Binding var showSportsView: Bool
+    @Binding var showRealEstateView: Bool
+    @Binding var showCrimeView: Bool
+    
     let category: String
     let position: String
     let salary: Int
     let color: Color
-    
-    func destinationPicker(_ category: String) -> some View {
-        Group {
-            switch category {
-            case "Job":
-                JobView()
-            case "Side Hustle":
-                SHView()
-            default:
-                Text("error in destination picker: categorybutton.swift")
-            }
-        }
-    }
         
     var body: some View {
         
-        NavigationLink(destination: destinationPicker(category)) {
+        Button(action: {
+            switch category {
+                case "Job":
+                    showJobView = true
+                case "Side Hustle":
+                    showSHView = true
+                case "Sports":
+                    showSportsView = true
+                case "Real Estate":
+                    showRealEstateView = true
+                default:
+                    showCrimeView = true
+            }
+            
+            showOccupationMain = false
+            
+        }, label: {
             VStack {
                 Text(category)
                     .padding(.top)
                     .font(Font.custom("mainFontBold", size: 28))
-                    
+                
                 HStack {
                     Spacer()
                     Text("\(position)")
@@ -54,7 +64,7 @@ struct CategoryButton: View {
                 .padding(.bottom)
             }
             .font(Font.custom("mainFont", size: 20))
-            .frame(maxWidth: .infinity)
+            
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(Color("mainDarkGray"))
@@ -62,19 +72,21 @@ struct CategoryButton: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(userPreferences.appColor, lineWidth: 4)
-                )
+            )
             .foregroundColor(userPreferences.appColor)
-            .cornerRadius(12)
             .shadow(radius: 6)
+        })
+            .frame(maxWidth: .infinity)
+            .cornerRadius(12)
             .padding(.horizontal)
             .padding(.top, 6)
-        }
+            .buttonStyle(.plain)
     }
 }
 
 struct OccupationButton_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryButton(category: "Job", position: "Junior Developer", salary: 69, color: Color.red)
+        CategoryButton(showOccupationMain: .constant(false), showJobView: .constant(false), showSHView: .constant(false), showSportsView: .constant(false), showRealEstateView: .constant(false), showCrimeView: .constant(false), category: "Job", position: "Junior Developer", salary: 69, color: Color.red)
             .environmentObject(UserPreferences())
     }
 }

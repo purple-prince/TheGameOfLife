@@ -11,24 +11,6 @@ protocol Occupation: Hashable, Identifiable {
     var jobTitle: String { get }
 }
 
-struct HourlyJob: Occupation {
-    let jobTitle : String
-    var salary: Int
-    var id = UUID()
-}
-
-struct OtherJob: Occupation {
-    let jobTitle : String
-    var salary: Int
-    var id = UUID()
-}
-
-struct CareerJob: Occupation {
-    let jobTitle : String
-    var salary: Int
-    var id = UUID()
-}
-
 var jobsAndSalaries = ["aerospace engineer": 10,
                        "prostitute": 10,
                        "farmer": 10,
@@ -111,7 +93,10 @@ let otherJobs: [Job] = [Job(jobTitle: "🍑 Prostitute",    salary: 484,  health
                         Job(jobTitle: "🔫 Army",          salary: 940,  healthMod: 0, hapMod: -3, energyMod: -2, description: ""),
                         Job(jobTitle: "📱TikTokker",      salary: 320,  healthMod: 0, hapMod: 0,  energyMod: 0,  description: "Talent-less scum of society"),
                         Job(jobTitle: "🚒 Firefighter",   salary: 696,  healthMod: 0, hapMod: -3, energyMod: -2, description: "")
-] // prostitute, beggar, army?, circus, street dancer/music, babysitter
+]
+
+
+// prostitute, beggar, army?, circus, street dancer/music, babysitter
 
 /*
  aerospace engineer

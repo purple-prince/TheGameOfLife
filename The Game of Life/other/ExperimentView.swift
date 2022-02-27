@@ -9,47 +9,29 @@ import SwiftUI
 
 struct ExperimentView: View {
     
+    @State var x: CGFloat = 0
+    
     var body: some View {
-        
-        VStack {
-            Spacer()
-            elShape()
-                .stroke(lineWidth: 4)
-            Spacer()
-        }
-    }
-    
-    
-}
-
-
-struct elShape: Shape {
-    
-    
-    
-//    var animatableData: CGFloat {
-//        get {
-//            
-//        }
-//        set {
-//            
-//        }
-//    }
-    
-    func path(in rect: CGRect) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: rect.midX, y: rect.midY))
-            path.addArc(center: CGPoint(x: rect.midX + 10, y: rect.midY),
-                        radius: 10.0,
-                        startAngle: Angle(degrees:180),
-                        endAngle: Angle(degrees:0),
-                        clockwise: false)
-            path.move(to: CGPoint(x: rect.midX + 20, y: rect.midY - 3))
-            path.addQuadCurve(to: CGPoint(x: rect.midX + 50, y: rect.midY + 8),
-                              control: CGPoint(x: rect.midX + 20, y: rect.midY + 10))
-            //path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
-            
-        }
+        Circle()
+            .frame(width: 100, height: 100)
+            .offset(x: x)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        x = value.translation.width
+                    }
+                    .onEnded { value in
+                        
+                        withAnimation(.linear) {
+                        
+                            if value.translation.width < -100 {
+                                x = -250
+                            } else {
+                                x = 0
+                            }
+                        }
+                    }
+            )
     }
 }
 

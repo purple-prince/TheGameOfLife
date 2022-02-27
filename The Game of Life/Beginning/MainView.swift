@@ -29,13 +29,16 @@ struct MainView: View {
     @State var showLearnView: Bool = false
     @State var showWorkView: Bool = false
     @State var showAssetsView: Bool = false
+    @State var showShop: Bool = false
     
     var body: some View {
         
         if(player.on_new_life) {
             NewLifeView()
-                //.environmentObject(player)
+                .environmentObject(player)
                 //.environmentObject(userPreferences)
+        } else if showShop {
+            ShopView(showShop: $showShop)
         } else {
             ZStack {
 
@@ -69,6 +72,7 @@ struct MainView: View {
             
             Button(action: {
                 HapticManager.instance.playHaptic(type: .rigid)
+                player.months_old += 1
             }, label: {
                 Image(systemName: "plus.diamond.fill")
                     .resizable()
@@ -110,7 +114,7 @@ struct MainView: View {
                 Spacer()
                 Text("|")
                 Spacer()
-                Text("45 y/o")
+                Text(String(player.yearsOld) + " y/o")
                 Spacer()
             }
             
@@ -128,6 +132,9 @@ struct MainView: View {
             
             Image(systemName: "cart.fill")
                 .foregroundColor(userPreferences.appColor)
+                .onTapGesture {
+                    showShop = true
+                }
             
             Spacer()
         

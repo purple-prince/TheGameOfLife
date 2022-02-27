@@ -9,15 +9,15 @@ import SwiftUI
 
 struct HomeTab: View {
     
+    enum NetWorthErrors: Error {
+        case tooBig
+    }
+    
     @EnvironmentObject var userPreferences: UserPreferences
     
     @State var showSettings: Bool = false
     @State var showOptions: Bool = false
     @EnvironmentObject var player: Player
-    
-    func getNetWorth() -> Int {
-        return player.life_cash_balance + player.life_bank_balance
-    }
     
     var body: some View {
         
@@ -27,7 +27,7 @@ struct HomeTab: View {
                 
                 VStack {
                     Spacer()
-                        .frame(width: 0, height: 124)
+                        //.frame(width: 0, height: 0)
                     
                     header
                     
@@ -47,6 +47,7 @@ struct HomeTab: View {
                     
                     infoLabels
                     
+                    Spacer()
                     Spacer()
                 }
             }
@@ -162,16 +163,16 @@ extension HomeTab {
                 HStack {
                     Text("Net worth: ")
                         .bold()
-                    Text(formatNum(getNetWorth()))
+                    Text(formatNum(player.getNetWorth()))
                 }
                 HStack {
                     Text("Monthly Income: ")
                         .bold()
                 }
                 HStack {
-                    Text("Years Lived: ")
+                    Text("Age: ")
                         .bold()
-                    Text("104")
+                    Text(String(player.yearsOld))
                     
                 }
             }

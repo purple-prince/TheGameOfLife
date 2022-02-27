@@ -20,9 +20,11 @@ struct Job: Occupation {
 struct SideHustle: Hashable {
     let id = UUID()
     var shTitle: String
-    var level = 1
+    var level = 0
     var salaryMin: Int
     var salaryMax: Int
+    
+    
 }
 
 struct Sports {

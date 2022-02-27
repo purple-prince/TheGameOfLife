@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A357326CA0A12008CB95F /* LovedOnes.swift */; };
+		D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816042D27BEE0AB00EFE47D /* CrashPopup.swift */; };
 		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
 		D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8AA277C18C8009D7992 /* OptionsView.swift */; };
 		D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82EE05F27365DD400C6498F /* ParentsDetail.swift */; };
@@ -27,6 +28,7 @@
 		D85C855A268EFE2100FA7C9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85C8559268EFE2100FA7C9A /* Preview Assets.xcassets */; };
 		D85C8565268EFE2100FA7C9A /* The_Game_of_LifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C8564268EFE2100FA7C9A /* The_Game_of_LifeTests.swift */; };
 		D85C8570268EFE2100FA7C9A /* The_Game_of_LifeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C856F268EFE2100FA7C9A /* The_Game_of_LifeUITests.swift */; };
+		D85EE27D27C8372400171320 /* LoanPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85EE27C27C8372400171320 /* LoanPopup.swift */; };
 		D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FA27855C68008606B2 /* DepositPopup.swift */; };
 		D860E0FD27856085008606B2 /* WithdrawPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FC27856085008606B2 /* WithdrawPopup.swift */; };
 		D860E0FF27858258008606B2 /* CasinoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FE27858258008606B2 /* CasinoView.swift */; };
@@ -43,6 +45,8 @@
 		D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67026C4B7410054D033 /* OccupationTab.swift */; };
 		D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67226C4B7AE0054D033 /* ActionTab.swift */; };
 		D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D881F67426C4B7C60054D033 /* HomeTab.swift */; };
+		D886028727A89ACB0025950E /* SHDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D886028627A89ACB0025950E /* SHDetail.swift */; };
+		D88C208B27B87E8800800AAD /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88C208A27B87E8700800AAD /* ShopView.swift */; };
 		D89CD643278AD8A80004FBB7 /* BallsGamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */; };
 		D8A5C8A326DC248D004123A4 /* mainFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8A5C8A226DC248D004123A4 /* mainFont.ttf */; };
 		D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC08DE27653415000A432E /* RealEstateDetail.swift */; };
@@ -81,6 +85,7 @@
 /* Begin PBXFileReference section */
 		D805C588277E74F500536992 /* Swift-BigInt-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Swift-BigInt-master"; path = "../../../../../Downloads/Swift-BigInt-master"; sourceTree = "<group>"; };
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
+		D816042D27BEE0AB00EFE47D /* CrashPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashPopup.swift; sourceTree = "<group>"; };
 		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		D82EE05F27365DD400C6498F /* ParentsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsDetail.swift; sourceTree = "<group>"; };
@@ -106,6 +111,7 @@
 		D85C856B268EFE2100FA7C9A /* The Game of LifeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Game of LifeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85C856F268EFE2100FA7C9A /* The_Game_of_LifeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Game_of_LifeUITests.swift; sourceTree = "<group>"; };
 		D85C8571268EFE2100FA7C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D85EE27C27C8372400171320 /* LoanPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanPopup.swift; sourceTree = "<group>"; };
 		D860E0FA27855C68008606B2 /* DepositPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositPopup.swift; sourceTree = "<group>"; };
 		D860E0FC27856085008606B2 /* WithdrawPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPopup.swift; sourceTree = "<group>"; };
 		D860E0FE27858258008606B2 /* CasinoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasinoView.swift; sourceTree = "<group>"; };
@@ -122,6 +128,8 @@
 		D881F67026C4B7410054D033 /* OccupationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationTab.swift; sourceTree = "<group>"; };
 		D881F67226C4B7AE0054D033 /* ActionTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTab.swift; sourceTree = "<group>"; };
 		D881F67426C4B7C60054D033 /* HomeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTab.swift; sourceTree = "<group>"; };
+		D886028627A89ACB0025950E /* SHDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHDetail.swift; sourceTree = "<group>"; };
+		D88C208A27B87E8700800AAD /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsGamePopup.swift; sourceTree = "<group>"; };
 		D8A5C8A226DC248D004123A4 /* mainFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mainFont.ttf; sourceTree = "<group>"; };
 		D8A5C8A526DC249F004123A4 /* mainFontBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainFontBold.ttf; path = "/Users/charliereeder/Desktop/xcode projs/The Game of Life/The Game of Life/custom fonts/mainFontBold.ttf"; sourceTree = "<absolute>"; };
@@ -191,6 +199,7 @@
 		D83913A7279CAE6400B8B468 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				D88C208A27B87E8700800AAD /* ShopView.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 				D8C202F12749EABB0057A92B /* BankDetail.swift */,
 				D860E0FA27855C68008606B2 /* DepositPopup.swift */,
 				D860E0FC27856085008606B2 /* WithdrawPopup.swift */,
+				D85EE27C27C8372400171320 /* LoanPopup.swift */,
 			);
 			path = Bank;
 			sourceTree = "<group>";
@@ -385,6 +395,7 @@
 				D8BF707C2786489800B4444B /* CasinoIcon.swift */,
 				D8BF707E278648E700B4444B /* LotteryPopup.swift */,
 				D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */,
+				D816042D27BEE0AB00EFE47D /* CrashPopup.swift */,
 			);
 			path = Casino;
 			sourceTree = "<group>";
@@ -451,6 +462,7 @@
 			children = (
 				D8FC918626E58B690065D3CF /* SHView.swift */,
 				D8FC918826E58BFE0065D3CF /* SHBackend.swift */,
+				D886028627A89ACB0025950E /* SHDetail.swift */,
 			);
 			path = "Side Hustle";
 			sourceTree = "<group>";
@@ -608,12 +620,14 @@
 				D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */,
 				D83913AD279CFA0200B8B468 /* ChildrenView.swift in Sources */,
 				D8C4305B272E4D8800F18F89 /* King.swift in Sources */,
+				D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */,
 				D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */,
 				D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */,
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
 				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
+				D85EE27D27C8372400171320 /* LoanPopup.swift in Sources */,
 				D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */,
 				D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */,
 				D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */,
@@ -621,6 +635,7 @@
 				D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */,
 				D839529C2772B84B002444D9 /* ExperimentView.swift in Sources */,
 				D85C8553268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift in Sources */,
+				D88C208B27B87E8800800AAD /* ShopView.swift in Sources */,
 				D860E0FF27858258008606B2 /* CasinoView.swift in Sources */,
 				D860E0FD27856085008606B2 /* WithdrawPopup.swift in Sources */,
 				D8C4304B272DD1E700F18F89 /* RelationshipDetail.swift in Sources */,
@@ -628,6 +643,7 @@
 				D83913A9279CF9E000B8B468 /* RomanceView.swift in Sources */,
 				D878B829278E373200E3DC70 /* Education.swift in Sources */,
 				D83913B3279CFA3100B8B468 /* PetsDetail.swift in Sources */,
+				D886028727A89ACB0025950E /* SHDetail.swift in Sources */,
 				D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */,
 				D8FC918926E58BFE0065D3CF /* SHBackend.swift in Sources */,
 				D881F66C26C4B43A0054D033 /* RelationshipTab.swift in Sources */,
@@ -839,7 +855,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "The Game of LifeTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -860,7 +876,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "The Game of LifeTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

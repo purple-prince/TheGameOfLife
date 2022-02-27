@@ -13,9 +13,9 @@ enum ButtonLocation {
 
 struct BankDetail: View {
         
-    @State var directDepositOn = false
-    @State var showDepositPopup = false
-    @State var showWithdrawPopup = false
+    @State private var showDepositPopup: Bool = false
+    @State private var showWithdrawPopup: Bool = false
+    @State private var showLoanPopup: Bool = false
     
     @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
@@ -44,6 +44,10 @@ struct BankDetail: View {
             }
             .aspectRatio(155/200, contentMode: .fit)
             
+            if showLoanPopup {
+                LoanPopup(showLoanPopup: $showLoanPopup)
+            }
+            
             if showDepositPopup {
                 DepositPopup(showDepositPopup: $showDepositPopup)
             }
@@ -57,9 +61,10 @@ struct BankDetail: View {
 
 struct BankButton:  View{
     
-    @Binding var directDepositOn: Bool
     @Binding var showDepositPopup: Bool
     @Binding var showWithdrawPopup: Bool
+    @Binding var showLoanPopup: Bool
+    @EnvironmentObject var player: Player
     
     var location: ButtonLocation
     
@@ -81,20 +86,20 @@ struct BankButton:  View{
         Button(action: {
             switch location {
                 case .bottomTrailing:
-                directDepositOn.toggle()
+                    player.direct_deposit_on.toggle()
                 case .topLeading:
-                showDepositPopup = true
+                    showDepositPopup = true
                 case .topTrailing:
                     showWithdrawPopup = true
-                default:
-                    break
+                case .bottomLeading:
+                    showLoanPopup = true
             }
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: 140, height: 140)
-                    .foregroundColor(location == .bottomTrailing ? (directDepositOn ? .green : Color("mainDarkGray")) : Color("mainDarkGray"))
+                    .foregroundColor(location == .bottomTrailing ? (player.direct_deposit_on ? .green : Color("mainDarkGray")) : Color("mainDarkGray"))
                     .shadow(color: .gray, radius: 6)
                 
                 Text(buttonText())
@@ -112,21 +117,21 @@ extension BankDetail {
         VStack(spacing: 20) {
             HStack(spacing: 20) {
                 
-                BankButton(directDepositOn: $directDepositOn, showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, location: .topLeading)
-                BankButton(directDepositOn: $directDepositOn, showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, location: .topTrailing)
+                BankButton(showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, showLoanPopup: $showLoanPopup, location: .topLeading)
+                BankButton(showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, showLoanPopup: $showLoanPopup, location: .topTrailing)
                 
             }
             
             HStack(spacing: 20) {
                 
-                BankButton(directDepositOn: $directDepositOn, showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, location: .bottomLeading)
-                BankButton(directDepositOn: $directDepositOn, showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, location: .bottomTrailing)
+                BankButton(showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, showLoanPopup: $showLoanPopup, location: .bottomLeading)
+                BankButton(showDepositPopup: $showDepositPopup, showWithdrawPopup: $showWithdrawPopup, showLoanPopup: $showLoanPopup, location: .bottomTrailing)
 
             }
         }
     }
     var header: some View {
-        VStack {
+        VStack() {
             HStack {
                 
                 Spacer()
@@ -141,12 +146,19 @@ extension BankDetail {
             
             Text(formatNum(player.life_bank_balance))
                 .font(Font.system(size: 24))
-                .padding(.bottom, 32)
+            
+            if player.loan_debt > 0 {
+                Text("Loan: " + formatNum(player.loan_debt))
+                    .foregroundColor(.red)
+                    .padding(.top, 1)
+                    .font(Font.system(size: 24))
+            }
         }
+        .padding(.bottom, 32)
     }
     var background: some View {
         RoundedRectangle(cornerRadius: 40)
-            .aspectRatio(130/200, contentMode: .fit)
+            .aspectRatio((player.loan_debt > 0 ? 120/200 : 130/200), contentMode: .fit)
             .foregroundColor(.white)
             .shadow(color: .gray, radius: 12, x: 0, y: 0)
             .padding()

@@ -28,6 +28,7 @@ struct ActionTab: View {
     @State var showCasinoView = false
     @State var showMainView: Bool = true
         
+    
     var body: some View {
         ZStack {
             

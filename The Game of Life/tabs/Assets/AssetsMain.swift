@@ -56,6 +56,8 @@ extension AssetsMain {
                         
                         Text("Debt: $0")
                             .padding(1)
+                        
+                        Text("Interest: \(String(format: "%.1f", player.interest_percent))%")
                     }
                 }
             }
