@@ -42,17 +42,17 @@ struct RelationshipTab: View {
             }
             if showParentsView {
                 ParentsView(showMainView: $showMainView, showParentsView: $showParentsView)
-            }else if showRomanceView {
+            } else if showRomanceView {
                 RomanceView(showMainView: $showMainView, showRomanceView: $showRomanceView)
-            }/*  else if showChildrenView {
-                
-            } else if showFriendsView {
-                FriendsView()
+            //}  else if showChildrenView {
+//
+//            } else if showFriendsView {
+//                FriendsView()
             } else if showPetsView {
-                PetsView()
-            } else {
-                Text("Error: RelationshipTab / RelationshipButton")
-            }*/
+                PetsView(showRelationshipTab: $showMainView, showPetsView: $showPetsView)
+//            } else {
+//                Text("Error: RelationshipTab / RelationshipButton")
+            }
         }
         
     }

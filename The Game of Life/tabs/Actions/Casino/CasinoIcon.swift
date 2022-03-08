@@ -59,10 +59,10 @@ struct CasinoIcon: View {
     }
     
     var iconBackground: some View {
-        RoundedRectangle(cornerRadius: 32)
+        RoundedRectangle(cornerRadius: 24)
             .fill(Color("mainDarkGray"))
             .overlay(
-                RoundedRectangle(cornerRadius: 32)
+                RoundedRectangle(cornerRadius: 24)
                     .stroke(userPreferences.appColor, lineWidth: 2)
             )
             .aspectRatio(3/2, contentMode: .fit)

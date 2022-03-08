@@ -25,13 +25,12 @@ extension ActionView {
 
 struct ActionTab: View {
     
-    @State var showCasinoView = false
     @State var showMainView: Bool = true
+    @State var showStoreView: Bool = false
         
     
     var body: some View {
         ZStack {
-            
             if showMainView {
                 ZStack {
                     Color("mainWhite")
@@ -39,17 +38,18 @@ struct ActionTab: View {
                     
                     ScrollView(showsIndicators: false) {
                         VStack {
-                            CasinoIcon()
+                            StoreIcon()
                                 .onTapGesture {
-                                    showCasinoView = true
+                                    showStoreView = true
+                                    showMainView = false
                                 }
                         }
                     }
                 }
             }
             
-            if showCasinoView {
-                CasinoView(showCasinoView: $showCasinoView, showMainView: $showMainView)
+            if showStoreView {
+                StoreView(showMainView: $showMainView, showStoreViewBinding: $showStoreView)
             }
         }
     }

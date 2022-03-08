@@ -36,6 +36,9 @@
 		D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B824278CFFD400E3DC70 /* LearnTab.swift */; };
 		D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B826278E371F00E3DC70 /* LearnMain.swift */; };
 		D878B829278E373200E3DC70 /* Education.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B828278E373200E3DC70 /* Education.swift */; };
+		D87DDEE727CBFEA8000CEC01 /* StoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEE627CBFEA8000CEC01 /* StoreIcon.swift */; };
+		D87DDEE927CC252C000CEC01 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEE827CC252C000CEC01 /* StoreView.swift */; };
+		D87DDEEC27CC64AE000CEC01 /* FoodShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEEB27CC64AE000CEC01 /* FoodShop.swift */; };
 		D87EC4D526D4291E00E21428 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EC4D426D4291E00E21428 /* CategoryButton.swift */; };
 		D87EC4DD26D4613900E21428 /* OccupationStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EC4DC26D4613900E21428 /* OccupationStructs.swift */; };
 		D87EC4DF26D4D5D700E21428 /* PosJobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EC4DE26D4D5D700E21428 /* PosJobs.swift */; };
@@ -119,6 +122,9 @@
 		D878B824278CFFD400E3DC70 /* LearnTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTab.swift; sourceTree = "<group>"; };
 		D878B826278E371F00E3DC70 /* LearnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMain.swift; sourceTree = "<group>"; };
 		D878B828278E373200E3DC70 /* Education.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Education.swift; sourceTree = "<group>"; };
+		D87DDEE627CBFEA8000CEC01 /* StoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreIcon.swift; sourceTree = "<group>"; };
+		D87DDEE827CC252C000CEC01 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		D87DDEEB27CC64AE000CEC01 /* FoodShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShop.swift; sourceTree = "<group>"; };
 		D87EC4D426D4291E00E21428 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		D87EC4DC26D4613900E21428 /* OccupationStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationStructs.swift; sourceTree = "<group>"; };
 		D87EC4DE26D4D5D700E21428 /* PosJobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosJobs.swift; sourceTree = "<group>"; };
@@ -242,9 +248,9 @@
 				D8399AAA2754730200A5DFB3 /* LottoFile.swift */,
 				D839529227714A9B002444D9 /* Beginning */,
 				D881F66F26C4B6AA0054D033 /* tabs */,
-				D83913A7279CAE6400B8B468 /* Shop */,
 				D82EE05E273635FB00C6498F /* other */,
 				D85C8558268EFE2100FA7C9A /* Preview Content */,
+				D83913A7279CAE6400B8B468 /* Shop */,
 				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
 				D85C855B268EFE2100FA7C9A /* Info.plist */,
 				D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */,
@@ -281,8 +287,8 @@
 		D860E0F927855C36008606B2 /* Bank */ = {
 			isa = PBXGroup;
 			children = (
-				D8C202F12749EABB0057A92B /* BankDetail.swift */,
 				D860E0FA27855C68008606B2 /* DepositPopup.swift */,
+				D8C202F12749EABB0057A92B /* BankDetail.swift */,
 				D860E0FC27856085008606B2 /* WithdrawPopup.swift */,
 				D85EE27C27C8372400171320 /* LoanPopup.swift */,
 			);
@@ -297,6 +303,24 @@
 				D878B826278E371F00E3DC70 /* LearnMain.swift */,
 			);
 			path = Learn;
+			sourceTree = "<group>";
+		};
+		D87DDEE527CBFE8C000CEC01 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				D87DDEEA27CC649B000CEC01 /* Food */,
+				D87DDEE627CBFEA8000CEC01 /* StoreIcon.swift */,
+				D87DDEE827CC252C000CEC01 /* StoreView.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		D87DDEEA27CC649B000CEC01 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				D87DDEEB27CC64AE000CEC01 /* FoodShop.swift */,
+			);
+			path = Food;
 			sourceTree = "<group>";
 		};
 		D87EC4D126D4286200E21428 /* Occupation */ = {
@@ -354,6 +378,7 @@
 		D8A5C89A26D9D665004123A4 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				D87DDEE527CBFE8C000CEC01 /* Store */,
 				D8BF707B2786487D00B4444B /* Casino */,
 				D881F67226C4B7AE0054D033 /* ActionTab.swift */,
 			);
@@ -619,8 +644,10 @@
 				D839529427714B1C002444D9 /* MainView.swift in Sources */,
 				D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */,
 				D83913AD279CFA0200B8B468 /* ChildrenView.swift in Sources */,
+				D87DDEEC27CC64AE000CEC01 /* FoodShop.swift in Sources */,
 				D8C4305B272E4D8800F18F89 /* King.swift in Sources */,
 				D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */,
+				D87DDEE927CC252C000CEC01 /* StoreView.swift in Sources */,
 				D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */,
 				D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */,
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
@@ -634,6 +661,7 @@
 				D87EC4DF26D4D5D700E21428 /* PosJobs.swift in Sources */,
 				D881F67326C4B7AE0054D033 /* ActionTab.swift in Sources */,
 				D839529C2772B84B002444D9 /* ExperimentView.swift in Sources */,
+				D87DDEE727CBFEA8000CEC01 /* StoreIcon.swift in Sources */,
 				D85C8553268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift in Sources */,
 				D88C208B27B87E8800800AAD /* ShopView.swift in Sources */,
 				D860E0FF27858258008606B2 /* CasinoView.swift in Sources */,

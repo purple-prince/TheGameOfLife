@@ -12,20 +12,27 @@ struct AssetsMain: View {
     @Binding var showAssetsMain: Bool
     @Binding var showBankDetail: Bool
     @Binding var showRealEstateDetail: Bool
+    @Binding var showCasinoView: Bool
+    @State var poop: Bool = false
     @EnvironmentObject var player: Player
     
     var body: some View {
         ScrollView {
-            ZStack {
-                VStack {
-                    bankButton
-                    
-                    Spacer()
-                    
-                    realEstateButton                    
-                    
-                    Spacer()
-                }
+            VStack {
+                bankButton
+
+                Spacer()
+
+                realEstateButton
+
+                Spacer()
+
+                CasinoIcon()
+                    .onTapGesture {
+                        showCasinoView = true
+                    }
+
+                Spacer()
             }
         }
         .background(Color("mainWhite"))
@@ -104,7 +111,8 @@ extension AssetsMain {
 
 struct AssetsMain_Previews: PreviewProvider {
     static var previews: some View {
-        AssetsMain(showAssetsMain: .constant(false), showBankDetail: .constant(false), showRealEstateDetail: .constant(false))
+        AssetsMain(showAssetsMain: .constant(false), showBankDetail: .constant(false), showRealEstateDetail: .constant(false), showCasinoView: .constant(false))
             .environmentObject(Player())
+            .environmentObject(UserPreferences())
     }
 }

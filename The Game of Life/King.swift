@@ -13,7 +13,8 @@
 //find . -path ./Pods -prune -o -name '*.swift' -print0 ! -name '/Pods' | xargs -0 wc -l
 //3106 total :
 //jan 18: 4730 total (ALMOST AT 5k!!! 5 fucking k lets fucking go bro)
-//feb 9 : 7103 total  ez. ez shit.
+//feb 9: 7103 total  ez. ez shit.
+//march 7: 8922 we gna finish this withing 20k lines fasho  ! !
 
 
 
@@ -132,9 +133,7 @@ class Player: ObservableObject {
 
     }
 
-
     //MARK: PARENT STUFF
-
     @AppStorage("mom_name") var mom_name = ""
     @AppStorage("mom_age") var mom_age = 0
     @AppStorage("mom_emoji") var mom_emoji = ""
@@ -156,39 +155,154 @@ class Player: ObservableObject {
     
 
     //MARK: ROMANCE STUFF
-    @AppStorage("partner1_name") var partner1_name = ""
-    @AppStorage("partner1_emoji") var partner1_emoji = ""
-    @AppStorage("partner1_age") var partner1_age = 0
+    @AppStorage("partner1_name")   var partner1_name   = ""
+    @AppStorage("partner1_emoji")  var partner1_emoji  = ""
+    @AppStorage("partner1_age")    var partner1_age    = 0
     @AppStorage("partner1_status") var partner1_status = 0 {
         didSet {
             limitStatus()
         }
     }
-    @AppStorage("partner2_name") var partner2_name = ""
-    @AppStorage("partner2_age") var partner2_age = 0
-    @AppStorage("partner2_emoji") var partner2_emoji = ""
+    @AppStorage("partner2_name")   var partner2_name   = ""
+    @AppStorage("partner2_age")    var partner2_age    = 0
+    @AppStorage("partner2_emoji")  var partner2_emoji  = ""
     @AppStorage("partner2_status") var partner2_status = 0 {
         didSet {
             limitStatus()
         }
     }
-    @AppStorage("partner3_name") var partner3_name = ""
-    @AppStorage("partner3_age") var partner3_age = 0
-    @AppStorage("partner3_emoji") var partner3_emoji = ""
+    @AppStorage("partner3_name")   var partner3_name   = ""
+    @AppStorage("partner3_age")    var partner3_age    = 0
+    @AppStorage("partner3_emoji")  var partner3_emoji  = ""
     @AppStorage("partner3_status") var partner3_status = 0 {
         didSet {
             limitStatus()
         }
     }
-    @AppStorage("partner4_name") var partner4_name = ""
-    @AppStorage("partner4_age") var partner4_age = 0
-    @AppStorage("partner4_emoji") var partner4_emoji = ""
+    @AppStorage("partner4_name")   var partner4_name   = ""
+    @AppStorage("partner4_age")    var partner4_age    = 0
+    @AppStorage("partner4_emoji")  var partner4_emoji  = ""
     @AppStorage("partner4_status") var partner4_status = 0 {
         didSet {
             limitStatus()
         }
     }
-
+    
+    
+    
+    
+    //MARK: PETS STUFF
+    @AppStorage("pet_types") var pet_types = "" {
+        didSet {
+            if pet_types != "" && pet_types.last != " " {
+                pet_types += " "
+            }
+        }
+    }
+    @AppStorage("pet_names") var pet_names = "" {
+        didSet {
+            if pet_names != "" && pet_names.last != " " {
+                pet_names += " "
+            }
+        }
+    }
+    @AppStorage("pet_status") var pet_status = "" {
+        didSet {
+            if pet_status != "" && pet_status.last != " " {
+                pet_status = pet_status + " "
+            }
+        }
+    }
+    @AppStorage("pet_ids") var pet_ids = "" {
+        didSet {
+            if pet_ids != "" && pet_ids.last != " "{
+                pet_ids += " "
+                updateAllPets()
+            }
+        }
+    }
+    
+    func getPetEmoji(index: Int) -> String {
+        switch pet_types.split(separator: " ")[index] {
+            case "Cat":
+                return "🐱"
+            case "Dog":
+                return "🐶"
+            case "Fish":
+                return "🐠"
+            case "Bird":
+                return "🐦"
+            case "Rabbit":
+                return "🐰"
+            case "Turtle":
+                return "🐢"
+            case "Alligator":
+                return "🐊"
+            case "Monkey":
+                return "🦧"
+            default:
+                return "error!!"
+        }
+    }
+    func getPetHapMod(index: Int) -> Int {
+        switch pet_types.split(separator: " ")[index] {
+            case "Cat":
+                return Pet.Cat.hapMod
+            case "Dog":
+                return Pet.Dog.hapMod
+            case "Fish":
+                return Pet.Fish.hapMod
+            case "Bird":
+                return Pet.Bird.hapMod
+            case "Rabbit":
+                return Pet.Rabbit.hapMod
+            case "Turtle":
+                return Pet.Turtle.hapMod
+            case "Alligator":
+                return Pet.Alligator.hapMod
+            case "Monkey":
+                return Pet.Monkey.hapMod
+            default:
+                return -1
+        }
+    }
+    func getPetCost(index: Int) -> Int {
+        switch pet_types.split(separator: " ")[index] {
+            case "Cat":
+                return Pet.Cat.cost
+            case "Dog":
+                return Pet.Dog.cost
+            case "Fish":
+                return Pet.Fish.cost
+            case "Bird":
+                return Pet.Bird.cost
+            case "Rabbit":
+                return Pet.Rabbit.cost
+            case "Turtle":
+                return Pet.Turtle.cost
+            case "Alligator":
+                return Pet.Alligator.cost
+            case "Monkey":
+                return Pet.Monkey.cost
+            default:
+                return -1
+        }
+    }
+    
+    func updateAllPets() {
+        for i in 0...(pet_types.split(separator: " ").count - 1) {
+            allPets.append(Pet(emoji: getPetEmoji(index: i),
+                               animal: String(pet_types.split(separator: " ")[i]),
+                               hapMod: getPetHapMod(index: i),
+                               cost: getPetCost(index: i),
+                               name: String(pet_names.split(separator: " ")[i]),
+                               status: Int(pet_status.split(separator: " ")[i])!,
+                               id: String(pet_ids.split(separator: " ")[i])
+                              )
+            )
+        }
+    }
+    var allPets: [Pet] = []
 
 
 
@@ -209,16 +323,42 @@ class Player: ObservableObject {
             life_bank_balance += Int(Double(life_bank_balance) * (Double(interest_percent) / 100.0))
             loan_debt += Int(Double(loan_debt) * (Double(interest_percent) / 100.0))
             addSHIncome()
+            
+            for pet in pet_names.split(separator: " ") {
+                switch pet {
+                    case Pet.Dog.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                        //pet_status.split(separator)
+                    case Pet.Cat.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Fish.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Bird.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Turtle.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Rabbit.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Alligator.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    case Pet.Monkey.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                    default:
+                        print("Error in pet thing in age update in king")
+                }
+            }
+            
+            eat()
         }
     }
 
     var yearsOld: Int {months_old / 12}
 
     @AppStorage("age_stage") var age_stage: AgeStages = .baby
-
-
     @AppStorage("on_new_life") var on_new_life: Bool = true
 
+    //MARK: STATUS STUFF
+    
     @AppStorage("life_health_status") var life_health_status = 100 {
         didSet {
             limitStatus()
@@ -234,8 +374,13 @@ class Player: ObservableObject {
             limitStatus()
         }
     }
-
-
+    
+    @AppStorage("vegan_meals")      var vegan_meals:      Int = 0
+    @AppStorage("vegetarian_meals") var vegetarian_meals: Int = 0
+    @AppStorage("average_meals")    var average_meals:    Int = 0
+    @AppStorage("america_meals")    var america_meals:    Int = 0
+    @AppStorage("fastfood_meals")   var fastfood_meals:   Int = 0
+    @AppStorage("poop_meals")       var poop_meals:       Int = 0
 
 
 
@@ -629,12 +774,39 @@ class Player: ObservableObject {
         //TODO: CATCH EXCEDING MAX INT ERROR
         return life_cash_balance + life_bank_balance
     }
-
-
-
     
     
 
+    private func eat() -> Void {
+        if vegan_meals > 0 {
+            vegan_meals -= 1
+            life_energy_status += Meal.veganMeal.energyMod!
+            life_health_status += Meal.veganMeal.healthMod!
+        } else if vegetarian_meals > 0 {
+            vegetarian_meals -= 1
+            life_energy_status += Meal.vegetarianMeal.energyMod!
+            life_health_status += Meal.vegetarianMeal.healthMod!
+        } else if average_meals > 0 {
+            average_meals -= 1
+            life_energy_status += Meal.averageMeal.energyMod!
+            life_health_status += Meal.averageMeal.healthMod!
+        } else if america_meals > 0 {
+            america_meals -= 1
+            life_energy_status += Meal.americaMeal.energyMod!
+            life_health_status += Meal.americaMeal.healthMod!
+        } else if fastfood_meals > 0 {
+            fastfood_meals -= 1
+            life_energy_status += Meal.fastfoodMeal.energyMod!
+            life_health_status += Meal.fastfoodMeal.healthMod!
+        } else if poop_meals > 0 {
+            poop_meals -= 1
+            life_energy_status += Meal.poopMeal.energyMod!
+            life_health_status += Meal.poopMeal.healthMod!
+        }
+    }
+
+    
+    
 
     enum Genders: CaseIterable {
         case male, female
@@ -789,6 +961,7 @@ class Player: ObservableObject {
     func resetFinances() {
         life_cash_balance = 0
         life_bank_balance = 0
+        loan_debt = 0
         
         life_job_title = nil
         life_job_salary = nil
@@ -803,6 +976,16 @@ class Player: ObservableObject {
         begun_sh = false
         direct_deposit_on = false
     }
+    
+    func resetAssets() -> Void {
+        vegan_meals = 0
+        vegetarian_meals = 0
+        average_meals = 0
+        america_meals = 0
+        fastfood_meals = 0
+        poop_meals = 0
+    }
+    
     func checkAgeStage() {
         if yearsOld < 5 {
             age_stage = .baby

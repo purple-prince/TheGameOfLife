@@ -240,6 +240,10 @@ struct SHDetail: View {
     func workButton() -> some View {
         var returnView = Button(action: {
             if buttonClickable {
+                
+                player.life_energy_status -= 15
+                player.life_happiness_status -= 2
+                
                 withAnimation(.linear) {
                     switch mode {
                         case .youtube:
