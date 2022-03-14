@@ -112,6 +112,7 @@ extension FriendsDetail {
         
         if false {
             print("")
+            print("test change")
         }
         
         @State var accepted: Bool?
