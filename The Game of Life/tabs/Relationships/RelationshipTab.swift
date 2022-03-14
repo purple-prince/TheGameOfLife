@@ -46,8 +46,8 @@ struct RelationshipTab: View {
                 RomanceView(showMainView: $showMainView, showRomanceView: $showRomanceView)
             //}  else if showChildrenView {
 //
-//            } else if showFriendsView {
-//                FriendsView()
+            } else if showFriendsView {
+                FriendsView(showFriendsViewEx: $showFriendsView, showRelationshipTab: $showMainView)
             } else if showPetsView {
                 PetsView(showRelationshipTab: $showMainView, showPetsView: $showPetsView)
 //            } else {

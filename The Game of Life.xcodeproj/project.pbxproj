@@ -244,16 +244,16 @@
 		D85C8551268EFE1E00FA7C9A /* The Game of Life */ = {
 			isa = PBXGroup;
 			children = (
+				D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */,
+				D85C855B268EFE2100FA7C9A /* Info.plist */,
+				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
 				D8C4305A272E4D8800F18F89 /* King.swift */,
 				D8399AAA2754730200A5DFB3 /* LottoFile.swift */,
+				D85C8558268EFE2100FA7C9A /* Preview Content */,
 				D839529227714A9B002444D9 /* Beginning */,
 				D881F66F26C4B6AA0054D033 /* tabs */,
 				D82EE05E273635FB00C6498F /* other */,
-				D85C8558268EFE2100FA7C9A /* Preview Content */,
 				D83913A7279CAE6400B8B468 /* Shop */,
-				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
-				D85C855B268EFE2100FA7C9A /* Info.plist */,
-				D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */,
 			);
 			path = "The Game of Life";
 			sourceTree = "<group>";

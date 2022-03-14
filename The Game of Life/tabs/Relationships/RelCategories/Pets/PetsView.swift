@@ -21,7 +21,7 @@ struct PetsView: View {
             Color("mainWhite").ignoresSafeArea()
             
             if showFindPetView {
-                FindPetView()
+                FindPetView(showFindPetView: $showFindPetView)
             } else {
                 VStack {
                     Banner
@@ -36,10 +36,10 @@ struct PetsView: View {
                     } else {
                         ScrollView {
                             
-                            Text(String(player.pet_names == ""))
+                            GetPetsButton
                                                         
                             ForEach(player.allPets, id: \.self) { pet in
-                                Text(pet.emoji)
+                                PetRow(pet)
                             }
                         }
                     }
@@ -53,6 +53,56 @@ struct PetsView: View {
 }
 
 extension PetsView {
+    
+    func PetRow(_ pet: Pet) -> some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text(pet.emoji)
+                    .font(Font.system(size: 56))
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text(pet.name)
+                            .fontWeight(.light)
+                            .font(.title)
+                        
+                        Spacer()
+                        
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .stroke(Color.green, lineWidth: 2)
+                                .frame(width: 100, height: 12)
+                            Capsule()
+                                .foregroundColor(Color.green)
+                                .frame(width: 60, height: 12)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                    HStack(spacing: 16) {
+                        
+                        Text("+ \(pet.hapMod) 😀")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                        
+                        Text("- " + formatNum(pet.cost) + "/mo")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                    }
+                }
+                
+                Spacer()
+            }
+            
+            Capsule()
+                .frame(width: .infinity, height: 1)
+                .padding(.horizontal)
+                .padding(.top, 8)
+        }
+        .padding(.horizontal, 4)
+    }
+    
     var Banner: some View {
         VStack /*current job*/ {
             Spacer()
@@ -65,13 +115,6 @@ extension PetsView {
                 .font(.title3)
             
             Spacer()
-        }
-        //REMOVE THIS
-        .onTapGesture {
-            player.pet_names = ""
-            player.pet_status = ""
-            player.pet_types = ""
-            player.pet_ids = ""
         }
         .frame(maxWidth: .infinity, maxHeight: 150)
         .background(Color("mainDarkGray"))
@@ -99,29 +142,33 @@ extension PetsView {
         }
     }
     
+    var GetPetsButton: some View {
+        Button(action: {
+            showFindPetView = true
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                Text("Adopt a pet")
+                    .fontWeight(.medium)
+                    .font(.title)
+                    .foregroundColor(.green)
+            }
+            .foregroundColor(Color("mainDarkGray"))
+            .aspectRatio(6/2, contentMode: .fit)
+            .frame(width: .infinity)
+            .padding(.horizontal)
+            .padding(.horizontal)
+            .padding(.horizontal)
+        })
+    }
+    
     var NoPetsView: some View {
         VStack {
             Text("No Pets 😿")
                 .fontWeight(.light)
                 .font(.largeTitle)
             
-            Button(action: {
-                showFindPetView = true
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                    Text("Adopt a pet")
-                        .fontWeight(.medium)
-                        .font(.title)
-                        .foregroundColor(.green)
-                }
-                .foregroundColor(Color("mainDarkGray"))
-                .aspectRatio(6/2, contentMode: .fit)
-                .frame(width: .infinity)
-                .padding(.horizontal)
-                .padding(.horizontal)
-                .padding(.horizontal)
-            })
+            GetPetsButton
         }
     }
 }
@@ -129,6 +176,8 @@ extension PetsView {
 struct FindPetView: View {
     
     @EnvironmentObject var player: Player
+    
+    @Binding var showFindPetView: Bool
     
     let petNames = [
         "Abigail" , "Ace",     "Adam",    "Addie",    "Admiral", "Aggie", "Aires", "Aj", "Ajax", "Aldo",
@@ -182,64 +231,81 @@ struct FindPetView: View {
                     }
                 }
             }
+            
+            BackButton
+        }
+    }
+    
+    var BackButton: some View {
+        VStack {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .font(Font.system(size: 32))
+                    .foregroundColor(.red)
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        showFindPetView = false
+                    }
+                Spacer()
+            }
+            
+            Spacer()
         }
     }
     
     func CategoryRow(_ pet: Pet) -> some View {
-        
         return VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 0) {
-                Text(pet.emoji)
-                    .font(Font.system(size: 60))
-                    .padding(.trailing, 12)
-                
-                VStack(alignment: .leading) {
-                    Text(pet.animal)
-                        .fontWeight(.thin)
-                        .lineLimit(1)
-                        .font(Font.system(size: 32))
+                HStack(spacing: 0) {
+                    Text(pet.emoji)
+                        .font(Font.system(size: 60))
+                        .padding(.trailing, 12)
                     
-                    HStack(spacing: 16) {
+                    VStack(alignment: .leading) {
+                        Text(pet.animal)
+                            .fontWeight(.thin)
+                            .lineLimit(1)
+                            .font(Font.system(size: 32))
                         
-                        Text("+ \(pet.hapMod) 😀")
-                            .foregroundColor(.green)
-                        
-                        Text("- " + formatNum(pet.cost) + "/mo")
-                            .foregroundColor(.red)
+                        HStack(spacing: 16) {
+                            
+                            Text("+ \(pet.hapMod) 😀")
+                                .foregroundColor(.green)
+                            
+                            Text("- " + formatNum(pet.cost) + "/mo")
+                                .foregroundColor(.red)
+                        }
                     }
+                             
+                    Spacer()
+                    
+                    Button(action: {
+                        player.pet_types += pet.animal
+                        player.pet_status += "100"
+                        player.pet_names += petNames.randomElement()!
+                        player.pet_ids += UUID().uuidString
+                    }, label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundColor(Color("mainDarkGray"))
+                            
+                            Text("Adopt")
+                                .foregroundColor(.white)
+                        }
+                        .aspectRatio(3/2, contentMode: .fit)
+                        .frame(width: 74)
+                    })
+                    
+                    
                 }
-                         
-                Spacer()
-                
-                Button(action: {
-                    player.pet_types += pet.animal
-                    player.pet_status += "100"
-                    player.pet_names += petNames.randomElement()!
-                    player.pet_ids += UUID().uuidString
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundColor(Color("mainDarkGray"))
-                        
-                        Text("Adopt")
-                            .foregroundColor(.white)                        
-                    }
-                    .aspectRatio(3/2, contentMode: .fit)
-                    .frame(width: 74)
-                })
+                .padding(8)
                 
                 
+                Capsule()
+                    .foregroundColor(Color("mainDarkGray"))
+                    .frame(width: .infinity, height: 1)
+                    .padding(.horizontal)
+                    .padding(.horizontal)
             }
-            .padding(8)
-            
-            
-            Capsule()
-                .foregroundColor(Color("mainDarkGray"))
-                .frame(width: .infinity, height: 1)
-                .padding(.horizontal)
-                .padding(.horizontal)
-        }
-        
     }
 }
 
@@ -286,7 +352,7 @@ struct PetsView_Previews: PreviewProvider {
         PetsView(showRelationshipTab: .constant(false), showPetsView: .constant(true))
             .environmentObject(Player())
         
-//        FindPetView()
+//        FindPetView(showFindPetView: .constant(false))
 //            .environmentObject(Player())
     }
 }

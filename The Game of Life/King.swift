@@ -189,6 +189,23 @@ class Player: ObservableObject {
     }
     
     
+    //MARK: FRIENDS STUFF
+    @AppStorage("friend1_name")   var friend1_name   = ""
+    @AppStorage("friend1_emoji")  var friend1_emoji  = ""
+    @AppStorage("friend1_age")    var friend1_age    = 0
+    @AppStorage("friend1_status") var friend1_status = 0
+    @AppStorage("friend2_name")   var friend2_name   = ""
+    @AppStorage("friend2_emoji")  var friend2_emoji  = ""
+    @AppStorage("friend2_age")    var friend2_age    = 0
+    @AppStorage("friend2_status") var friend2_status = 0
+    @AppStorage("friend3_name")   var friend3_name   = ""
+    @AppStorage("friend3_emoji")  var friend3_emoji  = ""
+    @AppStorage("friend3_age")    var friend3_age    = 0
+    @AppStorage("friend3_status") var friend3_status = 0
+    @AppStorage("friend4_name")   var friend4_name   = ""
+    @AppStorage("friend4_emoji")  var friend4_emoji  = ""
+    @AppStorage("friend4_age")    var friend4_age    = 0
+    @AppStorage("friend4_status") var friend4_status = 0
     
     
     //MARK: PETS STUFF
@@ -238,7 +255,7 @@ class Player: ObservableObject {
                 return "🐢"
             case "Alligator":
                 return "🐊"
-            case "Monkey":
+            case "Monke":
                 return "🦧"
             default:
                 return "error!!"
@@ -290,6 +307,9 @@ class Player: ObservableObject {
     }
     
     func updateAllPets() {
+        
+        allPets.removeAll()
+        
         for i in 0...(pet_types.split(separator: " ").count - 1) {
             allPets.append(Pet(emoji: getPetEmoji(index: i),
                                animal: String(pet_types.split(separator: " ")[i]),
@@ -324,25 +344,33 @@ class Player: ObservableObject {
             loan_debt += Int(Double(loan_debt) * (Double(interest_percent) / 100.0))
             addSHIncome()
             
-            for pet in pet_names.split(separator: " ") {
+            for pet in pet_types.split(separator: " ") {
                 switch pet {
                     case Pet.Dog.animal:
                         life_cash_balance -= Pet.Dog.cost
+                        life_happiness_status += Pet.Dog.hapMod
                         //pet_status.split(separator)
                     case Pet.Cat.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Cat.cost
+                        life_happiness_status += Pet.Cat.hapMod
                     case Pet.Fish.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Fish.cost
+                        life_happiness_status += Pet.Fish.hapMod
                     case Pet.Bird.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Bird.cost
+                        life_happiness_status += Pet.Bird.hapMod
                     case Pet.Turtle.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Turtle.cost
+                        life_happiness_status += Pet.Turtle.hapMod
                     case Pet.Rabbit.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Rabbit.cost
+                        life_happiness_status += Pet.Rabbit.hapMod
                     case Pet.Alligator.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Alligator.cost
+                        life_happiness_status += Pet.Alligator.hapMod
                     case Pet.Monkey.animal:
-                        life_cash_balance -= Pet.Dog.cost
+                        life_cash_balance -= Pet.Monkey.cost
+                        life_happiness_status += Pet.Monkey.hapMod
                     default:
                         print("Error in pet thing in age update in king")
                 }
@@ -835,6 +863,7 @@ class Player: ObservableObject {
         resetSelf()
         resetRomance(.all)
         resetAge()
+        resetPets()
     }
 
     func resetAge() {
@@ -876,70 +905,36 @@ class Player: ObservableObject {
         emoji = babyEmojis.randomElement()!
     }
     func limitStatus() {
-
-        if partner4_status < 0 {
-            partner4_status = 0
-        }
-        if partner4_status > 100 {
-            partner4_status = 100
-        }
-
-        if partner3_status < 0 {
-            partner3_status = 0
-        }
-        if partner3_status > 100 {
-            partner3_status = 100
-        }
-
-        if partner2_status < 0 {
-            partner2_status = 0
-        }
-        if partner2_status > 100 {
-            partner2_status = 100
-        }
-
-        if partner1_status < 0 {
-            partner1_status = 0
-        }
-        if partner1_status > 100 {
-            partner1_status = 100
-        }
-
-        if life_health_status < 0 {
-            on_new_life = true
-        }
-        if life_health_status > 100 {
-            life_health_status = 100
-        }
-
-        if life_happiness_status < 0 {
-            on_new_life = true
-        }
-        if life_happiness_status > 100 {
-            life_happiness_status = 100
-        }
-
-        if life_energy_status < 0 {
-            on_new_life = true
-        }
-        if life_energy_status > 100 {
-            life_energy_status = 100
-        }
-
-        if mom_status > 100 {
-            mom_status = 100
-        }
-        if dad_status > 100 {
-            dad_status = 100
-        }
-
-        if mom_status < 0 {
-            mom_status = 0
-        }
-
-        if dad_status < 0 {
-            dad_status = 0
-        }
+        
+        if friend1_status < 0          { partner1_status = 0         }
+        if friend1_status > 100        { friend1_status = 100        }
+        if friend2_status < 0          { partner2_status = 0         }
+        if friend2_status > 100        { friend2_status = 100        }
+        if friend3_status < 0          { partner3_status = 0         }
+        if friend3_status > 100        { friend3_status = 100        }
+        if friend4_status < 0          { partner4_status = 0         }
+        if friend4_status > 100        { friend4_status = 100        }
+        
+        if partner4_status < 0         { partner4_status = 0         }
+        if partner4_status > 100       { partner4_status = 100       }
+        if partner3_status < 0         { partner3_status = 0         }
+        if partner3_status > 100       { partner3_status = 100       }
+        if partner2_status < 0         { partner2_status = 0         }
+        if partner2_status > 100       { partner2_status = 100       }
+        if partner1_status < 0         { partner1_status = 0         }
+        if partner1_status > 100       { partner1_status = 100       }
+        
+        if life_health_status < 0      { on_new_life = true          }
+        if life_health_status > 100    { life_health_status = 100    }
+        if life_happiness_status < 0   { on_new_life = true          }
+        if life_happiness_status > 100 { life_happiness_status = 100 }
+        if life_energy_status < 0      { on_new_life = true          }
+        if life_energy_status > 100    { life_energy_status = 100    }
+        
+        if mom_status > 100            { mom_status = 100            }
+        if dad_status > 100            { dad_status = 100            }
+        if mom_status < 0              { mom_status = 0              }
+        if dad_status < 0              { dad_status = 0              }
 
     }
     func resetParents() {
@@ -976,7 +971,13 @@ class Player: ObservableObject {
         begun_sh = false
         direct_deposit_on = false
     }
-    
+    func resetPets() {
+        pet_ids = ""
+        pet_types = ""
+        pet_names = ""
+        pet_status = ""
+        allPets.removeAll()
+    }
     func resetAssets() -> Void {
         vegan_meals = 0
         vegetarian_meals = 0
@@ -985,7 +986,6 @@ class Player: ObservableObject {
         fastfood_meals = 0
         poop_meals = 0
     }
-    
     func checkAgeStage() {
         if yearsOld < 5 {
             age_stage = .baby
@@ -1000,5 +1000,28 @@ class Player: ObservableObject {
             emoji = gender == "male" ? grandpaEmojis.randomElement()! : grandmaEmojis.randomElement()!
         }
     }
-
+    public func resetFriend(friend: FriendsView.Friends) -> Void {
+        switch friend {
+            case .friend1:
+                friend1_name = ""
+                friend1_emoji = ""
+                friend1_status = 0
+                friend1_age = 0
+            case .friend2:
+                friend2_name = ""
+                friend2_emoji = ""
+                friend2_status = 0
+                friend2_age = 0
+            case .friend3:
+                friend3_name = ""
+                friend3_emoji = ""
+                friend3_status = 0
+                friend3_age = 0
+            case .friend4:
+                friend4_name = ""
+                friend4_emoji = ""
+                friend4_status = 0
+                friend4_age = 0
+        }
+    }
 }
