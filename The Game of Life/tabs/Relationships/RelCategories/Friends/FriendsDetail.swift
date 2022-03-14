@@ -107,8 +107,12 @@ extension FriendsDetail {
             return 4
         }
     }
-    
+    //test change
     func AskOutView() -> some View {
+        
+        if false {
+            print("")
+        }
         
         @State var accepted: Bool?
         
