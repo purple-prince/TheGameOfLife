@@ -76,6 +76,7 @@ struct FriendsView: View {
             
             if showFriendsDetail {
                 FriendsDetail(showFriendsDetail: $showFriendsDetail, showFriendsView: $showFriendsView, friend: selectedFriend!)
+                //OtherFriendsDetail(showFriendsDetail: $showFriendsDetail, showFriendsView: $showFriendsView, friend: selectedFriend!)
             }
         }
     }

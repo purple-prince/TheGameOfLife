@@ -25,6 +25,13 @@ struct FriendsDetail: View {
     
     @State var showFindFriends: Bool = false
     @State var showAskOutPopup: Bool = true//false
+    @State var accepted: Bool?
+    
+    //var firstName: String { String(friendInfo()["name"]!.split(separator: " ")[1]) }
+    
+    var firstName: String {
+        String(friendInfo()["name"]!.split(separator: " ")[0])
+    }
     
     var friend: FriendsView.Friends
     var numFriends: Int {
@@ -76,6 +83,7 @@ struct FriendsDetail: View {
 
                 }
                 .padding(12)
+                .disabled(showFindFriends || showAskOutPopup ? true : false)
 
                 Spacer()
             }.blur(radius: showFindFriends || showAskOutPopup ? 50 : 0)
@@ -110,12 +118,7 @@ extension FriendsDetail {
     //test change
     func AskOutView() -> some View {
         
-        if false {
-            print("")
-            print("test change")
-        }
         
-        @State var accepted: Bool?
         
         var posRejectionMessages = [
             "Ew.",
@@ -123,15 +126,44 @@ extension FriendsDetail {
             "I'm already seeing someone, sorry",
             "I'm gay, sorry",
             "You wish",
-            "You look so absolutely stupid right now. You really thought YOU could date ME? You're 5"
+            "You look so absolutely stupid right now. You really thought YOU could date ME? You're a 3/10. You smell like you haven't showered in months. I'm filing a restraining order you creep."
         ]
-        var firstName = String(friendInfo()["name"]!.split(separator: " ")[1])
+        
         
         return ZStack {
+            
+            Color.clear.ignoresSafeArea()
+            
             RoundedRectangle(cornerRadius: 24)
                 .foregroundColor(Color("mainDarkGray"))
             
-            if accepted == nil {
+            if let accepted = accepted {
+                if accepted {
+                    Text("\(firstName) said yes!")
+                        .fontWeight(.light)
+                        .padding()
+                        .foregroundColor(.white)
+                        .font(.title)
+                } else {
+                    
+                    VStack(spacing: 0) {
+                        Text("\(firstName) said: ")
+                        
+                        Spacer()
+                        
+                        Text("\"" + posRejectionMessages.randomElement()! + "\"")
+                            .fontWeight(.light)
+                            .lineSpacing(4.0)
+                            .minimumScaleFactor(0.5)
+                            .multilineTextAlignment(.leading)
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .font(.title)
+                }
+            } else {
                 VStack {
                     Text("Ask \(firstName) out?")
                         .font(.title)
@@ -147,7 +179,6 @@ extension FriendsDetail {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 12)
                                     .aspectRatio(3/2, contentMode: .fit)
-                                    //.foregroundColor(.red)
                                     .foregroundColor(Color(red: 180/255, green: 0.0, blue: 0.0))
                                 Text("No")
                                     .font(Font.system(size: 26))
@@ -166,26 +197,26 @@ extension FriendsDetail {
                                 switch numPartners {
                                     case 0:
                                         player.partner1_emoji = friendInfo()["emoji"]!
-                                        player.partner1_age = Int(friendInfo()["emoji"]!)!
+                                        player.partner1_age = Int(friendInfo()["age"]!)!
                                         player.partner1_status = Int(friendInfo()["status"]!)!
                                         player.partner1_name = friendInfo()["name"]!
                                     case 1:
                                         player.partner2_emoji = friendInfo()["emoji"]!
-                                        player.partner2_age = Int(friendInfo()["emoji"]!)!
+                                        player.partner2_age = Int(friendInfo()["age"]!)!
                                         player.partner2_status = Int(friendInfo()["status"]!)!
                                         player.partner2_name = friendInfo()["name"]!
                                     case 2:
                                         player.partner3_emoji = friendInfo()["emoji"]!
-                                        player.partner3_age = Int(friendInfo()["emoji"]!)!
+                                        player.partner3_age = Int(friendInfo()["age"]!)!
                                         player.partner3_status = Int(friendInfo()["status"]!)!
                                         player.partner3_name = friendInfo()["name"]!
                                     default:
                                         player.partner4_emoji = friendInfo()["emoji"]!
-                                        player.partner4_age = Int(friendInfo()["emoji"]!)!
+                                        player.partner4_age = Int(friendInfo()["age"]!)!
                                         player.partner4_status = Int(friendInfo()["status"]!)!
                                         player.partner4_name = friendInfo()["name"]!
                                 }
-                                
+
                                 player.resetFriend(friend: friend)
                                 
                             } else {
@@ -205,12 +236,7 @@ extension FriendsDetail {
                             .padding()
                     }
                 }
-            } else if accepted! {
-                Text("\(firstName) said yes!")
-            } else {
-                Text("\(firstName) said: \n \(posRejectionMessages.randomElement()!)")
             }
-
             VStack {
                 HStack {
                     Spacer()
@@ -220,6 +246,10 @@ extension FriendsDetail {
                         .padding()
                         .onTapGesture {
                             showAskOutPopup = false
+                            if accepted != nil {
+                                showFriendsView = true
+                                showFriendsDetail = false
+                            }
                         }
                 }
                 Spacer()
@@ -239,28 +269,28 @@ extension FriendsDetail {
         switch friend {
             case .friend1:
                 return [
-                    "name" : player.friend1_name,
+                    "name" : (player.friend1_name == "" ? "test worked" : player.friend1_name),
                     "emoji" : player.friend1_emoji,
                     "age" : String(player.friend1_age),
                     "status" : String(player.friend1_status)
                 ]
             case .friend2:
                 return [
-                    "name" : player.friend2_name,
+                    "name" : (player.friend2_name == "" ? "test worked" : player.friend2_name),
                     "emoji" : player.friend2_emoji,
                     "age" : String(player.friend2_age),
                     "status" : String(player.friend2_status)
                 ]
             case .friend3:
                 return [
-                    "name" : player.friend3_name,
+                    "name" : (player.friend3_name == "" ? "test worked" : player.friend3_name),
                     "emoji" : player.friend3_emoji,
                     "age" : String(player.friend3_age),
                     "status" : String(player.friend3_status)
                 ]
             case .friend4:
                 return [
-                    "name" : player.friend4_name,
+                    "name" : (player.friend4_name == "" ? "test worked" : player.friend4_name),
                     "emoji" : player.friend4_emoji,
                     "age" : String(player.friend4_age),
                     "status" : String(player.friend4_status)

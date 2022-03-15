@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A357326CA0A12008CB95F /* LovedOnes.swift */; };
+		D80F220827DFD1A900809086 /* OtherFriendsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */; };
 		D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816042D27BEE0AB00EFE47D /* CrashPopup.swift */; };
 		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
 		D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8AA277C18C8009D7992 /* OptionsView.swift */; };
@@ -88,6 +89,7 @@
 /* Begin PBXFileReference section */
 		D805C588277E74F500536992 /* Swift-BigInt-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Swift-BigInt-master"; path = "../../../../../Downloads/Swift-BigInt-master"; sourceTree = "<group>"; };
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
+		D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFriendsDetail.swift; sourceTree = "<group>"; };
 		D816042D27BEE0AB00EFE47D /* CrashPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashPopup.swift; sourceTree = "<group>"; };
 		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 			children = (
 				D8C43053272DD60700F18F89 /* FriendsView.swift */,
 				D83913B0279CFA1F00B8B468 /* FriendsDetail.swift */,
+				D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
+				D80F220827DFD1A900809086 /* OtherFriendsDetail.swift in Sources */,
 				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
 				D85EE27D27C8372400171320 /* LoanPopup.swift in Sources */,
 				D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */,
