@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//comment
+//comment///
 struct Lotto {
     var chances = 100_000
     var totalAttempts = 0
