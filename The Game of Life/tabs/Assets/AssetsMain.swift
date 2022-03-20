@@ -13,6 +13,7 @@ struct AssetsMain: View {
     @Binding var showBankDetail: Bool
     @Binding var showRealEstateDetail: Bool
     @Binding var showCasinoView: Bool
+    @Binding var showStockMarketView: Bool
     @State var poop: Bool = false
     @EnvironmentObject var player: Player
     
@@ -32,6 +33,10 @@ struct AssetsMain: View {
                         showCasinoView = true
                     }
 
+                Spacer()
+                
+                StockMarketIcon().onTapGesture { showStockMarketView = true}
+                
                 Spacer()
             }
         }
@@ -111,7 +116,7 @@ extension AssetsMain {
 
 struct AssetsMain_Previews: PreviewProvider {
     static var previews: some View {
-        AssetsMain(showAssetsMain: .constant(false), showBankDetail: .constant(false), showRealEstateDetail: .constant(false), showCasinoView: .constant(false))
+        AssetsMain(showAssetsMain: .constant(false), showBankDetail: .constant(false), showRealEstateDetail: .constant(false), showCasinoView: .constant(false), showStockMarketView: .constant(false))
             .environmentObject(Player())
             .environmentObject(UserPreferences())
     }

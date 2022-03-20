@@ -9,31 +9,67 @@ import SwiftUI
 
 struct ExperimentView: View {
     
-    @State var x: CGFloat = 0
+    //@StateObject var test: Testt = Testt()
+    @State var clicked: Bool = false
+    @ObservedObject var counter: TestClass = TestClass()
     
     var body: some View {
-        Circle()
-            .frame(width: 100, height: 100)
-            .offset(x: x)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        x = value.translation.width
-                    }
-                    .onEnded { value in
-                        
-                        withAnimation(.linear) {
-                        
-                            if value.translation.width < -100 {
-                                x = -250
-                            } else {
-                                x = 0
-                            }
-                        }
-                    }
-            )
+//        VStack {
+//            myShape(t: test)
+//                .stroke(Color.red, lineWidth: 40)
+//            Button(action: {test.count += 1}, label: {Text("Click me")})
+//        }
+        
+        ZStack {
+            MyShape(counter: counter)
+                .stroke(Color.red, lineWidth: 200)
+                .onTapGesture {
+                    counter.count += 1
+                }
+            Text(String(counter.count))
+        }
+        
     }
 }
+
+class TestClass: ObservableObject {
+    @Published var count = 0
+}
+
+struct MyShape: Shape {
+    
+    var counter: TestClass
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: 100 + (counter.count * 10), y: 100 + (counter.count * 10)))
+        return path
+    }
+}
+
+//class Testt: ObservableObject {
+//    var count: Int = 0 {
+//        didSet {
+//            value += 3
+//        }
+//    }
+//    @Published var value: Int = 0
+//
+//}
+
+//struct myShape: Shape {
+//
+//    var t: Testt
+//
+//    func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        path.move(to: CGPoint(x: rect.midX - 100, y: rect.midY - CGFloat(t.value)))
+//        path.addLine(to: CGPoint(x: rect.midX + 100, y: rect.midY - CGFloat(t.value)))
+//
+//        return path
+//    }
+//}
 
 
 struct ExperimentView_Previews: PreviewProvider {

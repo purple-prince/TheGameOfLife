@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "MovingNumbersView",
+        "repositoryURL": "https://github.com/aunnnn/MovingNumbersView.git",
+        "state": {
+          "branch": null,
+          "revision": "89dd0f149de0b89831f0bc5f6bc36daddf9a9eeb",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "swift-numerics",
         "repositoryURL": "https://github.com/apple/swift-numerics.git",
         "state": {

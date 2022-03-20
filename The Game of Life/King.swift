@@ -130,7 +130,21 @@ class Player: ObservableObject {
         self.dad_age = Int.random(in: 25...45)
         self.dad_emoji = dadEmojis.randomElement()!
         self.dad_status = 100
+        
+        setStockPoints()
 
+    }
+    
+    func setStockPoints() {
+        stock_points = ""
+        var num = 50
+        var variation = 25
+        for _ in 0...9 {
+            //num = Int.random(in: (num - 50 > 0 ? num - 50 : 0)...(num + 50 < 100 ? num + 50 : 100))
+            num = Int.random(in: (num - variation > 0 ? num - variation : 0)...(num + variation < 100 ? num + variation : 100))
+            stock_points += String(num)
+            stock_points += " "
+        }
     }
 
     //MARK: PARENT STUFF
@@ -377,6 +391,18 @@ class Player: ObservableObject {
             }
             
             eat()
+            
+            var tempPoints = stockPoints
+            for i in 0...tempPoints.count - 2 {
+                tempPoints[i] = tempPoints[i + 1]
+            }
+            tempPoints[tempPoints.count - 1] = Int.random(in: 0...100)
+            stock_points = ""
+            for elem in tempPoints {
+                stock_points += String(elem)
+                stock_points += " "
+            }
+            
         }
     }
 
@@ -419,14 +445,22 @@ class Player: ObservableObject {
     @AppStorage("life_bank_balance") var life_bank_balance = 0
     @AppStorage("direct_deposit_on") var direct_deposit_on = false
     @AppStorage("interest_percent") var interest_percent: Double = 2.5
-    
     @AppStorage("loan_debt") var loan_debt: Int = 0
     @AppStorage("loan_taken") var loan_taken: Int = 0
-    
     @AppStorage("life_job_title") var life_job_title: String?
     @AppStorage("life_job_salary") var life_job_salary: Int?
-    
     @AppStorage("total_lottery_winnings") var total_lottery_winnings = 0
+    
+    @AppStorage("stock_points") var stock_points = ""
+    var stockPoints: [Int] {
+        var arr: [Int] = []
+        let stockPointsArray = stock_points.split(separator: " ")
+        for i in stockPointsArray {
+            arr.append(Int(i) ?? 0)
+        }
+        return arr
+    }
+    
 
 
     @AppStorage("begun_sh") var begun_sh = false
@@ -810,7 +844,7 @@ class Player: ObservableObject {
             vegan_meals -= 1
             life_energy_status += Meal.veganMeal.energyMod!
             life_health_status += Meal.veganMeal.healthMod!
-        } else if vegetarian_meals > 0 {
+        }else if vegetarian_meals > 0 {
             vegetarian_meals -= 1
             life_energy_status += Meal.vegetarianMeal.energyMod!
             life_health_status += Meal.vegetarianMeal.healthMod!
@@ -864,8 +898,20 @@ class Player: ObservableObject {
         resetRomance(.all)
         resetAge()
         resetPets()
+        resetFriend(friend: .friend1)
+        resetFriend(friend: .friend2)
+        resetFriend(friend: .friend3)
+        resetFriend(friend: .friend4)
     }
 
+    func resetMeals() {
+        vegan_meals = 0
+        vegetarian_meals = 0
+        average_meals = 0
+        america_meals = 0
+        fastfood_meals = 0
+        poop_meals = 0
+    }
     func resetAge() {
         months_old = 0
         age_stage = .baby
@@ -970,6 +1016,12 @@ class Player: ObservableObject {
         sh_artist=0.0;sh_artist_progress=0.0;sh_artist_count=0;sh_artist_income=0;sh_artist_time=0
         begun_sh = false
         direct_deposit_on = false
+        
+        stock_points = ""
+        for _ in 0...9 {
+            stock_points += String(Int.random(in: 0...100))
+            stock_points += " "
+        }
     }
     func resetPets() {
         pet_ids = ""

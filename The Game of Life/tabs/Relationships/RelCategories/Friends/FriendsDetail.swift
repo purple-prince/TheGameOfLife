@@ -24,7 +24,7 @@ struct FriendsDetail: View {
     @Binding var showFriendsView: Bool
     
     @State var showFindFriends: Bool = false
-    @State var showAskOutPopup: Bool = true//false
+    @State var showAskOutPopup: Bool = false
     @State var accepted: Bool?
     
     //var firstName: String { String(friendInfo()["name"]!.split(separator: " ")[1]) }
@@ -59,9 +59,9 @@ struct FriendsDetail: View {
                 VStack(spacing: 12) {
                     HStack(spacing: 12) {
 
-                        ActionButton(friendStatusEffect: 10, healthMod: 0, hapMod: 10, energyMod: -2, cost: 0, description: "Visit park")
+                        ActionButton(friendStatusEffect: 10, healthMod: 0, hapMod: 10, energyMod: 0, cost: 50, description: "Get drinks")
 
-                        ActionButton(friendStatusEffect: 20, healthMod: 0, hapMod: 20, energyMod: 0, cost: 50, description: "Get dinner")
+                        ActionButton(friendStatusEffect: 20, healthMod: 0, hapMod: 20, energyMod: -2, cost: 0, description: "Go to a party")
 
                     }
 
@@ -86,7 +86,8 @@ struct FriendsDetail: View {
                 .disabled(showFindFriends || showAskOutPopup ? true : false)
 
                 Spacer()
-            }.blur(radius: showFindFriends || showAskOutPopup ? 50 : 0)
+            }
+            .blur(radius: showFindFriends || showAskOutPopup ? 50 : 0)
 
             if showFindFriends {
                 FindFriendsPopup(showFindFriends: $showFindFriends, numFriends: numFriends)

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A357326CA0A12008CB95F /* LovedOnes.swift */; };
-		D80F220827DFD1A900809086 /* OtherFriendsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */; };
 		D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816042D27BEE0AB00EFE47D /* CrashPopup.swift */; };
 		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
 		D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8AA277C18C8009D7992 /* OptionsView.swift */; };
@@ -33,6 +32,7 @@
 		D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FA27855C68008606B2 /* DepositPopup.swift */; };
 		D860E0FD27856085008606B2 /* WithdrawPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FC27856085008606B2 /* WithdrawPopup.swift */; };
 		D860E0FF27858258008606B2 /* CasinoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860E0FE27858258008606B2 /* CasinoView.swift */; };
+		D868D8DE27E1289500483C1B /* StockMarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D868D8DD27E1289500483C1B /* StockMarketView.swift */; };
 		D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8702311278E454D00C4E4FD /* NewLifeView.swift */; };
 		D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B824278CFFD400E3DC70 /* LearnTab.swift */; };
 		D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B826278E371F00E3DC70 /* LearnMain.swift */; };
@@ -63,6 +63,7 @@
 		D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43053272DD60700F18F89 /* FriendsView.swift */; };
 		D8C43056272DD61600F18F89 /* PetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C43055272DD61600F18F89 /* PetsView.swift */; };
 		D8C4305B272E4D8800F18F89 /* King.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4305A272E4D8800F18F89 /* King.swift */; };
+		D8DF2D8627E0E49E0077516D /* MovingNumbersView in Frameworks */ = {isa = PBXBuildFile; productRef = D8DF2D8527E0E49E0077516D /* MovingNumbersView */; };
 		D8E384DF27894568008E0DE8 /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = D8E384DE27894568008E0DE8 /* RealModule */; };
 		D8F18C3627375A2200A527B6 /* ParentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F18C3527375A2200A527B6 /* ParentsView.swift */; };
 		D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC918626E58B690065D3CF /* SHView.swift */; };
@@ -89,7 +90,6 @@
 /* Begin PBXFileReference section */
 		D805C588277E74F500536992 /* Swift-BigInt-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Swift-BigInt-master"; path = "../../../../../Downloads/Swift-BigInt-master"; sourceTree = "<group>"; };
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
-		D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFriendsDetail.swift; sourceTree = "<group>"; };
 		D816042D27BEE0AB00EFE47D /* CrashPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashPopup.swift; sourceTree = "<group>"; };
 		D823B8A227784D71009D7992 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D823B8AA277C18C8009D7992 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
@@ -120,6 +120,7 @@
 		D860E0FA27855C68008606B2 /* DepositPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositPopup.swift; sourceTree = "<group>"; };
 		D860E0FC27856085008606B2 /* WithdrawPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPopup.swift; sourceTree = "<group>"; };
 		D860E0FE27858258008606B2 /* CasinoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasinoView.swift; sourceTree = "<group>"; };
+		D868D8DD27E1289500483C1B /* StockMarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockMarketView.swift; sourceTree = "<group>"; };
 		D8702311278E454D00C4E4FD /* NewLifeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLifeView.swift; sourceTree = "<group>"; };
 		D878B824278CFFD400E3DC70 /* LearnTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTab.swift; sourceTree = "<group>"; };
 		D878B826278E371F00E3DC70 /* LearnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMain.swift; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8DF2D8627E0E49E0077516D /* MovingNumbersView in Frameworks */,
 				D8E384DF27894568008E0DE8 /* RealModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +198,7 @@
 		D82F48E326D60888007E8F74 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D868D8DC27E1286D00483C1B /* Stocks */,
 				D860E0F927855C36008606B2 /* Bank */,
 				D881F66D26C4B6800054D033 /* AssetTab.swift */,
 				D8AC08DE27653415000A432E /* RealEstateDetail.swift */,
@@ -295,6 +298,14 @@
 				D85EE27C27C8372400171320 /* LoanPopup.swift */,
 			);
 			path = Bank;
+			sourceTree = "<group>";
+		};
+		D868D8DC27E1286D00483C1B /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+				D868D8DD27E1289500483C1B /* StockMarketView.swift */,
+			);
+			path = Stocks;
 			sourceTree = "<group>";
 		};
 		D878B823278CFFC500E3DC70 /* Learn */ = {
@@ -471,7 +482,6 @@
 			children = (
 				D8C43053272DD60700F18F89 /* FriendsView.swift */,
 				D83913B0279CFA1F00B8B468 /* FriendsDetail.swift */,
-				D80F220727DFD1A900809086 /* OtherFriendsDetail.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -513,6 +523,7 @@
 			name = "The Game of Life";
 			packageProductDependencies = (
 				D8E384DE27894568008E0DE8 /* RealModule */,
+				D8DF2D8527E0E49E0077516D /* MovingNumbersView */,
 			);
 			productName = "The Game of Life";
 			productReference = D85C854F268EFE1E00FA7C9A /* The Game of Life.app */;
@@ -587,6 +598,7 @@
 			mainGroup = D85C8546268EFE1E00FA7C9A;
 			packageReferences = (
 				D8E384DD27894568008E0DE8 /* XCRemoteSwiftPackageReference "swift-numerics" */,
+				D8DF2D8427E0E49E0077516D /* XCRemoteSwiftPackageReference "MovingNumbersView" */,
 			);
 			productRefGroup = D85C8550268EFE1E00FA7C9A /* Products */;
 			projectDirPath = "";
@@ -640,6 +652,7 @@
 				D87EC4DD26D4613900E21428 /* OccupationStructs.swift in Sources */,
 				D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */,
 				D83913AF279CFA0D00B8B468 /* ChildrenDetail.swift in Sources */,
+				D868D8DE27E1289500483C1B /* StockMarketView.swift in Sources */,
 				D8BF707F278648E700B4444B /* LotteryPopup.swift in Sources */,
 				D881F67526C4B7C60054D033 /* HomeTab.swift in Sources */,
 				D881F66E26C4B6800054D033 /* AssetTab.swift in Sources */,
@@ -656,7 +669,6 @@
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
-				D80F220827DFD1A900809086 /* OtherFriendsDetail.swift in Sources */,
 				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
 				D85EE27D27C8372400171320 /* LoanPopup.swift in Sources */,
 				D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */,
@@ -1002,6 +1014,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D8DF2D8427E0E49E0077516D /* XCRemoteSwiftPackageReference "MovingNumbersView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aunnnn/MovingNumbersView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		D8E384DD27894568008E0DE8 /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-numerics.git";
@@ -1013,6 +1033,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D8DF2D8527E0E49E0077516D /* MovingNumbersView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8DF2D8427E0E49E0077516D /* XCRemoteSwiftPackageReference "MovingNumbersView" */;
+			productName = MovingNumbersView;
+		};
 		D8E384DE27894568008E0DE8 /* RealModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8E384DD27894568008E0DE8 /* XCRemoteSwiftPackageReference "swift-numerics" */;

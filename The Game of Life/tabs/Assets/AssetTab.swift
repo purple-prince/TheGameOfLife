@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct AssetTab: View {
-    
-    @State var showAssetsMain = true
-    @State var showBankDetail = false
-    @State var showRealEstateDetail = false
-    @State var showCasinoView = false
+
+    @State var showAssetsMain:       Bool = true
+    @State var showBankDetail:       Bool = false
+    @State var showRealEstateDetail: Bool = false
+    @State var showCasinoView:       Bool = false
+    @State var showStockMarketView:  Bool = false
 
     //BLEND MODE FOR BLUR OVERLAP
 
@@ -20,19 +21,31 @@ struct AssetTab: View {
         
         ZStack {
             if showAssetsMain {
-                AssetsMain(showAssetsMain: $showAssetsMain, showBankDetail: $showBankDetail, showRealEstateDetail: $showRealEstateDetail, showCasinoView: $showCasinoView)
+                AssetsMain(showAssetsMain: $showAssetsMain, showBankDetail: $showBankDetail, showRealEstateDetail: $showRealEstateDetail, showCasinoView: $showCasinoView, showStockMarketView: $showStockMarketView)
             }
             if showBankDetail {
                 BankDetail(showAssetsMain: $showAssetsMain, showBankDetail: $showBankDetail)
                     .transition(.scale)
+                    .frame(width: .infinity, height: .infinity)
+                    .background(Color("mainWhite"))
             }
             if showRealEstateDetail {
                 RealEstateDetail(showAssetsMain: $showAssetsMain, showRealEstateDetail: $showRealEstateDetail)
                     .transition(.scale)
+                    .frame(width: .infinity, height: .infinity)
+                    .background(Color("mainWhite"))
             }
             if showCasinoView {
                 CasinoView(showCasinoView: $showCasinoView, showMainView: $showAssetsMain)
+                    .frame(width: .infinity, height: .infinity)
+                    .background(Color("mainWhite"))
             }
+            if showStockMarketView {
+                StockMarketView()
+                    .frame(width: .infinity, height: .infinity)
+                    .background(Color("mainWhite"))
+            }
+            
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MovingNumbersView
 
 struct AgeButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -30,6 +31,14 @@ struct MainView: View {
     @State var showWorkView: Bool = false
     @State var showAssetsView: Bool = false
     @State var showShop: Bool = false
+    
+//    var moneyView: some View {
+//        MovingNumbersView(number: Double(player.life_cash_balance * 5), numberOfDecimalPlaces: 0) { num in
+//            Text(num)
+//                .font(.title3)
+//                .foregroundColor(.white)
+//        }
+//    }
     
     var body: some View {
         
@@ -105,6 +114,47 @@ struct MainView: View {
         
         return returnView
     }
+    
+    
+    /*
+     for each char in the formatNum array
+        if the char is a num
+            do this
+        if not
+            do this
+     */
+    
+    
+    
+    /*func moneyView() -> some View {
+        
+        var _elems = Array(formatNum(player.life_cash_balance))
+        var nums: [Int] = []
+        var letters: [String] = ["", "", ""]
+        let posNums: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        for elem in _elems {
+            if posNums.contains(String(elem)) {
+                nums.append(Int(String(elem))!)
+            } else {
+                letters[letters.firstIndex(of: "")!] = String(elem)
+            }
+        }
+        
+        return HStack(spacing: 0) {
+            Text(letters[0])
+            
+            MovingNumbersView(number: Double(nums[2]), numberOfDecimalPlaces: 0, elementBuilder: { num in
+                Text(num)
+                    .foregroundColor(.white)
+            })
+            
+            Text(letters[1])
+            
+            
+            
+            Text(letters[2])
+        }
+    }*/
     
     var topInfo: some View {
         HStack {
