@@ -47,11 +47,11 @@ struct OccupationTab: View {
             } else if showSHView {
                 SHView()
             } else if showSportsView {
-                
+                SportsView(showOccupationMain: $showOccupationMain, pShowSportsView: $showSportsView)
             } else if showRealEstateView {
-                
-            } else {
-                
+                RealEstateView(showOccupationMain: $showOccupationMain, pshowRealEstateView: $showRealEstateView)
+            } else if showCrimeView {
+                CrimeView(showOccupationMain: $showOccupationMain, pShowCrimeView: $showCrimeView)
             }
         }
     }

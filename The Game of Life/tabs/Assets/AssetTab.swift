@@ -41,7 +41,7 @@ struct AssetTab: View {
                     .background(Color("mainWhite"))
             }
             if showStockMarketView {
-                StockMarketView()
+                StockMarketView(showStockMarketView: $showStockMarketView, showAssetsMain: $showAssetsMain)
                     .frame(width: .infinity, height: .infinity)
                     .background(Color("mainWhite"))
             }

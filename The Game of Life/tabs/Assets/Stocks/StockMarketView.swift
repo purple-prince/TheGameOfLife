@@ -9,45 +9,219 @@ import SwiftUI
 
 struct StockMarketView: View {
     
+    @Binding var showStockMarketView: Bool
+    @Binding var showAssetsMain: Bool
+    
     @EnvironmentObject var player: Player
+    @EnvironmentObject var userPreferences: UserPreferences
+    
+    @State var buyMode: Bool = true
+    @State var amountPercent: Double = 0.0
+    @State var increaseAmountTextSize: Bool = false
+    
+    var canBuy: Bool { player.life_cash_balance > 0 }
+    var canSell: Bool { player.stock_position_value > 0 }
+    
     
     var body: some View {
-        StockMarketViewGraph()
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                
+                Title("Stonk Market")
+                
+                Text("Current Holdings: " + formatNum(player.stock_position_value))
+                    .font(.title2)
+                    .padding(.top, 8)
+                                
+                StockMarketViewGraph()
+                    .padding()
+                
+                Buttons
+                
+                if (buyMode && canBuy) || (!buyMode && canSell) {
+                    AmountPicker
+                }
+                
+                Spacer()
+                
+                if (buyMode && canBuy) || (!buyMode && canSell) {
+                    ConfirmButton
+                } else if !buyMode && !canSell {
+                    Text("Stockless... 🤔")
+                        .font(.title)
+                }
+                Spacer()
+                
+            }
+            
+            BackButton
+        }
+    }
+    
+//    struct ConfirmStockButtonStyle: ButtonStyle {
+//        func makeBody(configuration: Configuration) -> some View {
+//            configuration.label
+//                .offset(x: 0, y: configuration.isPressed ? 1 : 0)
+//        }
+//    }
+    
+    var ConfirmButton: some View {
+        Button(action: {
+            if buyMode {
+                player.life_cash_balance -= Int(amountPercent)
+                player.stock_position_value += Int(amountPercent)
+            } else {
+                player.life_cash_balance += Int(amountPercent)
+                player.stock_position_value -= Int(amountPercent)
+            }
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(userPreferences.appColor, lineWidth: 2)
+                    .aspectRatio(7/4, contentMode: .fit)
+                    .frame(width: 112)
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color("mainDarkGray"))
+                    .aspectRatio(7/4, contentMode: .fit)
+                    .frame(width: 110)
+                    .shadow(color: .gray, radius: 10, x: 0, y: 10)
+                Text("Confirm")
+                    .foregroundColor(.white)
+                    .font(.title2)
+            }
+        })
+            //.buttonStyle(ConfirmStockButtonStyle())
+    }
+    
+    var BackButton: some View {
+        VStack {
+            HStack {
+                Image(systemName: "chevron.backward")
+                    .foregroundColor(.red)
+                    .font(Font.system(size: 32))
+                    .onTapGesture {
+                        showStockMarketView = false
+                        showAssetsMain = true
+                    }
+                
+                Spacer()
+            }
+            Spacer()
+        }
+        .padding()
+    }
+    
+    /*
+     RoundedRectangle(cornerRadius: 12)
+         .foregroundColor(Color("mainDarkGray"))
+         .aspectRatio(5/3, contentMode: .fit)
+         .frame(width: 100)
+     */
+    
+    var Buttons: some View {
+        
+        ZStack {
+            
+            HStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color("mainDarkGray"))
+                    .aspectRatio(7/4, contentMode: .fit)
+                    .frame(width: 110)
+                    .offset(x: buyMode ? -65 : 65)//-65
+            }
+            
+            
+            HStack(spacing: 0) {
+                Rectangle()
+                    .foregroundColor(Color("mainDarkGray"))
+                    .onTapGesture {
+                        if !buyMode {
+                            withAnimation(.spring()) {
+                                buyMode = true
+                            }
+                        }
+                    }
+                Rectangle()
+                    .foregroundColor(.white)
+                Rectangle()
+                    .foregroundColor(Color("mainDarkGray"))
+                    .onTapGesture {
+                        if buyMode {
+                            withAnimation(.spring()) {
+                                buyMode = false
+                            }
+                        }
+                    }
+            }
+            .offset(x: buyMode ? -60 : 60)
+            .frame(width: 300, height: 64)
+            .mask(
+                HStack(spacing: 88) {
+                    Text("Buy")
+                        .fontWeight(.light)
+                    Text("Sell")
+                        .fontWeight(.light)
+                }
+                .font(.title)
+            )
+        }
+    }
+    
+    
+    var step: Double {
+        if buyMode {
+            return Double(player.life_cash_balance / 100)
+        } else {
+            return Double(player.stock_position_value / 100)
+        }
+    }
+    
+    var AmountPicker: some View {
+        VStack {
+            Slider(
+                value: $amountPercent,
+                in: 0.0...(Double(buyMode ? player.life_cash_balance : player.stock_position_value)),
+                   step: step,
+                onEditingChanged: {_ in increaseAmountTextSize.toggle()}
+            )
+            
+                .padding()
+            
+            VStack {
+                Spacer()
+                Text(formatNum(Int(amountPercent)))
+                    .font(Font.system(size: increaseAmountTextSize ? 32 : 28))
+                Spacer()
+            }
+            .frame(width: .infinity, height: 40)
+        }
     }
 }
 
 //screen: 844 tall, 390 wide
-
 //with padding: 731 tall, 358
 
 struct StockMarketViewGraph: View {
     
     @EnvironmentObject var player: Player
     
-    var ggrr: Graph {Graph(player: player)}
+    var ggrr: Graph {Graph(stockPoints: player.stockPoints)}
         
     var body: some View {
         ZStack {
+            GraphAxisBg()
+                .stroke(Color.blue, lineWidth: 2)
             
+            GraphLinesBg(numLines: 12)
+                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
             
-            
-            Color.white.ignoresSafeArea()
-            
-            ZStack {
-                GraphAxisBg()
-                    .stroke(Color.blue, lineWidth: 2)
-                
-                GraphLinesBg(numLines: 12)
-                    .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-                
-                ggrr//Graph(player: player)
-                    .stroke(Color.green, lineWidth: 4)
-                
-                Button(action: {player.months_old += 1}, label: {Text(String(player.stockPoints[0]) + String(player.stockPoints[1]))})
-            }
-            .padding()
-            .aspectRatio(1, contentMode: .fit)
+            ggrr//Graph(player: player)
+                .stroke(Color.green, lineWidth: 4)
         }
+        .padding()
+        .aspectRatio(6/5, contentMode: .fit)
     }
     
     struct GraphLinesBg: Shape {
@@ -86,22 +260,22 @@ struct StockMarketViewGraph: View {
     struct Graph: Shape {
                 
         //let points: [CGPoint]
-        let player: Player
+        let stockPoints: [Int]
         
         func path(in rect: CGRect) -> Path {
             
             let widthSegment = rect.width / 9
             
-            var pt1:  CGPoint { CGPoint(x: rect.minX, y: rect.height / 100 * CGFloat(player.stockPoints[0])) }
-            var pt2:  CGPoint { CGPoint(x: CGFloat(widthSegment)   ,  y: rect.height / 100 * CGFloat(player.stockPoints[1])) }
-            var pt3:  CGPoint { CGPoint(x: CGFloat(widthSegment * 2), y: rect.height / 100 * CGFloat(player.stockPoints[2])) }
-            var pt4:  CGPoint { CGPoint(x: CGFloat(widthSegment * 3), y: rect.height / 100 * CGFloat(player.stockPoints[3])) }
-            var pt5:  CGPoint { CGPoint(x: CGFloat(widthSegment * 4), y: rect.height / 100 * CGFloat(player.stockPoints[4])) }
-            var pt6:  CGPoint { CGPoint(x: CGFloat(widthSegment * 5), y: rect.height / 100 * CGFloat(player.stockPoints[5])) }
-            var pt7:  CGPoint { CGPoint(x: CGFloat(widthSegment * 6), y: rect.height / 100 * CGFloat(player.stockPoints[6])) }
-            var pt8:  CGPoint { CGPoint(x: CGFloat(widthSegment * 7), y: rect.height / 100 * CGFloat(player.stockPoints[7])) }
-            var pt9:  CGPoint { CGPoint(x: CGFloat(widthSegment * 8), y: rect.height / 100 * CGFloat(player.stockPoints[8])) }
-            var pt10: CGPoint { CGPoint(x: CGFloat(widthSegment * 9), y: rect.height / 100 * CGFloat(player.stockPoints[9])) }
+        var pt1:  CGPoint { CGPoint(x: rect.minX, y: rect.height / 100 * CGFloat(stockPoints[0])) }
+        var pt2:  CGPoint { CGPoint(x: CGFloat(widthSegment)   ,  y: rect.height - (rect.height / 100 * CGFloat(stockPoints[1]))) }
+        var pt3:  CGPoint { CGPoint(x: CGFloat(widthSegment * 2), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[2]))) }
+        var pt4:  CGPoint { CGPoint(x: CGFloat(widthSegment * 3), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[3]))) }
+        var pt5:  CGPoint { CGPoint(x: CGFloat(widthSegment * 4), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[4]))) }
+        var pt6:  CGPoint { CGPoint(x: CGFloat(widthSegment * 5), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[5]))) }
+        var pt7:  CGPoint { CGPoint(x: CGFloat(widthSegment * 6), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[6]))) }
+        var pt8:  CGPoint { CGPoint(x: CGFloat(widthSegment * 7), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[7]))) }
+        var pt9:  CGPoint { CGPoint(x: CGFloat(widthSegment * 8), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[8]))) }
+        var pt10: CGPoint { CGPoint(x: CGFloat(widthSegment * 9), y: rect.height - (rect.height / 100 * CGFloat(stockPoints[9]))) }
             
             var path = Path()
             path.move(to: pt1)
@@ -230,8 +404,9 @@ struct StockMarketIcon: View {
 
 struct StockMarketView_Previews: PreviewProvider {
     static var previews: some View {
-        StockMarketView()
+        StockMarketView(showStockMarketView: .constant(true), showAssetsMain: .constant(false))
             .environmentObject(Player())
+            .environmentObject(UserPreferences())
         //StockMarketIcon()
     }
 }

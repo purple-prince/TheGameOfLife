@@ -1,20 +1,20 @@
 //
-//  Education.swift
+//  AchievementView.swift
 //  The Game of Life
 //
-//  Created by Charlie Reeder on 1/11/22.
+//  Created by Charlie Reeder on 4/16/22.
 //
 
 import SwiftUI
 
-struct Education: View {
+struct AchievementView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct Education_Previews: PreviewProvider {
+struct AchievementView_Previews: PreviewProvider {
     static var previews: some View {
-        Education()
+        AchievementView()
     }
 }

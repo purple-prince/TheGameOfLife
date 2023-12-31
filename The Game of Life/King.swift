@@ -113,6 +113,72 @@ class UserPreferences: ObservableObject {
 }
 
 class Player: ObservableObject {
+    
+    @AppStorage("months_old") var months_old: Int = 0 {
+        didSet {
+            if (months_old / 12) / 100 >= 1 {
+                on_new_life = true
+                reset()
+            }
+            
+            life_bank_balance += Int(Double(life_bank_balance) * (Double(interest_percent) / 100.0))
+            loan_debt += Int(Double(loan_debt) * (Double(interest_percent) / 100.0))
+            addSHIncome()
+            
+            for pet in pet_types.split(separator: " ") {
+                switch pet {
+                    case Pet.Dog.animal:
+                        life_cash_balance -= Pet.Dog.cost
+                        life_happiness_status += Pet.Dog.hapMod
+                        //pet_status.split(separator)
+                    case Pet.Cat.animal:
+                        life_cash_balance -= Pet.Cat.cost
+                        life_happiness_status += Pet.Cat.hapMod
+                    case Pet.Fish.animal:
+                        life_cash_balance -= Pet.Fish.cost
+                        life_happiness_status += Pet.Fish.hapMod
+                    case Pet.Bird.animal:
+                        life_cash_balance -= Pet.Bird.cost
+                        life_happiness_status += Pet.Bird.hapMod
+                    case Pet.Turtle.animal:
+                        life_cash_balance -= Pet.Turtle.cost
+                        life_happiness_status += Pet.Turtle.hapMod
+                    case Pet.Rabbit.animal:
+                        life_cash_balance -= Pet.Rabbit.cost
+                        life_happiness_status += Pet.Rabbit.hapMod
+                    case Pet.Alligator.animal:
+                        life_cash_balance -= Pet.Alligator.cost
+                        life_happiness_status += Pet.Alligator.hapMod
+                    case Pet.Monkey.animal:
+                        life_cash_balance -= Pet.Monkey.cost
+                        life_happiness_status += Pet.Monkey.hapMod
+                    default:
+                        print("Error in pet thing in age update in king")
+                }
+            }
+            
+            eat()
+            
+            var tempPoints = stockPoints
+            for i in 0...tempPoints.count - 2 {
+                tempPoints[i] = tempPoints[i + 1]
+            }
+            //adds new point to stock points/graph/data
+            let newPoint = Int.random(in: (tempPoints[tempPoints.count - 1] - stock_variation + stock_success_motifier...tempPoints[tempPoints.count - 1] + stock_variation))
+            //add calculate thing
+            stock_position_value += Int(Double(stock_position_value) * (Double((newPoint - tempPoints[tempPoints.count - 1])) / 100.0))
+            
+            
+            
+            tempPoints[tempPoints.count - 1] = (newPoint < 0 ? 0 : newPoint > 100 ? 100 : newPoint)//newPoint
+            stock_points = ""
+            for elem in tempPoints {
+                stock_points += String(elem)
+                stock_points += " "
+            }
+            
+        }
+    }
 
     init() {
 
@@ -138,10 +204,8 @@ class Player: ObservableObject {
     func setStockPoints() {
         stock_points = ""
         var num = 50
-        var variation = 25
         for _ in 0...9 {
-            //num = Int.random(in: (num - 50 > 0 ? num - 50 : 0)...(num + 50 < 100 ? num + 50 : 100))
-            num = Int.random(in: (num - variation > 0 ? num - variation : 0)...(num + variation < 100 ? num + variation : 100))
+            num = Int.random(in: (num - stock_variation > 0 ? num - stock_variation : 0)...(num + stock_variation < 100 ? num + stock_variation : 100))
             stock_points += String(num)
             stock_points += " "
         }
@@ -338,8 +402,50 @@ class Player: ObservableObject {
     }
     var allPets: [Pet] = []
 
+    
+    //MARK: CRIME STUFF
+    
+    //NOTE: each should remain below 1,000:
+    // i.e. 300/1000 exp = 30% chance of success
+    
+    @AppStorage("theft_exp")    var theft_exp:    Int = 1
+    @AppStorage("violence_exp") var violence_exp: Int = 1
+    @AppStorage("drugs_exp")    var drugs_exp:    Int = 1
+    @AppStorage("hacking_exp")  var hacking_exp:  Int = 1
+    
+    func increaseCrimeExp(crime: CrimeActionClass.CrimeAction) -> Void {
+        switch crime.mode {
+            case .violence:
+                violence_exp += crime.xp
+            case .theft:
+                theft_exp += crime.xp
+            case .drugs:
+                drugs_exp += crime.xp
+            case .hacking:
+                hacking_exp += crime.xp
+        }
+    }
+    
+    func commit(crime: CrimeActionClass.CrimeAction) -> Bool {
+        let diffDivisor = 5 - crime.difficulty
+        let random = Int.random(in: 0...100)
+        var toCompareToRandom: Double { Double(getRisk(mode: crime.mode)) * ((4.0 + Double(diffDivisor)) / 8.0) - 1.0 }
+            
+        return  toCompareToRandom >= Double(random)
+    }
 
-
+    func getRisk(mode: CrimeView.CrimeModes) -> Double {
+        switch mode {
+            case .violence:
+                return 0.1 * Double(violence_exp)
+            case .drugs:
+                return 0.1 * Double(drugs_exp)
+            case .theft:
+                return 0.1 * Double(theft_exp)
+            case .hacking:
+                return 0.1 * Double(hacking_exp)
+        }
+    }
 
 
     //MARK: PLAYER STUFF
@@ -347,64 +453,6 @@ class Player: ObservableObject {
     @AppStorage("name") var name: String = ""
     @AppStorage("emoji") var emoji: String = ""
     @AppStorage("gender") var gender: String = ""
-    @AppStorage("months_old") var months_old: Int = 0 {
-        didSet {
-            if (months_old / 12) / 100 >= 1 {
-                on_new_life = true
-                reset()
-            }
-            
-            life_bank_balance += Int(Double(life_bank_balance) * (Double(interest_percent) / 100.0))
-            loan_debt += Int(Double(loan_debt) * (Double(interest_percent) / 100.0))
-            addSHIncome()
-            
-            for pet in pet_types.split(separator: " ") {
-                switch pet {
-                    case Pet.Dog.animal:
-                        life_cash_balance -= Pet.Dog.cost
-                        life_happiness_status += Pet.Dog.hapMod
-                        //pet_status.split(separator)
-                    case Pet.Cat.animal:
-                        life_cash_balance -= Pet.Cat.cost
-                        life_happiness_status += Pet.Cat.hapMod
-                    case Pet.Fish.animal:
-                        life_cash_balance -= Pet.Fish.cost
-                        life_happiness_status += Pet.Fish.hapMod
-                    case Pet.Bird.animal:
-                        life_cash_balance -= Pet.Bird.cost
-                        life_happiness_status += Pet.Bird.hapMod
-                    case Pet.Turtle.animal:
-                        life_cash_balance -= Pet.Turtle.cost
-                        life_happiness_status += Pet.Turtle.hapMod
-                    case Pet.Rabbit.animal:
-                        life_cash_balance -= Pet.Rabbit.cost
-                        life_happiness_status += Pet.Rabbit.hapMod
-                    case Pet.Alligator.animal:
-                        life_cash_balance -= Pet.Alligator.cost
-                        life_happiness_status += Pet.Alligator.hapMod
-                    case Pet.Monkey.animal:
-                        life_cash_balance -= Pet.Monkey.cost
-                        life_happiness_status += Pet.Monkey.hapMod
-                    default:
-                        print("Error in pet thing in age update in king")
-                }
-            }
-            
-            eat()
-            
-            var tempPoints = stockPoints
-            for i in 0...tempPoints.count - 2 {
-                tempPoints[i] = tempPoints[i + 1]
-            }
-            tempPoints[tempPoints.count - 1] = Int.random(in: 0...100)
-            stock_points = ""
-            for elem in tempPoints {
-                stock_points += String(elem)
-                stock_points += " "
-            }
-            
-        }
-    }
 
     var yearsOld: Int {months_old / 12}
 
@@ -435,8 +483,57 @@ class Player: ObservableObject {
     @AppStorage("america_meals")    var america_meals:    Int = 0
     @AppStorage("fastfood_meals")   var fastfood_meals:   Int = 0
     @AppStorage("poop_meals")       var poop_meals:       Int = 0
-
-
+    
+    
+    
+    //MARK: EDUCATION STUFF
+    
+    @AppStorage("education_elementary_progress") var education_elementary_progress: Int = 0 {
+        didSet {
+            if education_elementary_progress > Education.ElementarySchool.monthsRequired {
+                education_elementary_progress = Education.ElementarySchool.monthsRequired
+            }
+        }
+        willSet {
+            if education_elementary_progress < Education.ElementarySchool.monthsRequired {
+                life_cash_balance -= Education.ElementarySchool.monthlyCost
+                months_old += 1
+            }
+        }
+    }
+    @AppStorage("education_highSchool_progress") var education_highSchool_progress: Int = 0{
+        didSet {
+            if education_highSchool_progress > Education.HighSchool.monthsRequired {
+                education_highSchool_progress = Education.HighSchool.monthsRequired
+            }
+        }
+        willSet {
+            if education_highSchool_progress < Education.HighSchool.monthsRequired {
+                life_cash_balance -= Education.HighSchool.monthlyCost
+                months_old += 1
+            }
+        }
+    }
+    @AppStorage("education_college_progress") var education_college_progress: Int = 0{
+        didSet {
+            if education_college_progress > Education.CollegeSchool.monthsRequired {
+                education_college_progress = Education.CollegeSchool.monthsRequired
+            }
+        }
+        willSet {
+            if education_college_progress < Education.CollegeSchool.monthsRequired {
+                life_cash_balance -= Education.CollegeSchool.monthlyCost
+                months_old += 1
+            }
+        }
+    }
+    
+    func resetEducation() {
+        education_elementary_progress = 0
+        education_highSchool_progress = 0
+        education_college_progress = 0
+    }
+    
 
 
     //MARK: MONEY STUFF
@@ -460,6 +557,11 @@ class Player: ObservableObject {
         }
         return arr
     }
+    @AppStorage("stock_variation") var stock_variation = 25
+    @AppStorage("stock_success_modifier") var stock_success_motifier = 3
+    
+    @AppStorage("stock_price") var stock_price: Int = 0
+    @AppStorage("stock_position_value") var stock_position_value = 0
     
 
 
@@ -836,8 +938,6 @@ class Player: ObservableObject {
         //TODO: CATCH EXCEDING MAX INT ERROR
         return life_cash_balance + life_bank_balance
     }
-    
-    
 
     private func eat() -> Void {
         if vegan_meals > 0 {
@@ -866,7 +966,6 @@ class Player: ObservableObject {
             life_health_status += Meal.poopMeal.healthMod!
         }
     }
-
     
     
 
@@ -882,7 +981,6 @@ class Player: ObservableObject {
         case health
     }
 
-
     enum AgeStages: String {
         case baby = "baby"
         case kid = "kid"
@@ -891,7 +989,6 @@ class Player: ObservableObject {
     }
 
     func reset() {
-        resetFinances()
         resetEmotions()
         resetParents()
         resetSelf()
@@ -902,8 +999,15 @@ class Player: ObservableObject {
         resetFriend(friend: .friend2)
         resetFriend(friend: .friend3)
         resetFriend(friend: .friend4)
+        resetEducation()
+        resetFinances()
+        
+        violence_exp = 1
+        theft_exp = 1
+        drugs_exp = 1
+        hacking_exp = 1
     }
-
+    
     func resetMeals() {
         vegan_meals = 0
         vegetarian_meals = 0
@@ -1017,11 +1121,9 @@ class Player: ObservableObject {
         begun_sh = false
         direct_deposit_on = false
         
-        stock_points = ""
-        for _ in 0...9 {
-            stock_points += String(Int.random(in: 0...100))
-            stock_points += " "
-        }
+        setStockPoints()
+        
+        stock_position_value = 0
     }
     func resetPets() {
         pet_ids = ""

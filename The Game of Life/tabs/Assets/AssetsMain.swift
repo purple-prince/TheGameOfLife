@@ -14,7 +14,6 @@ struct AssetsMain: View {
     @Binding var showRealEstateDetail: Bool
     @Binding var showCasinoView: Bool
     @Binding var showStockMarketView: Bool
-    @State var poop: Bool = false
     @EnvironmentObject var player: Player
     
     var body: some View {

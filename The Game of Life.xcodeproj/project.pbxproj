@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8019D4927FCF4D900BD9C07 /* SportDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8019D4827FCF4D900BD9C07 /* SportDetail.swift */; };
+		D8019D4D27FD1CBC00BD9C07 /* CrimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8019D4C27FD1CBC00BD9C07 /* CrimeView.swift */; };
+		D8019D4F27FD1CCC00BD9C07 /* RealEstateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8019D4E27FD1CCC00BD9C07 /* RealEstateView.swift */; };
+		D8019D5127FD2BFC00BD9C07 /* CrimeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8019D5027FD2BFC00BD9C07 /* CrimeDetail.swift */; };
 		D80A357426CA0A12008CB95F /* LovedOnes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A357326CA0A12008CB95F /* LovedOnes.swift */; };
 		D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816042D27BEE0AB00EFE47D /* CrashPopup.swift */; };
 		D823B8A327784D71009D7992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823B8A227784D71009D7992 /* SettingsView.swift */; };
@@ -21,7 +25,6 @@
 		D839529427714B1C002444D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D839529327714B1C002444D9 /* MainView.swift */; };
 		D83952982771B6B8002444D9 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83952972771B6B8002444D9 /* EntryView.swift */; };
 		D839529C2772B84B002444D9 /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D839529B2772B84B002444D9 /* ExperimentView.swift */; };
-		D8399AAB2754730200A5DFB3 /* LottoFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8399AAA2754730200A5DFB3 /* LottoFile.swift */; };
 		D85C8553268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */; };
 		D85C8555268EFE1E00FA7C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C8554268EFE1E00FA7C9A /* ContentView.swift */; };
 		D85C8557268EFE2100FA7C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85C8556268EFE2100FA7C9A /* Assets.xcassets */; };
@@ -36,7 +39,8 @@
 		D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8702311278E454D00C4E4FD /* NewLifeView.swift */; };
 		D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B824278CFFD400E3DC70 /* LearnTab.swift */; };
 		D878B827278E371F00E3DC70 /* LearnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B826278E371F00E3DC70 /* LearnMain.swift */; };
-		D878B829278E373200E3DC70 /* Education.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B828278E373200E3DC70 /* Education.swift */; };
+		D878B829278E373200E3DC70 /* EducationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878B828278E373200E3DC70 /* EducationView.swift */; };
+		D87BB19827FA428400CFC8C5 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87BB19727FA428300CFC8C5 /* SportsView.swift */; };
 		D87DDEE727CBFEA8000CEC01 /* StoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEE627CBFEA8000CEC01 /* StoreIcon.swift */; };
 		D87DDEE927CC252C000CEC01 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEE827CC252C000CEC01 /* StoreView.swift */; };
 		D87DDEEC27CC64AE000CEC01 /* FoodShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DDEEB27CC64AE000CEC01 /* FoodShop.swift */; };
@@ -54,6 +58,8 @@
 		D89CD643278AD8A80004FBB7 /* BallsGamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89CD642278AD8A80004FBB7 /* BallsGamePopup.swift */; };
 		D8A5C8A326DC248D004123A4 /* mainFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8A5C8A226DC248D004123A4 /* mainFont.ttf */; };
 		D8AC08DF27653415000A432E /* RealEstateDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AC08DE27653415000A432E /* RealEstateDetail.swift */; };
+		D8AE17402801DB840009B3AC /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AE173F2801DB840009B3AC /* Achievements.swift */; };
+		D8B04C44280B9BE1003F325D /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B04C43280B9BE1003F325D /* AchievementView.swift */; };
 		D8BEF23927685C7A004DC3EF /* AssetsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BEF23827685C7A004DC3EF /* AssetsMain.swift */; };
 		D8BF707D2786489800B4444B /* CasinoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF707C2786489800B4444B /* CasinoIcon.swift */; };
 		D8BF707F278648E700B4444B /* LotteryPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF707E278648E700B4444B /* LotteryPopup.swift */; };
@@ -88,6 +94,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8019D4827FCF4D900BD9C07 /* SportDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetail.swift; sourceTree = "<group>"; };
+		D8019D4C27FD1CBC00BD9C07 /* CrimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeView.swift; sourceTree = "<group>"; };
+		D8019D4E27FD1CCC00BD9C07 /* RealEstateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateView.swift; sourceTree = "<group>"; };
+		D8019D5027FD2BFC00BD9C07 /* CrimeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeDetail.swift; sourceTree = "<group>"; };
 		D805C588277E74F500536992 /* Swift-BigInt-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Swift-BigInt-master"; path = "../../../../../Downloads/Swift-BigInt-master"; sourceTree = "<group>"; };
 		D80A357326CA0A12008CB95F /* LovedOnes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LovedOnes.swift; sourceTree = "<group>"; };
 		D816042D27BEE0AB00EFE47D /* CrashPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashPopup.swift; sourceTree = "<group>"; };
@@ -103,7 +113,6 @@
 		D839529327714B1C002444D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D83952972771B6B8002444D9 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		D839529B2772B84B002444D9 /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
-		D8399AAA2754730200A5DFB3 /* LottoFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoFile.swift; sourceTree = "<group>"; };
 		D85C854F268EFE1E00FA7C9A /* The Game of Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Game of Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Game_of_LifeApp.swift; sourceTree = "<group>"; };
 		D85C8554268EFE1E00FA7C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -124,7 +133,8 @@
 		D8702311278E454D00C4E4FD /* NewLifeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLifeView.swift; sourceTree = "<group>"; };
 		D878B824278CFFD400E3DC70 /* LearnTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTab.swift; sourceTree = "<group>"; };
 		D878B826278E371F00E3DC70 /* LearnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMain.swift; sourceTree = "<group>"; };
-		D878B828278E373200E3DC70 /* Education.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Education.swift; sourceTree = "<group>"; };
+		D878B828278E373200E3DC70 /* EducationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationView.swift; sourceTree = "<group>"; };
+		D87BB19727FA428300CFC8C5 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
 		D87DDEE627CBFEA8000CEC01 /* StoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreIcon.swift; sourceTree = "<group>"; };
 		D87DDEE827CC252C000CEC01 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		D87DDEEB27CC64AE000CEC01 /* FoodShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShop.swift; sourceTree = "<group>"; };
@@ -143,6 +153,8 @@
 		D8A5C8A226DC248D004123A4 /* mainFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mainFont.ttf; sourceTree = "<group>"; };
 		D8A5C8A526DC249F004123A4 /* mainFontBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainFontBold.ttf; path = "/Users/charliereeder/Desktop/xcode projs/The Game of Life/The Game of Life/custom fonts/mainFontBold.ttf"; sourceTree = "<absolute>"; };
 		D8AC08DE27653415000A432E /* RealEstateDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateDetail.swift; sourceTree = "<group>"; };
+		D8AE173F2801DB840009B3AC /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
+		D8B04C43280B9BE1003F325D /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
 		D8BEF23827685C7A004DC3EF /* AssetsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsMain.swift; sourceTree = "<group>"; };
 		D8BF707C2786489800B4444B /* CasinoIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasinoIcon.swift; sourceTree = "<group>"; };
 		D8BF707E278648E700B4444B /* LotteryPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryPopup.swift; sourceTree = "<group>"; };
@@ -184,13 +196,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8019D4A27FD1C8D00BD9C07 /* Real Estate */ = {
+			isa = PBXGroup;
+			children = (
+				D8019D4E27FD1CCC00BD9C07 /* RealEstateView.swift */,
+			);
+			path = "Real Estate";
+			sourceTree = "<group>";
+		};
+		D8019D4B27FD1CA400BD9C07 /* Crime */ = {
+			isa = PBXGroup;
+			children = (
+				D8019D4C27FD1CBC00BD9C07 /* CrimeView.swift */,
+				D8019D5027FD2BFC00BD9C07 /* CrimeDetail.swift */,
+			);
+			path = Crime;
+			sourceTree = "<group>";
+		};
 		D82EE05E273635FB00C6498F /* other */ = {
 			isa = PBXGroup;
 			children = (
 				D805C588277E74F500536992 /* Swift-BigInt-master */,
-				D8A5C8A126DC244A004123A4 /* custom fonts */,
-				D85C8554268EFE1E00FA7C9A /* ContentView.swift */,
-				D839529B2772B84B002444D9 /* ExperimentView.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -249,16 +275,14 @@
 		D85C8551268EFE1E00FA7C9A /* The Game of Life */ = {
 			isa = PBXGroup;
 			children = (
-				D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */,
-				D85C855B268EFE2100FA7C9A /* Info.plist */,
-				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
 				D8C4305A272E4D8800F18F89 /* King.swift */,
-				D8399AAA2754730200A5DFB3 /* LottoFile.swift */,
-				D85C8558268EFE2100FA7C9A /* Preview Content */,
+				D8AE173A2801D9F80009B3AC /* Files */,
 				D839529227714A9B002444D9 /* Beginning */,
 				D881F66F26C4B6AA0054D033 /* tabs */,
-				D82EE05E273635FB00C6498F /* other */,
+				D8AE173E2801DB130009B3AC /* Achievements */,
 				D83913A7279CAE6400B8B468 /* Shop */,
+				D85C855B268EFE2100FA7C9A /* Info.plist */,
+				D85C8558268EFE2100FA7C9A /* Preview Content */,
 			);
 			path = "The Game of Life";
 			sourceTree = "<group>";
@@ -312,10 +336,19 @@
 			isa = PBXGroup;
 			children = (
 				D878B824278CFFD400E3DC70 /* LearnTab.swift */,
-				D878B828278E373200E3DC70 /* Education.swift */,
+				D878B828278E373200E3DC70 /* EducationView.swift */,
 				D878B826278E371F00E3DC70 /* LearnMain.swift */,
 			);
 			path = Learn;
+			sourceTree = "<group>";
+		};
+		D87BB19627FA426200CFC8C5 /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				D87BB19727FA428300CFC8C5 /* SportsView.swift */,
+				D8019D4827FCF4D900BD9C07 /* SportDetail.swift */,
+			);
+			path = Sports;
 			sourceTree = "<group>";
 		};
 		D87DDEE527CBFE8C000CEC01 /* Store */ = {
@@ -401,6 +434,9 @@
 		D8A5C89B26D9D766004123A4 /* Category Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8019D4B27FD1CA400BD9C07 /* Crime */,
+				D8019D4A27FD1C8D00BD9C07 /* Real Estate */,
+				D87BB19627FA426200CFC8C5 /* Sports */,
 				D8FC918526E58B430065D3CF /* Side Hustle */,
 				D8A5C89C26D9D77F004123A4 /* Job */,
 			);
@@ -424,6 +460,28 @@
 				D8A5C8A226DC248D004123A4 /* mainFont.ttf */,
 			);
 			path = "custom fonts";
+			sourceTree = "<group>";
+		};
+		D8AE173A2801D9F80009B3AC /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				D82EE05E273635FB00C6498F /* other */,
+				D8A5C8A126DC244A004123A4 /* custom fonts */,
+				D85C8554268EFE1E00FA7C9A /* ContentView.swift */,
+				D839529B2772B84B002444D9 /* ExperimentView.swift */,
+				D85C8552268EFE1E00FA7C9A /* The_Game_of_LifeApp.swift */,
+				D85C8556268EFE2100FA7C9A /* Assets.xcassets */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		D8AE173E2801DB130009B3AC /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				D8AE173F2801DB840009B3AC /* Achievements.swift */,
+				D8B04C43280B9BE1003F325D /* AchievementView.swift */,
+			);
+			path = Achievements;
 			sourceTree = "<group>";
 		};
 		D8BF707B2786487D00B4444B /* Casino */ = {
@@ -663,13 +721,19 @@
 				D87DDEEC27CC64AE000CEC01 /* FoodShop.swift in Sources */,
 				D8C4305B272E4D8800F18F89 /* King.swift in Sources */,
 				D816042E27BEE0AB00EFE47D /* CrashPopup.swift in Sources */,
+				D87BB19827FA428400CFC8C5 /* SportsView.swift in Sources */,
+				D8019D5127FD2BFC00BD9C07 /* CrimeDetail.swift in Sources */,
 				D87DDEE927CC252C000CEC01 /* StoreView.swift in Sources */,
 				D8C43054272DD60700F18F89 /* FriendsView.swift in Sources */,
+				D8019D4927FCF4D900BD9C07 /* SportDetail.swift in Sources */,
 				D878B825278CFFD400E3DC70 /* LearnTab.swift in Sources */,
+				D8AE17402801DB840009B3AC /* Achievements.swift in Sources */,
 				D82EE06027365DD400C6498F /* ParentsDetail.swift in Sources */,
+				D8019D4F27FD1CCC00BD9C07 /* RealEstateView.swift in Sources */,
 				D87EC4E126D4DF7A00E21428 /* JobView.swift in Sources */,
 				D881F67126C4B7410054D033 /* OccupationTab.swift in Sources */,
 				D823B8AB277C18C8009D7992 /* OptionsView.swift in Sources */,
+				D8019D4D27FD1CBC00BD9C07 /* CrimeView.swift in Sources */,
 				D85EE27D27C8372400171320 /* LoanPopup.swift in Sources */,
 				D8702312278E454D00C4E4FD /* NewLifeView.swift in Sources */,
 				D8FC918726E58B6A0065D3CF /* SHView.swift in Sources */,
@@ -685,17 +749,17 @@
 				D8C4304B272DD1E700F18F89 /* RelationshipDetail.swift in Sources */,
 				D8F18C3627375A2200A527B6 /* ParentsView.swift in Sources */,
 				D83913A9279CF9E000B8B468 /* RomanceView.swift in Sources */,
-				D878B829278E373200E3DC70 /* Education.swift in Sources */,
+				D878B829278E373200E3DC70 /* EducationView.swift in Sources */,
 				D83913B3279CFA3100B8B468 /* PetsDetail.swift in Sources */,
 				D886028727A89ACB0025950E /* SHDetail.swift in Sources */,
 				D860E0FB27855C69008606B2 /* DepositPopup.swift in Sources */,
+				D8B04C44280B9BE1003F325D /* AchievementView.swift in Sources */,
 				D8FC918926E58BFE0065D3CF /* SHBackend.swift in Sources */,
 				D881F66C26C4B43A0054D033 /* RelationshipTab.swift in Sources */,
 				D83952982771B6B8002444D9 /* EntryView.swift in Sources */,
 				D89CD643278AD8A80004FBB7 /* BallsGamePopup.swift in Sources */,
 				D8C43056272DD61600F18F89 /* PetsView.swift in Sources */,
 				D8BF707D2786489800B4444B /* CasinoIcon.swift in Sources */,
-				D8399AAB2754730200A5DFB3 /* LottoFile.swift in Sources */,
 				D823B8A327784D71009D7992 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

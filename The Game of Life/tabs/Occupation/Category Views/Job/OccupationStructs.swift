@@ -7,9 +7,15 @@
 
 import Foundation
 
-struct Job: Occupation {
+struct Job: Occupation, Equatable {
+    
+    enum JobRequirement {
+        case elementary, highSchool, college
+    }
+    
     var jobTitle: String
     var salary: Int
+    var requirements: [JobRequirement]?
     var healthMod: Int
     var hapMod: Int
     var energyMod: Int
@@ -24,17 +30,5 @@ struct SideHustle: Hashable {
     var salaryMin: Int
     var salaryMax: Int
     
-    
-}
-
-struct Sports {
-    
-}
-
-struct RealEstate {
-    
-}
-
-struct Crime {
     
 }

@@ -19,11 +19,14 @@ struct JobView: View{
     @State var showMainView = true
     @State var jobTapped: Job? = nil
     
+    @State var applyAccepted: Bool = false
+    @State var applyRejected: Bool = false
+    @State var rejectedReason: String = ""
+    
     // = 0
     @EnvironmentObject var player: Player
         
     var body: some View {
-        
         ZStack {
             
             if showMainView {
@@ -61,13 +64,20 @@ struct JobView: View{
                         Spacer()
                     }
                 }
+                .blur(radius: applyAccepted || applyRejected || showApplyPopup ? 32 : 0)
+                .disabled(applyAccepted || applyRejected || showApplyPopup)
             }
             
             if showApplyPopup {
                 ApplyPopup(showApplyPopup: $showApplyPopup, showMainView: $showMainView, job: jobTapped!)
             }
+            
+            if applyAccepted {
+                applyInfoPopup(accepted: true)
+            } else if applyRejected {
+                applyInfoPopup(accepted: false)
+            }
         }
-        //.navigationBarHidden(true)
     }
 }
 
@@ -75,10 +85,91 @@ extension JobView {
     
     //Color(hue: 1.0, saturation: 0.027, brightness: 0.356)
     
+    func applyInfoPopup(accepted: Bool) -> some View {
+        return ZStack {
+            RoundedRectangle(cornerRadius: 24)
+                .fill(Color("mainDarkGray"))
+            
+            VStack {
+                Spacer()
+                Text("You've been " + (accepted ? "accepted 😄" : "rejected 😐"))
+                    .fontWeight(.medium)
+                    .font(.title)
+                if !accepted {
+                    
+                    Spacer()
+                    
+                    Text("Reason: " + rejectedReason)
+                        .fontWeight(.light)
+                        .font(.title2)
+                    
+                    
+                }
+                Spacer()
+            }
+            .foregroundColor(.white)
+            .padding()
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    Image(systemName: "xmark")
+                        .foregroundColor(.red)
+                        .font(Font.system(size: 40))
+                        .onTapGesture {
+                            applyAccepted = false
+                            applyRejected = false
+                            rejectedReason = ""
+                        }
+                }
+                Spacer()
+            }
+            .padding()
+        }
+        .aspectRatio(3/2, contentMode: .fit)
+        .padding()
+    }
+    
+    func checkRequirements(job: Job) -> Bool {
+        if let requirements = job.requirements {
+            if player.education_elementary_progress < Education.ElementarySchool.monthsRequired {
+                return false
+            } else {
+                if requirements.contains(.highSchool) {
+                    if player.education_highSchool_progress < Education.HighSchool.monthsRequired {
+                        return false
+                    } else {
+                        if requirements.contains(.college) {
+                            if player.education_college_progress < Education.CollegeSchool.monthsRequired {
+                                return false
+                            } else {
+                                return true
+                            }
+                        } else {
+                            return true
+                        }
+                    }
+                } else {
+                    return true
+                }
+            }
+        } else {
+            return true
+        }
+    }
+    
     func jobOption(job: Job) -> some View {
         Button(action: {
-            player.life_job_title = job.jobTitle
-            player.life_job_salary = job.salary
+            
+            if checkRequirements(job: job) {
+                applyAccepted = true
+                player.life_job_title = job.jobTitle
+                player.life_job_salary = job.salary
+            } else {
+                applyRejected = true
+                rejectedReason = "Not educated enough 🤦‍♂️"
+            }
         }, label: {
             HStack {
                 Text(job.jobTitle)
@@ -283,6 +374,8 @@ struct ApplyPopup: View {
     @Binding var showApplyPopup: Bool
     @Binding var showMainView: Bool
     
+    @EnvironmentObject var player: Player
+    
     var job: Job
     
     var body: some View {
@@ -334,7 +427,6 @@ extension ApplyPopup {
         VStack(spacing: 12) {
             HStack {
                 Text("Salary: ")
-                    .fontWeight(.light)
                 Spacer()
                 Text(formatNum(job.salary) + "/month")
                     .fontWeight(.light)
@@ -343,12 +435,29 @@ extension ApplyPopup {
                 Text("Requirements: ")
                     .fontWeight(.light)
                 Spacer()
-                Text("None")
-                    .fontWeight(.light)
+                HStack(spacing: 0) {
+                    if let requirements = job.requirements {
+                        if requirements.contains(.college) {
+                            Text("College")
+                                .fontWeight(.light)
+                                .foregroundColor(player.education_college_progress >= Education.CollegeSchool.monthsRequired ? .green : .red)
+                        } else if requirements.contains(.highSchool) {
+                            Text("High School")
+                                .fontWeight(.light)
+                                .foregroundColor(player.education_highSchool_progress >= Education.HighSchool.monthsRequired ? .green : .red)
+                        } else if requirements.contains(.elementary) {
+                            Text("Elementary")
+                                .fontWeight(.light)
+                                .foregroundColor(player.education_elementary_progress >= Education.ElementarySchool.monthsRequired ? .green : .red)
+                        }
+                    } else {
+                        Text("None")
+                            .fontWeight(.light)
+                    }
+                }
             }
             HStack {
                 Text("Affects: ")
-                    .fontWeight(.light)
                 Spacer()
                 VStack {
                     Text(String(job.hapMod) + " 😀")
@@ -363,17 +472,10 @@ extension ApplyPopup {
         .frame(width: UIScreen.main.bounds.width * 4 / 5)
     }
     var background: some View {
-        ZStack {
-            Color(UIColor.systemGray3)
-                .opacity(0.9)
-                .edgesIgnoringSafeArea(.all)
-            
-            RoundedRectangle(cornerRadius: 24)
-                .foregroundColor(Color("mainDarkGray"))
-                //.background(Color("appMainWhite")).blur(radius: 10)
-                .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
-                .padding()
-        }
+        RoundedRectangle(cornerRadius: 24)
+            .foregroundColor(Color("mainDarkGray"))
+            .frame(width: .infinity, height: UIScreen.main.bounds.height / 2)
+            .padding()
     }
     var closeButton: some View {
         HStack {
